@@ -28,12 +28,11 @@ import {
   Text,
   UIManager,
 } from "react-native";
-import { Slot, Stack } from "expo-router";
-import { Drawer } from "expo-router/drawer";
 import {
   DarkNavigationColors,
   LightNavigationColors,
 } from "@styles/navigation";
+import { Drawer } from "expo-router/drawer";
 
 if (Platform.OS === "android") {
   if (UIManager.setLayoutAnimationEnabledExperimental) {
@@ -158,7 +157,12 @@ export default function RootLayout() {
             value={isDark ? DarkNavigationColors : LightNavigationColors}
           >
             <Box flex={1} onLayout={onLayoutRootView}>
-              <Drawer>
+              <Drawer
+                screenOptions={{
+                  drawerPosition: "left",
+                  headerShown: false,
+                }}
+              >
                 <Drawer.Screen name="(index)" options={{ title: "Home" }} />
                 <Drawer.Screen name="(search)" options={{ title: "Search" }} />
                 <Drawer.Screen
