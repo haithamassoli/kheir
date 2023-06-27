@@ -35,8 +35,11 @@ const Home = () => {
           height={60}
         >
           <Box flexDirection="row" alignItems="center">
-            <Image source={require("@assets/images/logo.png")} />
-            <Box>
+            <Image
+              source={require("@assets/images/logo.png")}
+              style={{ width: hs(69), height: vs(69), resizeMode: "contain" }}
+            />
+            <Box marginTop="vxs">
               <ReText variant="TitleMedium">خـيـر</ReText>
               <ReText variant="BodySmall">KHEIR</ReText>
             </Box>
