@@ -33,6 +33,7 @@ import {
   LightNavigationColors,
 } from "@styles/navigation";
 import { Drawer } from "expo-router/drawer";
+import CustomDrawer from "@src/layouts/custom-drawer";
 
 if (Platform.OS === "android") {
   if (UIManager.setLayoutAnimationEnabledExperimental) {
@@ -158,16 +159,33 @@ export default function RootLayout() {
           >
             <Box flex={1} onLayout={onLayoutRootView}>
               <Drawer
+                drawerContent={(props) => <CustomDrawer {...props} />}
                 screenOptions={{
                   drawerPosition: "left",
                   headerShown: false,
                 }}
               >
-                <Drawer.Screen name="(index)" options={{ title: "Home" }} />
-                <Drawer.Screen name="(search)" options={{ title: "Search" }} />
+                <Drawer.Screen name="(index)" options={{ title: "الرئيسة" }} />
+                <Drawer.Screen
+                  name="(donations)"
+                  options={{ title: "تبرعاتي" }}
+                />
+                <Drawer.Screen
+                  name="(notifications)"
+                  options={{ title: "الإشعارات" }}
+                />
+                <Drawer.Screen
+                  name="(volunteer)"
+                  options={{ title: "فرص التطوع" }}
+                />
+                <Drawer.Screen name="(search)" options={{ title: "البحث" }} />
                 <Drawer.Screen
                   name="(profile)"
-                  options={{ title: "Profile" }}
+                  options={{ title: "الملف الشخصي" }}
+                />
+                <Drawer.Screen
+                  name="(about)"
+                  options={{ title: "عن تطبيق خير" }}
                 />
               </Drawer>
             </Box>

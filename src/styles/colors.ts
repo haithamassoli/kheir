@@ -1,7 +1,7 @@
 const Colors = {
   lightBackground: "#fff",
   lightBackgroundSec: "#f1f5f8",
-  darkBackground: "#000",
+  darkBackground: "#212529",
   darkBackgroundSec: "#262626",
   darkText: "#001438",
   lightText: "#eee",

@@ -1,5 +1,4 @@
 import { SafeAreaView } from "react-native-safe-area-context";
-
 import { Feather } from "@expo/vector-icons";
 import { Box, ReText, Theme } from "@styles/theme";
 import { useNavigation } from "expo-router";
@@ -10,7 +9,7 @@ import { useStore } from "@zustand/store";
 import ImagesCarousel from "@components/imagesCarousel";
 import { Shadow } from "react-native-shadow-2";
 
-const HomeTab = () => {
+const Home = () => {
   const navigation: any = useNavigation();
   const { colors } = useTheme<Theme>();
   const toggleTheme = useStore((state) => state.toggleTheme);
@@ -70,4 +69,4 @@ const HomeTab = () => {
   );
 };
 
-export default HomeTab;
+export default Home;
