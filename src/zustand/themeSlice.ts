@@ -1,4 +1,5 @@
 import { StateCreator } from "zustand";
+import { storeDataToStorage } from "@utils/helper";
 
 export interface ThemeState {
   isDark: boolean;
@@ -7,5 +8,10 @@ export interface ThemeState {
 
 export const createThemeSlice: StateCreator<ThemeState> = (set) => ({
   isDark: false,
-  toggleTheme: () => set((state) => ({ isDark: !state.isDark })),
+  toggleTheme: () => {
+    set((state) => {
+      storeDataToStorage("isDark", !state.isDark);
+      return { isDark: !state.isDark };
+    });
+  },
 });

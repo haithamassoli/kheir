@@ -34,6 +34,7 @@ import {
 } from "@styles/navigation";
 import { Drawer } from "expo-router/drawer";
 import CustomDrawer from "@src/layouts/custom-drawer";
+import { getDataFromStorage } from "@utils/helper";
 
 if (Platform.OS === "android") {
   if (UIManager.setLayoutAnimationEnabledExperimental) {
@@ -106,6 +107,16 @@ export default function RootLayout() {
       }
     };
     forceRTL();
+
+    const getTheme = async () => {
+      const darkMode = await getDataFromStorage("isDark");
+      if (darkMode === null) {
+        useStore.setState({ isDark: false });
+      } else {
+        useStore.setState({ isDark: darkMode });
+      }
+    };
+    getTheme();
     // const firstTime = async () => {
     //   const firstTime = await getDataFromStorage("firstTime");
     //   if (firstTime === null) {
