@@ -165,7 +165,7 @@ export default function RootLayout() {
                   headerShown: false,
                 }}
               >
-                <Drawer.Screen name="(index)" options={{ title: "الرئيسة" }} />
+                <Drawer.Screen name="index" options={{ title: "الرئيسة" }} />
                 <Drawer.Screen
                   name="(donations)"
                   options={{ title: "تبرعاتي" }}

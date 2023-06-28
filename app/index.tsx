@@ -19,7 +19,7 @@ const Home = () => {
   };
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ flex: 1 }}>
       <Shadow
         distance={8}
         stretch

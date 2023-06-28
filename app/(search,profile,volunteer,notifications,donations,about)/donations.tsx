@@ -3,9 +3,9 @@ import { Box, ReText } from "@styles/theme";
 
 const Donations = () => {
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ flex: 1 }}>
       <Box flex={1} justifyContent="center" alignItems="center">
-        <ReText variant="DisplayLarge">Donations</ReText>
+        <ReText variant="DisplayMedium">Donations</ReText>
         <ReText variant="BodySmall">KHEIR</ReText>
       </Box>
     </SafeAreaView>

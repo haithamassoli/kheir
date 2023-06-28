@@ -1,15 +1,15 @@
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Box, ReText } from "@styles/theme";
 
-const Search = () => {
+const Profile = () => {
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ flex: 1 }}>
       <Box flex={1} justifyContent="center" alignItems="center">
-        <ReText variant="DisplayLarge">Search</ReText>
+        <ReText variant="DisplayMedium">Profile</ReText>
         <ReText variant="BodySmall">KHEIR</ReText>
       </Box>
     </SafeAreaView>
   );
 };
 
-export default Search;
+export default Profile;

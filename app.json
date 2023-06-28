@@ -45,6 +45,15 @@
     "extra": {
       "eas": {
         "projectId": "66a92220-8f3a-4f58-b597-0d5392128767"
+      },
+      "firebase": {
+        "apiKey": "AIzaSyDvhjLHxTzGmOBnl-XPkeLqv-XBj6mEvy0",
+        "authDomain": "kheir-ebd9b.firebaseapp.com",
+        "projectId": "kheir-ebd9b",
+        "storageBucket": "kheir-ebd9b.appspot.com",
+        "messagingSenderId": "362796967322",
+        "appId": "1:362796967322:web:c745715ebb43d8f8a38623",
+        "measurementId": "G-31LSZQEG0E"
       }
     }
   }

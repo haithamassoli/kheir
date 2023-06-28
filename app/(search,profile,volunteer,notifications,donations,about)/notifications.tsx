@@ -3,9 +3,9 @@ import { Box, ReText } from "@styles/theme";
 
 const Notifications = () => {
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ flex: 1 }}>
       <Box flex={1} justifyContent="center" alignItems="center">
-        <ReText variant="DisplayLarge">Notifications</ReText>
+        <ReText variant="DisplayMedium">Notifications</ReText>
         <ReText variant="BodySmall">KHEIR</ReText>
       </Box>
     </SafeAreaView>
