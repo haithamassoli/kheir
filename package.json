@@ -1,4 +1,5 @@
 {
+  "main": "index.js",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -27,7 +28,7 @@
     "expo-linear-gradient": "^12.1.2",
     "expo-linking": "~4.0.1",
     "expo-notifications": "^0.18.1",
-    "expo-router": "^2.0.0-rc.6",
+    "expo-router": "^1.0.0",
     "expo-splash-screen": "~0.18.1",
     "expo-status-bar": "~1.4.2",
     "expo-updates": "~0.16.4",
