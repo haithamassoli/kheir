@@ -25,8 +25,10 @@ import {
   I18nManager,
   Platform,
   ScrollView,
+  StyleSheet,
   Text,
   UIManager,
+  Image,
 } from "react-native";
 import {
   DarkNavigationColors,
@@ -35,6 +37,8 @@ import {
 import { Drawer } from "expo-router/drawer";
 import CustomDrawer from "@src/layouts/custom-drawer";
 import { getDataFromStorage } from "@utils/helper";
+import { Feather } from "@expo/vector-icons";
+import { hs } from "@utils/platform";
 
 if (Platform.OS === "android") {
   if (UIManager.setLayoutAnimationEnabledExperimental) {
@@ -174,29 +178,94 @@ export default function RootLayout() {
                 screenOptions={{
                   drawerPosition: "left",
                   headerShown: false,
+                  drawerLabelStyle: labelStyle,
                 }}
               >
-                <Drawer.Screen name="index" options={{ title: "الرئيسة" }} />
+                <Drawer.Screen
+                  name="index"
+                  options={{
+                    title: "الرئيسة",
+                    drawerIcon: ({ color, size }) => (
+                      <Feather
+                        name="home"
+                        size={size}
+                        color={color}
+                        style={styles.icon}
+                      />
+                    ),
+                  }}
+                />
                 <Drawer.Screen
                   name="(donations)"
-                  options={{ title: "تبرعاتي" }}
+                  options={{
+                    title: "تبرعاتي",
+                    drawerIcon: ({ size, focused }) => (
+                      <Image
+                        source={
+                          focused
+                            ? require("@assets/icons/drawerIcons/priDonations.png")
+                            : isDark
+                            ? require("@assets/icons/drawerIcons/darkDonations.png")
+                            : require("@assets/icons/drawerIcons/donations.png")
+                        }
+                        resizeMode="contain"
+                        style={[styles.icon, { width: size, height: size }]}
+                      />
+                    ),
+                  }}
                 />
                 <Drawer.Screen
                   name="(notifications)"
-                  options={{ title: "الإشعارات" }}
+                  options={{
+                    title: "الإشعارات",
+                    drawerIcon: ({ color, size }) => (
+                      <Feather
+                        name="bell"
+                        size={size}
+                        color={color}
+                        style={styles.icon}
+                      />
+                    ),
+                  }}
                 />
                 <Drawer.Screen
                   name="(volunteer)"
-                  options={{ title: "فرص التطوع" }}
+                  options={{
+                    title: "فرص التطوع",
+                    drawerIcon: ({ size, focused }) => (
+                      <Image
+                        source={
+                          focused
+                            ? require("@assets/icons/drawerIcons/priVolunteer.png")
+                            : isDark
+                            ? require("@assets/icons/drawerIcons/darkVolunteer.png")
+                            : require("@assets/icons/drawerIcons/volunteer.png")
+                        }
+                        resizeMode="contain"
+                        style={[styles.icon, { width: size, height: size }]}
+                      />
+                    ),
+                  }}
                 />
-                <Drawer.Screen name="(search)" options={{ title: "البحث" }} />
                 <Drawer.Screen
                   name="(profile)"
-                  options={{ title: "الملف الشخصي" }}
+                  options={{
+                    drawerItemStyle: { display: "none" },
+                  }}
                 />
                 <Drawer.Screen
                   name="(about)"
-                  options={{ title: "عن تطبيق خير" }}
+                  options={{
+                    title: "عن تطبيق خير",
+                    drawerIcon: ({ color, size }) => (
+                      <Feather
+                        name="info"
+                        size={size}
+                        color={color}
+                        style={styles.icon}
+                      />
+                    ),
+                  }}
                 />
               </Drawer>
             </Box>
@@ -206,3 +275,15 @@ export default function RootLayout() {
     </ReThemeProvider>
   );
 }
+
+const styles = StyleSheet.create({
+  icon: {
+    right: hs(8),
+    position: "absolute",
+  },
+});
+
+const labelStyle = {
+  fontFamily: "CairoBold",
+  transform: [{ translateX: hs(32) }],
+};
