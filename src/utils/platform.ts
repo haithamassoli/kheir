@@ -18,10 +18,9 @@ export const moderateVerticalScale = (size: number, factor = 0.5) =>
 
 export const isIOS = Platform.OS === "ios";
 
-export function fontSizing(size: number, height: number): TextStyle {
+export function fontSizing(size: number): TextStyle {
   return {
     fontSize: isIOS ? hs(size) : hs(size) - 1,
-    lineHeight: vs(height),
   };
 }
 
