@@ -12,7 +12,7 @@ import { ms } from "@utils/platform";
 import { useRouter } from "expo-router";
 
 const CustomDrawer = (props: any) => {
-  const { toggleTheme, isDark } = useStore((state) => state);
+  const { toggleTheme, isDark, user, logout } = useStore((state) => state);
   const { colors } = useTheme<Theme>();
   const onToggleTheme = () => toggleTheme();
   const router = useRouter();
@@ -39,7 +39,7 @@ const CustomDrawer = (props: any) => {
                 الملف الشخصي
               </ReText>
               <ReText variant="TitleSmall" color="primary8" textAlign="center">
-                أحمد ملايــشة
+                {!!user ? "أحمد ملايــشة" : "تسجيل الدخول"}
               </ReText>
             </Box>
           </Box>
@@ -76,18 +76,27 @@ const CustomDrawer = (props: any) => {
             </ReText>
           </Box>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => {}} style={{ paddingVertical: 15 }}>
-          <Box flexDirection={"row"} alignItems={"center"}>
-            <Ionicons
-              name="exit-outline"
-              color={colors.text}
-              size={IconSize.m}
-            />
-            <ReText variant="LabelLarge" marginLeft="hs" fontFamily="CairoBold">
-              تسجيل خروج
-            </ReText>
-          </Box>
-        </TouchableOpacity>
+        {!!user && (
+          <TouchableOpacity
+            onPress={() => logout()}
+            style={{ paddingVertical: 15 }}
+          >
+            <Box flexDirection={"row"} alignItems={"center"}>
+              <Ionicons
+                name="exit-outline"
+                color={colors.text}
+                size={IconSize.m}
+              />
+              <ReText
+                variant="LabelLarge"
+                marginLeft="hs"
+                fontFamily="CairoBold"
+              >
+                تسجيل خروج
+              </ReText>
+            </Box>
+          </TouchableOpacity>
+        )}
       </Box>
     </Box>
   );

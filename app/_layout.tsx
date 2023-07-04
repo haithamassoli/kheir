@@ -10,8 +10,9 @@ import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import * as Notifications from "expo-notifications";
 import { FlashList } from "@shopify/flash-list";
+import { getDataFromStorage } from "@utils/helper";
 import { PaperProvider, MD3LightTheme, TextInput } from "react-native-paper";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect } from "react";
 import { MaterialDark, MaterialLight } from "@styles/material";
 import { ThemeProvider } from "@react-navigation/native";
 import {
@@ -36,9 +37,9 @@ import {
 } from "@styles/navigation";
 import { Drawer } from "expo-router/drawer";
 import CustomDrawer from "@src/layouts/custom-drawer";
-import { getDataFromStorage } from "@utils/helper";
 import { Feather } from "@expo/vector-icons";
 import { hs } from "@utils/platform";
+import { useRouter, useSegments } from "expo-router";
 
 if (Platform.OS === "android") {
   if (UIManager.setLayoutAnimationEnabledExperimental) {
@@ -95,40 +96,59 @@ export default function RootLayout() {
   FlashList.defaultProps.showsVerticalScrollIndicator = false;
   FlashList.defaultProps.showsHorizontalScrollIndicator = false;
 
-  const [isFirstTime, setIsFirstTime] = useState(false);
-  const isDark = useStore((state) => state.isDark);
+  const segments = useSegments();
+  const router = useRouter();
+
+  const { isDark, setUser, user } = useStore((state) => state);
+
+  const getUserFromStorage = async () => {
+    const user = await getDataFromStorage("user");
+    if (user) setUser(user);
+    console.log("user is:", user);
+  };
+
+  const getTheme = async () => {
+    const darkMode = await getDataFromStorage("isDark");
+    if (darkMode === null) {
+      useStore.setState({ isDark: false });
+    } else {
+      useStore.setState({ isDark: darkMode });
+    }
+  };
+
+  const forceRTL = async () => {
+    if (!I18nManager.isRTL) {
+      try {
+        I18nManager.allowRTL(true);
+        I18nManager.forceRTL(true);
+        await reloadAsync();
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
 
   useEffect(() => {
-    const forceRTL = async () => {
-      if (!I18nManager.isRTL) {
-        try {
-          I18nManager.allowRTL(true);
-          I18nManager.forceRTL(true);
-          await reloadAsync();
-        } catch (error) {
-          console.log(error);
-        }
-      }
-    };
     forceRTL();
-
-    const getTheme = async () => {
-      const darkMode = await getDataFromStorage("isDark");
-      if (darkMode === null) {
-        useStore.setState({ isDark: false });
-      } else {
-        useStore.setState({ isDark: darkMode });
-      }
-    };
     getTheme();
-    // const firstTime = async () => {
-    //   const firstTime = await getDataFromStorage("firstTime");
-    //   if (firstTime === null) {
-    //     setIsFirstTime(true);
-    //   }
-    // };
-    // firstTime();
+    getUserFromStorage();
   }, []);
+
+  useEffect(() => {
+    const inAuthGroup = segments[0] === "(profile)";
+    if (
+      // If the user is not signed in and the initial segment is not anything in the auth group.
+      !user &&
+      inAuthGroup
+    ) {
+      // Redirect to the sign-in page.
+      router.push("/sign-in");
+    } else if (user && segments[0] === "(auth)") {
+      // Redirect away from the sign-in page.
+      router.push("/");
+    }
+    console.log(user, segments);
+  }, [user, segments]);
 
   const [fontsLoaded] = useFonts({
     CairoReg: require("@assets/fonts/Cairo-Reg.ttf"),
@@ -160,18 +180,18 @@ export default function RootLayout() {
   };
 
   return (
-    <ReThemeProvider theme={isDark ? darkTheme : theme}>
-      <StatusBar
-        style={isDark ? "light" : "dark"}
-        backgroundColor={
-          isDark ? Colors.darkBackground : Colors.lightBackground
-        }
-      />
-      <QueryClientProvider client={queryClient}>
-        <PaperProvider theme={materialTheme}>
-          <ThemeProvider
-            value={isDark ? DarkNavigationColors : LightNavigationColors}
-          >
+    <QueryClientProvider client={queryClient}>
+      <ReThemeProvider theme={isDark ? darkTheme : theme}>
+        <StatusBar
+          style={isDark ? "light" : "dark"}
+          backgroundColor={
+            isDark ? Colors.darkBackground : Colors.lightBackground
+          }
+        />
+        <ThemeProvider
+          value={isDark ? DarkNavigationColors : LightNavigationColors}
+        >
+          <PaperProvider theme={materialTheme}>
             <Box flex={1} onLayout={onLayoutRootView}>
               <Drawer
                 drawerContent={(props) => <CustomDrawer {...props} />}
@@ -267,12 +287,26 @@ export default function RootLayout() {
                     ),
                   }}
                 />
+                <Drawer.Screen
+                  name="(auth)/sign-in"
+                  options={{
+                    title: "تسجيل الدخول",
+                    drawerItemStyle: { display: "none" },
+                  }}
+                />
+                <Drawer.Screen
+                  name="(auth)/sign-up"
+                  options={{
+                    title: "تسجيل",
+                    drawerItemStyle: { display: "none" },
+                  }}
+                />
               </Drawer>
             </Box>
-          </ThemeProvider>
-        </PaperProvider>
-      </QueryClientProvider>
-    </ReThemeProvider>
+          </PaperProvider>
+        </ThemeProvider>
+      </ReThemeProvider>
+    </QueryClientProvider>
   );
 }
 
