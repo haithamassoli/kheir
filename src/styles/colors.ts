@@ -2,7 +2,7 @@ const Colors = {
   lightBackground: "#fff",
   lightBackgroundSec: "#f1f5f8",
   darkBackground: "#212529",
-  darkBackgroundSec: "#262626",
+  darkBackgroundSec: "rgb(2, 84, 92)",
   darkText: "#001438",
   lightText: "#eee",
   overlay: "rgba(28,29,28,0.5)",

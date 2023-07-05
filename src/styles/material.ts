@@ -50,7 +50,7 @@ export const MaterialDark = {
   onPrimaryContainer: "rgb(181, 235, 255)",
   secondary: "rgb(179, 202, 212)",
   onSecondary: "rgb(30, 51, 59)",
-  secondaryContainer: "rgb(52, 74, 82)",
+  secondaryContainer: "rgb(2, 84, 92)",
   onSecondaryContainer: "rgb(207, 230, 240)",
   tertiary: "rgb(194, 195, 235)",
   onTertiary: "rgb(43, 46, 77)",
