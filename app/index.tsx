@@ -2,31 +2,21 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { Feather } from "@expo/vector-icons";
 import { Box, ReText, Theme } from "@styles/theme";
 import { useNavigation } from "expo-router";
-import { Image } from "react-native";
+import { Image, ScrollView } from "react-native";
 import { hs, vs } from "@utils/platform";
 import { useTheme } from "@shopify/restyle";
-import { useStore } from "@zustand/store";
 import ImagesCarousel from "@components/imagesCarousel";
-import { Shadow } from "react-native-shadow-2";
+import CategoryCard from "@components/categoryCard";
+import { categories } from "@src/data/categories";
+import Card from "@components/card";
 
 const Home = () => {
   const navigation: any = useNavigation();
   const { colors } = useTheme<Theme>();
-  const toggleTheme = useStore((state) => state.toggleTheme);
-
-  const onToggleTheme = () => {
-    toggleTheme();
-  };
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <Shadow
-        distance={8}
-        stretch
-        startColor={colors.shadow}
-        endColor="rgba(0, 0, 0, 0)"
-        style={{ height: vs(60) }}
-      >
+      <ScrollView style={{ flex: 1 }}>
         <Box
           flexDirection="row"
           justifyContent="space-between"
@@ -46,10 +36,10 @@ const Home = () => {
           </Box>
           <Box flexDirection="row" alignItems="center" gap="hm">
             <Feather
-              name="moon"
+              name={"shopping-cart"}
               size={hs(24)}
               color={colors.text}
-              onPress={() => onToggleTheme()}
+              onPress={() => {}}
             />
             <Feather
               name="menu"
@@ -59,15 +49,92 @@ const Home = () => {
             />
           </Box>
         </Box>
-      </Shadow>
-      <Box flex={1} marginTop="vm" paddingHorizontal="h2xl">
-        <ImagesCarousel
-          images={[
-            require("@assets/images/carousel/1.jpg"),
-            require("@assets/images/carousel/2.jpg"),
-          ]}
-        />
-      </Box>
+        <Box marginTop="vm">
+          <ImagesCarousel
+            images={[
+              require("@assets/images/carousel/1.jpg"),
+              require("@assets/images/carousel/2.jpg"),
+            ]}
+          />
+        </Box>
+        <ReText variant="HeadlineMedium" marginStart="hm">
+          فئات التبرع
+        </ReText>
+        <Box height={vs(120)}>
+          <ScrollView
+            horizontal
+            overScrollMode="never"
+            contentContainerStyle={{
+              paddingLeft: hs(16),
+              marginTop: vs(12),
+            }}
+          >
+            {categories.map((category) => (
+              <Box key={category.id} marginHorizontal="hs">
+                <CategoryCard
+                  // onPress={() => navigation.navigate("Category", { category })}
+                  onPress={() => {}}
+                  title={category.title}
+                  image={category.image}
+                />
+              </Box>
+            ))}
+          </ScrollView>
+        </Box>
+        <ReText variant="HeadlineMedium" marginStart="hm" marginTop="vm">
+          شارف على الإنتهاء
+        </ReText>
+        <Box height={vs(258)}>
+          <ScrollView
+            horizontal
+            overScrollMode="never"
+            contentContainerStyle={{
+              paddingLeft: hs(16),
+              marginTop: vs(12),
+            }}
+          >
+            {categories.map((category) => (
+              <Box key={category.id} marginHorizontal="hs">
+                <Card
+                  // onPress={() => navigation.navigate("Category", { category })}
+                  onPress={() => {}}
+                  title={category.title}
+                  progress={"70"}
+                  imageUrl={
+                    "https://lh3.googleusercontent.com/u/0/drive-viewer/AFGJ81oWu_4K9kUlQnN5nLxrqr8ulX1HXWTdC3AdCyCizsVIa4YXOxcDZUv7nRm3ad2Ix9QzTf0BGgGyreZTeHijji0MSASbUA=w1920-h982"
+                  }
+                />
+              </Box>
+            ))}
+          </ScrollView>
+        </Box>
+        <ReText variant="HeadlineMedium" marginStart="hm" marginTop="vm">
+          فرص التطوع
+        </ReText>
+        <Box height={vs(258)}>
+          <ScrollView
+            horizontal
+            overScrollMode="never"
+            contentContainerStyle={{
+              paddingLeft: hs(16),
+              marginTop: vs(12),
+            }}
+          >
+            {categories.map((category) => (
+              <Box key={category.id} marginHorizontal="hs">
+                <Card
+                  // onPress={() => navigation.navigate("Category", { category })}
+                  onPress={() => {}}
+                  // title={category.title}
+                  imageUrl={
+                    "https://lh3.googleusercontent.com/u/0/drive-viewer/AFGJ81oWu_4K9kUlQnN5nLxrqr8ulX1HXWTdC3AdCyCizsVIa4YXOxcDZUv7nRm3ad2Ix9QzTf0BGgGyreZTeHijji0MSASbUA=w1920-h982"
+                  }
+                />
+              </Box>
+            ))}
+          </ScrollView>
+        </Box>
+      </ScrollView>
     </SafeAreaView>
   );
 };

@@ -1,9 +1,7 @@
 import { TouchableOpacity } from "react-native";
-import {
-  DrawerContentScrollView,
-  DrawerItemList,
-} from "@react-navigation/drawer";
+import { DrawerContentScrollView } from "@react-navigation/drawer";
 import { Feather, Ionicons } from "@expo/vector-icons";
+import { Drawer } from "react-native-paper";
 import { Box, ReText, Theme } from "@styles/theme";
 import { IconSize } from "@styles/size";
 import { useTheme } from "@shopify/restyle";
@@ -32,20 +30,45 @@ const CustomDrawer = (props: any) => {
                 overflow: "hidden",
               }}
             >
-              <Feather name="user" color={colors.primary8} size={IconSize.xl} />
+              <Feather name="user" color={colors.primary} size={IconSize.xl} />
             </Box>
             <Box alignItems={"center"}>
-              <ReText variant="TitleMedium" textAlign="center" color="primary7">
+              <ReText variant="TitleMedium" textAlign="center" color="primary">
                 الملف الشخصي
               </ReText>
-              <ReText variant="TitleSmall" color="primary8" textAlign="center">
-                {!!user ? "أحمد ملايــشة" : "تسجيل الدخول"}
+              <ReText variant="TitleSmall" color="primary" textAlign="center">
+                {!!user ? user.email : "تسجيل الدخول"}
               </ReText>
             </Box>
           </Box>
         </TouchableOpacity>
         <Box flex={1} paddingTop="vs">
-          <DrawerItemList {...props} />
+          {props.state.routes.map((route: any, index: number) => {
+            const { options } = props.descriptors[route.key];
+            if (options.drawerIcon === undefined) return null;
+            const label =
+              options.drawerLabel !== undefined
+                ? options.drawerLabel
+                : options.title !== undefined
+                ? options.title
+                : route.name;
+
+            const isFocused = props.state.index === index;
+
+            const onPress = () => {
+              props.navigation.navigate(route.name);
+            };
+
+            return (
+              <Drawer.Item
+                key={route.key}
+                label={label}
+                active={isFocused}
+                onPress={onPress}
+                icon={options.drawerIcon}
+              />
+            );
+          })}
         </Box>
       </DrawerContentScrollView>
       <Box padding="hm" borderTopWidth={1} borderTopColor="black3">

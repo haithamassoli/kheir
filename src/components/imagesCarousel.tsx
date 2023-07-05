@@ -34,7 +34,7 @@ const ImagesCarousel = ({ images }: Props) => {
       ),
         scrollRef.current?.scrollTo({
           animated: true,
-          x: (width - hs(45)) * selectedIndex,
+          x: (width - hs(32)) * selectedIndex,
           y: 0,
         });
     }, 3000);
@@ -112,16 +112,10 @@ const ImagesCarousel = ({ images }: Props) => {
               {
                 borderColor:
                   index === images.length - selectedIndex - 1
-                    ? isDark
-                      ? colors.primary4
-                      : colors.primary7
-                    : images.length === 1
-                    ? isDark
-                      ? colors.primary4
-                      : colors.primary7
+                    ? colors.primary7
                     : colors.black6,
                 backgroundColor:
-                  index === selectedIndex ? colors.primary6 : colors.black6,
+                  index === selectedIndex ? colors.primary7 : colors.black6,
               },
             ]}
           />
@@ -136,17 +130,17 @@ export default memo(ImagesCarousel);
 const styles = StyleSheet.create({
   container: {
     alignSelf: "center",
-    height: vs(182),
+    height: vs(232),
   },
   shadow: {
     borderRadius: ms(12),
-    width: width - hs(45),
+    width: width - hs(32),
     height: height * 0.24,
   },
   image: {
     resizeMode: "cover",
     borderRadius: ms(12),
-    width: width - hs(45),
+    width: width - hs(32),
     height: height * 0.24,
   },
   dotsContainer: {
