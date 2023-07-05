@@ -274,6 +274,20 @@ export default function RootLayout() {
                   }}
                 />
                 <Drawer.Screen
+                  name="(contact)"
+                  options={{
+                    title: "تواصل معنا",
+                    drawerIcon: ({ color, size }) => (
+                      <Feather
+                        name="mail"
+                        size={size}
+                        color={color}
+                        style={styles.icon}
+                      />
+                    ),
+                  }}
+                />
+                <Drawer.Screen
                   name="(about)"
                   options={{
                     title: "عن تطبيق خير",

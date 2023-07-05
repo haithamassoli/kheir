@@ -7,8 +7,15 @@ import {
   signOut,
 } from "firebase/auth";
 import { db } from "@src/firebase.config";
+import { UserType } from "@src/types/schema";
 
-export const login = async (
+type AuthType = (
+  email: string,
+  password: string,
+  setSnackbarText: (snackbarText: string) => void
+) => Promise<UserType | any | null>;
+
+export const login: AuthType = async (
   email: string,
   password: string,
   setSnackbarText: (snackbarText: string) => void
@@ -29,7 +36,7 @@ export const login = async (
   }
 };
 
-export const register = async (
+export const register: AuthType = async (
   email: string,
   password: string,
   setSnackbarText: (snackbarText: string) => void

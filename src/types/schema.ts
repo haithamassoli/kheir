@@ -14,3 +14,29 @@ export const validationSchema = z.object({
 });
 
 export type ValidationSchemaType = z.infer<typeof validationSchema>;
+
+export type UserType = {
+  apiKey: string;
+  appName: string;
+  createdAt: string;
+  email: string;
+  emailVerified: boolean;
+  isAnonymous: boolean;
+  lastLoginAt: string;
+  providerData: [
+    {
+      displayName?: string;
+      email: string;
+      phoneNumber?: string;
+      photoURL?: string;
+      providerId: string;
+      uid: string;
+    }
+  ];
+  stsTokenManager: {
+    accessToken: string;
+    expirationTime: number;
+    refreshToken: string;
+  };
+  uid: string;
+};

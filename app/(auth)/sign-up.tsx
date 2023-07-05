@@ -17,7 +17,7 @@ import { type ValidationSchemaType, validationSchema } from "@src/types/schema";
 import { useState } from "react";
 
 const SingUp = () => {
-  const { setSnackbarText, user, register } = useStore((state) => state);
+  const { setSnackbarText, register } = useStore((state) => state);
   const router = useRouter();
   const { colors } = useTheme<Theme>();
   const { control, handleSubmit } = useForm<ValidationSchemaType>({
@@ -28,7 +28,6 @@ const SingUp = () => {
   const onSubmit = (data: ValidationSchemaType) => {
     console.log(data);
     register(data.email, data.password, setSnackbarText);
-    console.log(user);
   };
 
   const onEyePress = () => {

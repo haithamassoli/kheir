@@ -7,19 +7,17 @@ import { useRouter } from "expo-router";
 import { Button, TextInput } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { vs } from "@utils/platform";
 import ControlledInput from "@components/controlledInput";
 import { useTheme } from "@shopify/restyle";
 import { TouchableOpacity } from "react-native";
-import { login } from "@apis/auth";
 import Snackbar from "@components/snackbar";
 import { useState } from "react";
 import { type ValidationSchemaType, validationSchema } from "@src/types/schema";
 
 const SignIn = () => {
-  const { setSnackbarText } = useStore((state) => state);
+  const { setSnackbarText, login } = useStore((state) => state);
   const router = useRouter();
   const { colors } = useTheme<Theme>();
   const { control, handleSubmit } = useForm<ValidationSchemaType>({

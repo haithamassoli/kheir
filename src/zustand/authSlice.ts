@@ -1,9 +1,10 @@
 import { StateCreator } from "zustand";
 import { login, register, logout } from "@apis/auth";
+import { UserType } from "@src/types/schema";
 
 export interface AuthState {
-  user: any;
-  setUser: (user: any) => void;
+  user: UserType | null | undefined | any;
+  setUser: (user: UserType) => void;
   login: (
     email: string,
     password: string,
@@ -20,24 +21,24 @@ export interface AuthState {
 export const createAuthSlice: StateCreator<AuthState> = (set) => ({
   user: null,
   setUser: (user) => set({ user }),
-  login: async (
+  login: (
     email: string,
     password: string,
     setSnackbarText: (snackbarText: string) => void
   ) => {
-    const user = await login(email, password, setSnackbarText);
+    const user = login(email, password, setSnackbarText);
     set({ user });
   },
-  register: async (
+  register: (
     email: string,
     password: string,
     setSnackbarText: (snackbarText: string) => void
   ) => {
-    const user = await register(email, password, setSnackbarText);
+    const user = register(email, password, setSnackbarText);
     set({ user });
   },
-  logout: async () => {
-    await logout();
+  logout: () => {
+    logout();
     set({ user: null });
   },
 });
