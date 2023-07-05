@@ -1,12 +1,12 @@
 import { TouchableOpacity } from "react-native";
 import { DrawerContentScrollView } from "@react-navigation/drawer";
 import { Feather, Ionicons } from "@expo/vector-icons";
-import { Drawer } from "react-native-paper";
+import { Divider, Drawer } from "react-native-paper";
 import { Box, ReText, Theme } from "@styles/theme";
 import { IconSize } from "@styles/size";
 import { useTheme } from "@shopify/restyle";
 import { useStore } from "@zustand/store";
-import { ms } from "@utils/platform";
+import { ms, vs } from "@utils/platform";
 import { useRouter } from "expo-router";
 
 const CustomDrawer = (props: any) => {
@@ -71,10 +71,11 @@ const CustomDrawer = (props: any) => {
           })}
         </Box>
       </DrawerContentScrollView>
-      <Box padding="hm" borderTopWidth={1} borderTopColor="black3">
+      <Divider horizontalInset bold />
+      <Box padding="hm">
         <TouchableOpacity
           onPress={onToggleTheme}
-          style={{ paddingVertical: 15 }}
+          style={{ paddingVertical: vs(16) }}
         >
           <Box flexDirection="row" alignItems="center">
             <Feather
@@ -87,7 +88,10 @@ const CustomDrawer = (props: any) => {
             </ReText>
           </Box>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => {}} style={{ paddingVertical: 15 }}>
+        <TouchableOpacity
+          onPress={() => {}}
+          style={{ paddingVertical: vs(16) }}
+        >
           <Box flexDirection={"row"} alignItems={"center"}>
             <Ionicons
               name="share-social-outline"
@@ -102,7 +106,7 @@ const CustomDrawer = (props: any) => {
         {!!user && (
           <TouchableOpacity
             onPress={() => logout()}
-            style={{ paddingVertical: 15 }}
+            style={{ paddingVertical: vs(16) }}
           >
             <Box flexDirection={"row"} alignItems={"center"}>
               <Ionicons

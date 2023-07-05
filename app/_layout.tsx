@@ -31,7 +31,6 @@ import {
   I18nManager,
   Platform,
   ScrollView,
-  StyleSheet,
   Text,
   UIManager,
   Image,
@@ -43,7 +42,6 @@ import {
 import { Drawer } from "expo-router/drawer";
 import CustomDrawer from "@src/layouts/custom-drawer";
 import { Feather } from "@expo/vector-icons";
-import { hs } from "@utils/platform";
 import { useRouter, useSegments } from "expo-router";
 
 if (Platform.OS === "android") {
@@ -204,7 +202,6 @@ export default function RootLayout() {
                 screenOptions={{
                   drawerPosition: "left",
                   headerShown: false,
-                  drawerLabelStyle: labelStyle,
                 }}
               >
                 <Drawer.Screen
@@ -212,12 +209,7 @@ export default function RootLayout() {
                   options={{
                     title: "الرئيسة",
                     drawerIcon: ({ color, size }) => (
-                      <Feather
-                        name="home"
-                        size={size}
-                        color={color}
-                        style={styles.icon}
-                      />
+                      <Feather name="home" size={size} color={color} />
                     ),
                   }}
                 />
@@ -235,7 +227,7 @@ export default function RootLayout() {
                             : require("@assets/icons/drawerIcons/donations.png")
                         }
                         resizeMode="contain"
-                        style={[styles.icon, { width: size, height: size }]}
+                        style={{ width: size, height: size }}
                       />
                     ),
                   }}
@@ -245,31 +237,7 @@ export default function RootLayout() {
                   options={{
                     title: "الإشعارات",
                     drawerIcon: ({ color, size }) => (
-                      <Feather
-                        name="bell"
-                        size={size}
-                        color={color}
-                        style={styles.icon}
-                      />
-                    ),
-                  }}
-                />
-                <Drawer.Screen
-                  name="(volunteer)"
-                  options={{
-                    title: "فرص التطوع",
-                    drawerIcon: ({ size, focused }) => (
-                      <Image
-                        source={
-                          focused
-                            ? require("@assets/icons/drawerIcons/priVolunteer.png")
-                            : isDark
-                            ? require("@assets/icons/drawerIcons/darkVolunteer.png")
-                            : require("@assets/icons/drawerIcons/volunteer.png")
-                        }
-                        resizeMode="contain"
-                        style={[styles.icon, { width: size, height: size }]}
-                      />
+                      <Feather name="bell" size={size} color={color} />
                     ),
                   }}
                 />
@@ -284,12 +252,7 @@ export default function RootLayout() {
                   options={{
                     title: "تواصل معنا",
                     drawerIcon: ({ color, size }) => (
-                      <Feather
-                        name="mail"
-                        size={size}
-                        color={color}
-                        style={styles.icon}
-                      />
+                      <Feather name="mail" size={size} color={color} />
                     ),
                   }}
                 />
@@ -298,12 +261,7 @@ export default function RootLayout() {
                   options={{
                     title: "عن تطبيق خير",
                     drawerIcon: ({ color, size }) => (
-                      <Feather
-                        name="info"
-                        size={size}
-                        color={color}
-                        style={styles.icon}
-                      />
+                      <Feather name="info" size={size} color={color} />
                     ),
                   }}
                 />
@@ -329,15 +287,3 @@ export default function RootLayout() {
     </QueryClientProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  icon: {
-    right: hs(8),
-    position: "absolute",
-  },
-});
-
-const labelStyle = {
-  fontFamily: "CairoBold",
-  transform: [{ translateX: hs(32) }],
-};

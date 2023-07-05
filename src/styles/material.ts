@@ -89,47 +89,62 @@ export const MaterialDark = {
 export const fontConfig = {
   labelLarge: {
     fontFamily: "CairoBold",
+    lineHeight: 26,
   },
   labelMedium: {
     fontFamily: "CairoMedium",
+    lineHeight: 26,
   },
   labelSmall: {
     fontFamily: "CairoReg",
+    lineHeight: 26,
   },
   bodyLarge: {
     fontFamily: "CairoBold",
+    lineHeight: 26,
   },
   bodyMedium: {
     fontFamily: "CairoMedium",
+    lineHeight: 26,
   },
   bodySmall: {
     fontFamily: "CairoReg",
+    lineHeight: 26,
   },
   DisplayLarge: {
     fontFamily: "CairoBold",
+    lineHeight: 26,
   },
   DisplayMedium: {
     fontFamily: "CairoMedium",
+    lineHeight: 26,
   },
   DisplaySmall: {
     fontFamily: "CairoReg",
+    lineHeight: 26,
   },
   titleSmall: {
     fontFamily: "CairoBold",
+    lineHeight: 26,
   },
   titleMedium: {
     fontFamily: "CairoMedium",
+    lineHeight: 26,
   },
   titleLarge: {
     fontFamily: "CairoReg",
+    lineHeight: 26,
   },
   headlineSmall: {
     fontFamily: "CairoBold",
+    lineHeight: 26,
   },
   headlineMedium: {
     fontFamily: "CairoMedium",
+    lineHeight: 26,
   },
   headlineLarge: {
     fontFamily: "CairoReg",
+    lineHeight: 26,
   },
 };

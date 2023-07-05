@@ -2,7 +2,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { Feather } from "@expo/vector-icons";
 import { Box, ReText, Theme } from "@styles/theme";
 import { useNavigation } from "expo-router";
-import { Image, ScrollView } from "react-native";
+import { Image, ScrollView, TouchableOpacity } from "react-native";
 import { hs, vs } from "@utils/platform";
 import { useTheme } from "@shopify/restyle";
 import ImagesCarousel from "@components/imagesCarousel";
@@ -110,9 +110,20 @@ const Home = () => {
             ))}
           </ScrollView>
         </Box>
-        <ReText variant="HeadlineMedium" marginStart="hm" marginTop="vm">
-          فرص التطوع
-        </ReText>
+        <Box
+          flexDirection="row"
+          justifyContent="space-between"
+          alignItems="center"
+          marginTop="vm"
+          marginHorizontal="hm"
+        >
+          <ReText variant="HeadlineMedium">فرص التطوع</ReText>
+          <TouchableOpacity onPress={() => {}}>
+            <ReText variant="BodySmall" color="primary6">
+              عرض الكل
+            </ReText>
+          </TouchableOpacity>
+        </Box>
         <Box height={vs(258)}>
           <ScrollView
             horizontal
