@@ -11,7 +11,12 @@ import * as SplashScreen from "expo-splash-screen";
 import * as Notifications from "expo-notifications";
 import { FlashList } from "@shopify/flash-list";
 import { getDataFromStorage } from "@utils/helper";
-import { PaperProvider, MD3LightTheme, TextInput } from "react-native-paper";
+import {
+  PaperProvider,
+  MD3LightTheme,
+  TextInput,
+  configureFonts,
+} from "react-native-paper";
 import { useCallback, useEffect } from "react";
 import { MaterialDark, MaterialLight } from "@styles/material";
 import { ThemeProvider } from "@react-navigation/native";
@@ -69,6 +74,54 @@ const queryClient = new QueryClient({
 });
 
 SplashScreen.preventAutoHideAsync();
+
+const fontConfig = {
+  labelLarge: {
+    fontFamily: "CairoBold",
+  },
+  labelMedium: {
+    fontFamily: "CairoMedium",
+  },
+  labelSmall: {
+    fontFamily: "CairoReg",
+  },
+  bodyLarge: {
+    fontFamily: "CairoBold",
+  },
+  bodyMedium: {
+    fontFamily: "CairoMedium",
+  },
+  bodySmall: {
+    fontFamily: "CairoReg",
+  },
+  DisplayLarge: {
+    fontFamily: "CairoBold",
+  },
+  DisplayMedium: {
+    fontFamily: "CairoMedium",
+  },
+  DisplaySmall: {
+    fontFamily: "CairoReg",
+  },
+  titleSmall: {
+    fontFamily: "CairoBold",
+  },
+  titleMedium: {
+    fontFamily: "CairoMedium",
+  },
+  titleLarge: {
+    fontFamily: "CairoReg",
+  },
+  headlineSmall: {
+    fontFamily: "CairoBold",
+  },
+  headlineMedium: {
+    fontFamily: "CairoMedium",
+  },
+  headlineLarge: {
+    fontFamily: "CairoReg",
+  },
+};
 
 export default function RootLayout() {
   TextInput.defaultProps = TextInput.defaultProps || {};
@@ -177,6 +230,7 @@ export default function RootLayout() {
     colors: isDark
       ? { ...MD3LightTheme.colors, ...MaterialDark }
       : { ...MD3LightTheme.colors, ...MaterialLight },
+    fonts: configureFonts({ config: fontConfig }),
   };
 
   return (
