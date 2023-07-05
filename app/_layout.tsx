@@ -18,7 +18,7 @@ import {
   configureFonts,
 } from "react-native-paper";
 import { useCallback, useEffect } from "react";
-import { MaterialDark, MaterialLight } from "@styles/material";
+import { MaterialDark, MaterialLight, fontConfig } from "@styles/material";
 import { ThemeProvider } from "@react-navigation/native";
 import {
   Text as PaperText,
@@ -74,54 +74,6 @@ const queryClient = new QueryClient({
 });
 
 SplashScreen.preventAutoHideAsync();
-
-const fontConfig = {
-  labelLarge: {
-    fontFamily: "CairoBold",
-  },
-  labelMedium: {
-    fontFamily: "CairoMedium",
-  },
-  labelSmall: {
-    fontFamily: "CairoReg",
-  },
-  bodyLarge: {
-    fontFamily: "CairoBold",
-  },
-  bodyMedium: {
-    fontFamily: "CairoMedium",
-  },
-  bodySmall: {
-    fontFamily: "CairoReg",
-  },
-  DisplayLarge: {
-    fontFamily: "CairoBold",
-  },
-  DisplayMedium: {
-    fontFamily: "CairoMedium",
-  },
-  DisplaySmall: {
-    fontFamily: "CairoReg",
-  },
-  titleSmall: {
-    fontFamily: "CairoBold",
-  },
-  titleMedium: {
-    fontFamily: "CairoMedium",
-  },
-  titleLarge: {
-    fontFamily: "CairoReg",
-  },
-  headlineSmall: {
-    fontFamily: "CairoBold",
-  },
-  headlineMedium: {
-    fontFamily: "CairoMedium",
-  },
-  headlineLarge: {
-    fontFamily: "CairoReg",
-  },
-};
 
 export default function RootLayout() {
   TextInput.defaultProps = TextInput.defaultProps || {};

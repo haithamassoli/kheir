@@ -85,3 +85,51 @@ export const MaterialDark = {
   onSurfaceDisabled: "rgba(225, 227, 228, 0.38)",
   backdrop: "rgba(41, 50, 53, 0.4)",
 };
+
+export const fontConfig = {
+  labelLarge: {
+    fontFamily: "CairoBold",
+  },
+  labelMedium: {
+    fontFamily: "CairoMedium",
+  },
+  labelSmall: {
+    fontFamily: "CairoReg",
+  },
+  bodyLarge: {
+    fontFamily: "CairoBold",
+  },
+  bodyMedium: {
+    fontFamily: "CairoMedium",
+  },
+  bodySmall: {
+    fontFamily: "CairoReg",
+  },
+  DisplayLarge: {
+    fontFamily: "CairoBold",
+  },
+  DisplayMedium: {
+    fontFamily: "CairoMedium",
+  },
+  DisplaySmall: {
+    fontFamily: "CairoReg",
+  },
+  titleSmall: {
+    fontFamily: "CairoBold",
+  },
+  titleMedium: {
+    fontFamily: "CairoMedium",
+  },
+  titleLarge: {
+    fontFamily: "CairoReg",
+  },
+  headlineSmall: {
+    fontFamily: "CairoBold",
+  },
+  headlineMedium: {
+    fontFamily: "CairoMedium",
+  },
+  headlineLarge: {
+    fontFamily: "CairoReg",
+  },
+};

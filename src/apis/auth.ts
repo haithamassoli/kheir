@@ -5,6 +5,7 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   signOut,
+  sendEmailVerification,
 } from "firebase/auth";
 import { db } from "@src/firebase.config";
 import { UserType } from "@src/types/schema";
@@ -48,7 +49,14 @@ export const register: AuthType = async (
       password
     );
     const user = userCredential.user;
+    await sendEmailVerification(user);
+    await addDoc(collection(db, "users"), {
+      email: user.email,
+      uid: user.uid,
+      createdAt: new Date(),
+    });
     await storeDataToStorage("user", user);
+    setSnackbarText("الرجاء التحقق من عنوان بريدك الإلكتروني");
     return user;
   } catch (error: any) {
     console.log(error.message);
@@ -60,8 +68,9 @@ export const register: AuthType = async (
 export const logout = async () => {
   try {
     await signOut(auth);
-    await storeDataToStorage("user", null);
   } catch (error: any) {
     console.log(error.message);
+  } finally {
+    await storeDataToStorage("user", null);
   }
 };

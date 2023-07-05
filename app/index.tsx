@@ -9,6 +9,7 @@ import ImagesCarousel from "@components/imagesCarousel";
 import CategoryCard from "@components/categoryCard";
 import { categories } from "@src/data/categories";
 import Card from "@components/card";
+import Snackbar from "@components/snackbar";
 
 const Home = () => {
   const navigation: any = useNavigation();
@@ -16,6 +17,7 @@ const Home = () => {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
+      <Snackbar />
       <ScrollView style={{ flex: 1 }}>
         <Box
           flexDirection="row"

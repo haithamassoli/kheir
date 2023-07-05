@@ -21,24 +21,24 @@ export interface AuthState {
 export const createAuthSlice: StateCreator<AuthState> = (set) => ({
   user: null,
   setUser: (user) => set({ user }),
-  login: (
+  login: async (
     email: string,
     password: string,
     setSnackbarText: (snackbarText: string) => void
   ) => {
-    const user = login(email, password, setSnackbarText);
+    const user = await login(email, password, setSnackbarText);
     set({ user });
   },
-  register: (
+  register: async (
     email: string,
     password: string,
     setSnackbarText: (snackbarText: string) => void
   ) => {
-    const user = register(email, password, setSnackbarText);
+    const user = await register(email, password, setSnackbarText);
     set({ user });
   },
-  logout: () => {
-    logout();
+  logout: async () => {
+    await logout();
     set({ user: null });
   },
 });
