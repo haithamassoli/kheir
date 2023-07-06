@@ -15,7 +15,7 @@ export const validationSchema = z.object({
 
 export type ValidationSchemaType = z.infer<typeof validationSchema>;
 
-export type UserType = {
+export interface IUser {
   apiKey: string;
   appName: string;
   createdAt: string;
@@ -39,4 +39,4 @@ export type UserType = {
     refreshToken: string;
   };
   uid: string;
-};
+}

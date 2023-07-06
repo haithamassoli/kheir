@@ -3,7 +3,7 @@ import { useRouter, useLocalSearchParams } from "expo-router";
 
 const Categories = () => {
   const router = useRouter();
-  const { id } = useLocalSearchParams();
+  // const { id } = useLocalSearchParams();
 
   return (
     <Box>

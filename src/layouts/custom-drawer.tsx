@@ -7,18 +7,22 @@ import { IconSize } from "@styles/size";
 import { useTheme } from "@shopify/restyle";
 import { useStore } from "@zustand/store";
 import { ms, vs } from "@utils/platform";
-import { useRouter } from "expo-router";
+import Loading from "@components/loading";
+import { logoutMutation } from "@apis/auth";
 
 const CustomDrawer = (props: any) => {
-  const { toggleTheme, isDark, user, logout } = useStore((state) => state);
+  const { navigation } = props;
+  const { toggleTheme, isDark, user } = useStore((state) => state);
   const { colors } = useTheme<Theme>();
   const onToggleTheme = () => toggleTheme();
-  const router = useRouter();
+  const { mutate, isLoading } = logoutMutation();
+
+  if (isLoading) return <Loading />;
 
   return (
     <Box flex={1}>
       <DrawerContentScrollView {...props}>
-        <TouchableOpacity onPress={() => router.push("/profile")}>
+        <TouchableOpacity onPress={() => navigation.navigate("profile")}>
           <Box alignItems="center" padding="hm" flexDirection="row" gap="hs">
             <Box
               justifyContent="center"
@@ -37,7 +41,7 @@ const CustomDrawer = (props: any) => {
                 الملف الشخصي
               </ReText>
               <ReText variant="TitleSmall" color="primary" textAlign="center">
-                {!!user ? user.email : "تسجيل الدخول"}
+                {!!user ? user.email.split("@")[0] : "تسجيل الدخول"}
               </ReText>
             </Box>
           </Box>
@@ -105,7 +109,7 @@ const CustomDrawer = (props: any) => {
         </TouchableOpacity>
         {!!user && (
           <TouchableOpacity
-            onPress={() => logout()}
+            onPress={() => mutate()}
             style={{ paddingVertical: vs(16) }}
           >
             <Box flexDirection={"row"} alignItems={"center"}>
