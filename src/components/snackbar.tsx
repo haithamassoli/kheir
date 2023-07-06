@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Snackbar as PSnackbar } from "react-native-paper";
 
 const Snackbar = () => {
-  const { snackbarText, setSnackbarText } = useStore((state) => state);
+  const { snackbarText } = useStore((state) => state);
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -15,7 +15,7 @@ const Snackbar = () => {
 
   const onDismiss = () => {
     setVisible(false);
-    setSnackbarText("");
+    useStore.setState({ snackbarText: "" });
   };
   return (
     <Box

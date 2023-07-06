@@ -1,6 +1,6 @@
 {
   "expo": {
-    "scheme": "myapp",
+    "scheme": "kheir",
     "web": {
       "bundler": "metro",
       "output": "static",

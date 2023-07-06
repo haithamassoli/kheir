@@ -1,4 +1,3 @@
-import { SafeAreaView } from "react-native-safe-area-context";
 import { Feather } from "@expo/vector-icons";
 import { Box, ReText, Theme } from "@styles/theme";
 import { useNavigation } from "expo-router";
@@ -16,7 +15,7 @@ const Home = () => {
   const { colors } = useTheme<Theme>();
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <>
       <Snackbar />
       <ScrollView style={{ flex: 1 }}>
         <Box
@@ -148,7 +147,7 @@ const Home = () => {
           </ScrollView>
         </Box>
       </ScrollView>
-    </SafeAreaView>
+    </>
   );
 };
 

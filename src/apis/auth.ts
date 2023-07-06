@@ -17,17 +17,15 @@ interface ILoginData {
 }
 
 export const loginMutation = () => {
-  const { setSnackbarText, setUser } = useStore((state) => state);
   return useMutation({
     mutationFn: (data: ILoginData) => login(data.email, data.password),
     onSuccess: (data: any) => {
       console.log("data", data);
-      setSnackbarText("تم تسجيل الدخول بنجاح");
-      setUser(data);
+      useStore.setState({ user: data, snackbarText: "تم تسجيل الدخول بنجاح" });
     },
     onError: (error: any) => {
       console.log("error", error);
-      setSnackbarText(error.message);
+      useStore.setState({ snackbarText: error.message });
     },
   });
 };
@@ -48,19 +46,19 @@ const login = async (email: string, password: string) => {
 };
 
 export const registerMutation = () => {
-  const { setSnackbarText, setUser } = useStore((state) => state);
   return useMutation({
     mutationFn: (data: ILoginData) => register(data.email, data.password),
     onSuccess: (data: any) => {
       console.log("data", data);
-      setSnackbarText(
-        "تم تسجيل الدخول بنجاح، تم إرسال رسالة تأكيد إلى بريدك الإلكتروني"
-      );
-      setUser(data);
+      useStore.setState({
+        user: data,
+        snackbarText:
+          "تم تسجيل الدخول بنجاح، تم إرسال رسالة تأكيد إلى بريدك الإلكتروني",
+      });
     },
     onError: (error: any) => {
       console.log("error", error);
-      setSnackbarText(error.message);
+      useStore.setState({ snackbarText: error.message });
     },
   });
 };
@@ -87,16 +85,14 @@ const register = async (email: string, password: string) => {
 };
 
 export const logoutMutation = () => {
-  const { setSnackbarText, setUser } = useStore((state) => state);
   return useMutation({
     mutationFn: () => logout(),
     onSuccess: () => {
-      setSnackbarText("تم تسجيل الخروج بنجاح");
-      setUser(null);
+      useStore.setState({ snackbarText: "تم تسجيل الخروج بنجاح", user: null });
     },
     onError: (error: any) => {
       console.log("error", error);
-      setSnackbarText(error.message);
+      useStore.setState({ snackbarText: error.message });
     },
   });
 };

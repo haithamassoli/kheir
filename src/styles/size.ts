@@ -1,16 +1,5 @@
 import { hs, ms } from "@utils/platform";
 
-// export const FontSize = {
-//   xs: ms(4),
-//   s: ms(8),
-//   m: ms(16),
-//   l: ms(24),
-//   xl: ms(32),
-//   "2xl": ms(40),
-//   "3xl": ms(48),
-//   "4xl": ms(56),
-// };
-
 export const FontSize = {
   "4xs": ms(10),
   "3xs": ms(12),

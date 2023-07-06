@@ -24,7 +24,7 @@ import {
   TextInput as PaperTextInput,
 } from "react-native-paper";
 import { ThemeProp } from "react-native-paper/lib/typescript/src/types";
-import theme, { Box, ReText, darkTheme } from "@styles/theme";
+import theme, { ReText, darkTheme } from "@styles/theme";
 import Colors from "@styles/colors";
 import {
   I18nManager,
@@ -32,21 +32,13 @@ import {
   ScrollView,
   Text,
   UIManager,
-  Image,
 } from "react-native";
 import {
   DarkNavigationColors,
   LightNavigationColors,
 } from "@styles/navigation";
-import { Drawer } from "expo-router/drawer";
-import CustomDrawer from "@src/layouts/custom-drawer";
-import { Feather } from "@expo/vector-icons";
-import {
-  useRouter,
-  useSegments,
-  ErrorBoundary,
-  SplashScreen,
-} from "expo-router";
+import { useRouter, useSegments, SplashScreen, Stack } from "expo-router";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 if (Platform.OS === "android") {
   if (UIManager.setLayoutAnimationEnabledExperimental) {
@@ -75,7 +67,39 @@ const queryClient = new QueryClient({
   },
 });
 
+export const unstable_settings = {
+  // Ensure any route can link back to `/`
+  initialRouteName: "index",
+};
+
 SplashScreen.preventAutoHideAsync();
+
+const forceRTL = async () => {
+  if (!I18nManager.isRTL) {
+    try {
+      I18nManager.allowRTL(true);
+      I18nManager.forceRTL(true);
+      await reloadAsync();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+};
+
+const getTheme = async () => {
+  const darkMode = await getDataFromStorage("isDark");
+  if (darkMode === null) {
+    useStore.setState({ isDark: false });
+  } else {
+    useStore.setState({ isDark: darkMode });
+  }
+};
+
+const getUserFromStorage = async () => {
+  const user = await getDataFromStorage("user");
+  if (user) useStore.setState({ user });
+  console.log("user is:", user);
+};
 
 export default function RootLayout() {
   TextInput.defaultProps = TextInput.defaultProps || {};
@@ -106,34 +130,7 @@ export default function RootLayout() {
   const segments = useSegments();
   const router = useRouter();
 
-  const { isDark, setUser, user } = useStore((state) => state);
-
-  const getUserFromStorage = async () => {
-    const user = await getDataFromStorage("user");
-    if (user) setUser(user);
-    console.log("user is:", user);
-  };
-
-  const getTheme = async () => {
-    const darkMode = await getDataFromStorage("isDark");
-    if (darkMode === null) {
-      useStore.setState({ isDark: false });
-    } else {
-      useStore.setState({ isDark: darkMode });
-    }
-  };
-
-  const forceRTL = async () => {
-    if (!I18nManager.isRTL) {
-      try {
-        I18nManager.allowRTL(true);
-        I18nManager.forceRTL(true);
-        await reloadAsync();
-      } catch (error) {
-        console.log(error);
-      }
-    }
-  };
+  const { isDark, user } = useStore((state) => state);
 
   useEffect(() => {
     forceRTL();
@@ -142,17 +139,11 @@ export default function RootLayout() {
   }, []);
 
   useEffect(() => {
-    const inAuthGroup = segments[0] === "(profile)";
-    if (
-      // If the user is not signed in and the initial segment is not anything in the auth group.
-      !user &&
-      inAuthGroup
-    ) {
-      // Redirect to the sign-in page.
-      router.push("/sign-in");
+    const inAuthGroup = segments.includes("profile");
+    if (!user && inAuthGroup) {
+      router.replace("/sign-in");
     } else if (user && segments[0] === "(auth)") {
-      // Redirect away from the sign-in page.
-      router.push("/");
+      router.replace("/");
     }
     console.log(user, segments);
   }, [user, segments]);
@@ -166,9 +157,10 @@ export default function RootLayout() {
     SahabahBold: require("@assets/fonts/DG-Sahabah-Bold.ttf"),
     SahabahReg: require("@assets/fonts/DG-Sahabah-Reg.ttf"),
   });
-  const onLayoutRootView = useCallback(async () => {
+
+  const onLayoutRootView = useCallback(() => {
     if (fontsLoaded) {
-      await SplashScreen.hideAsync();
+      SplashScreen.hideAsync();
     }
   }, [fontsLoaded]);
 
@@ -200,91 +192,13 @@ export default function RootLayout() {
           value={isDark ? DarkNavigationColors : LightNavigationColors}
         >
           <PaperProvider theme={materialTheme}>
-            <Box flex={1} onLayout={onLayoutRootView}>
-              <Drawer
-                drawerContent={(props) => <CustomDrawer {...props} />}
+            <SafeAreaView style={{ flex: 1 }} onLayout={onLayoutRootView}>
+              <Stack
                 screenOptions={{
-                  drawerPosition: "left",
                   headerShown: false,
                 }}
-              >
-                <Drawer.Screen
-                  name="index"
-                  options={{
-                    title: "الرئيسة",
-                    drawerIcon: ({ color, size }) => (
-                      <Feather name="home" size={size} color={color} />
-                    ),
-                  }}
-                />
-                <Drawer.Screen
-                  name="(donations)"
-                  options={{
-                    title: "تبرعاتي",
-                    drawerIcon: ({ size, focused }) => (
-                      <Image
-                        source={
-                          focused
-                            ? require("@assets/icons/drawerIcons/priDonations.png")
-                            : isDark
-                            ? require("@assets/icons/drawerIcons/darkDonations.png")
-                            : require("@assets/icons/drawerIcons/donations.png")
-                        }
-                        resizeMode="contain"
-                        style={{ width: size, height: size }}
-                      />
-                    ),
-                  }}
-                />
-                <Drawer.Screen
-                  name="(notifications)"
-                  options={{
-                    title: "الإشعارات",
-                    drawerIcon: ({ color, size }) => (
-                      <Feather name="bell" size={size} color={color} />
-                    ),
-                  }}
-                />
-                <Drawer.Screen
-                  name="(profile)"
-                  options={{
-                    drawerItemStyle: { display: "none" },
-                  }}
-                />
-                <Drawer.Screen
-                  name="(contact)"
-                  options={{
-                    title: "تواصل معنا",
-                    drawerIcon: ({ color, size }) => (
-                      <Feather name="mail" size={size} color={color} />
-                    ),
-                  }}
-                />
-                <Drawer.Screen
-                  name="(about)"
-                  options={{
-                    title: "عن تطبيق خير",
-                    drawerIcon: ({ color, size }) => (
-                      <Feather name="info" size={size} color={color} />
-                    ),
-                  }}
-                />
-                <Drawer.Screen
-                  name="(auth)/sign-in"
-                  options={{
-                    title: "تسجيل الدخول",
-                    drawerItemStyle: { display: "none" },
-                  }}
-                />
-                <Drawer.Screen
-                  name="(auth)/sign-up"
-                  options={{
-                    title: "تسجيل",
-                    drawerItemStyle: { display: "none" },
-                  }}
-                />
-              </Drawer>
-            </Box>
+              />
+            </SafeAreaView>
           </PaperProvider>
         </ThemeProvider>
       </ReThemeProvider>

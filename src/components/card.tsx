@@ -65,8 +65,8 @@ const Card = ({ imageUrl, onPress, progress, title }: Props) => {
             paddingVertical="vs"
             alignItems="center"
             backgroundColor="secBackground"
-            borderBottomLeftRadius={"xl"}
-            borderBottomRightRadius={"xl"}
+            borderBottomLeftRadius={"l"}
+            borderBottomRightRadius={"l"}
           >
             <ReText variant="BodyLarge" color="primary6">
               {title}
