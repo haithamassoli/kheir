@@ -1,9 +1,9 @@
 import { Box, ReText } from "@styles/theme";
-import { useRouter, useSearchParams } from "expo-router";
+import { useRouter, useLocalSearchParams } from "expo-router";
 
 const Categories = () => {
   const router = useRouter();
-  const { id } = useSearchParams();
+  const { id } = useLocalSearchParams();
 
   return (
     <Box>

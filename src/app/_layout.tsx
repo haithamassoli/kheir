@@ -7,7 +7,6 @@ import { StatusBar } from "expo-status-bar";
 import { useStore } from "@zustand/store";
 import { reloadAsync } from "expo-updates";
 import { useFonts } from "expo-font";
-import * as SplashScreen from "expo-splash-screen";
 import * as Notifications from "expo-notifications";
 import { FlashList } from "@shopify/flash-list";
 import { getDataFromStorage } from "@utils/helper";
@@ -42,7 +41,12 @@ import {
 import { Drawer } from "expo-router/drawer";
 import CustomDrawer from "@src/layouts/custom-drawer";
 import { Feather } from "@expo/vector-icons";
-import { useRouter, useSegments } from "expo-router";
+import {
+  useRouter,
+  useSegments,
+  ErrorBoundary,
+  SplashScreen,
+} from "expo-router";
 
 if (Platform.OS === "android") {
   if (UIManager.setLayoutAnimationEnabledExperimental) {

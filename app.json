@@ -1,8 +1,10 @@
 {
   "expo": {
-    "scheme": "acme",
+    "scheme": "myapp",
     "web": {
-      "bundler": "metro"
+      "bundler": "metro",
+      "output": "static",
+      "favicon": "./assets/favicon.png"
     },
     "name": "kheir",
     "slug": "kheir",
@@ -40,8 +42,13 @@
           "icon": "./assets/icon.png",
           "color": "#ffffff"
         }
-      ]
+      ],
+      "expo-router"
     ],
+    "experiments": {
+      "tsconfigPaths": true,
+      "typedRoutes": true
+    },
     "extra": {
       "eas": {
         "projectId": "66a92220-8f3a-4f58-b597-0d5392128767"
