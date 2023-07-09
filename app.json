@@ -6,7 +6,7 @@
       "output": "static",
       "favicon": "./assets/favicon.png"
     },
-    "name": "kheir",
+    "name": "خير",
     "slug": "kheir",
     "version": "0.1.0",
     "orientation": "portrait",
@@ -42,13 +42,8 @@
           "icon": "./assets/icon.png",
           "color": "#ffffff"
         }
-      ],
-      "expo-router"
+      ]
     ],
-    "experiments": {
-      "tsconfigPaths": true,
-      "typedRoutes": true
-    },
     "extra": {
       "eas": {
         "projectId": "66a92220-8f3a-4f58-b597-0d5392128767"

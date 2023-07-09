@@ -69,7 +69,7 @@ const queryClient = new QueryClient({
 
 export const unstable_settings = {
   // Ensure any route can link back to `/`
-  initialRouteName: "index",
+  initialRouteName: "(drawer)",
 };
 
 SplashScreen.preventAutoHideAsync();
@@ -188,10 +188,10 @@ export default function RootLayout() {
             isDark ? Colors.darkBackground : Colors.lightBackground
           }
         />
-        <ThemeProvider
-          value={isDark ? DarkNavigationColors : LightNavigationColors}
-        >
-          <PaperProvider theme={materialTheme}>
+        <PaperProvider theme={materialTheme}>
+          <ThemeProvider
+            value={isDark ? DarkNavigationColors : LightNavigationColors}
+          >
             <SafeAreaView style={{ flex: 1 }} onLayout={onLayoutRootView}>
               <Stack
                 screenOptions={{
@@ -199,8 +199,8 @@ export default function RootLayout() {
                 }}
               />
             </SafeAreaView>
-          </PaperProvider>
-        </ThemeProvider>
+          </ThemeProvider>
+        </PaperProvider>
       </ReThemeProvider>
     </QueryClientProvider>
   );

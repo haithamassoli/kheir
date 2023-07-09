@@ -4,7 +4,7 @@ import { useStore } from "@zustand/store";
 import { Drawer } from "expo-router/drawer";
 import { Image } from "react-native";
 
-const HomeTabs = () => {
+const HomeDrawer = () => {
   const { isDark } = useStore((state) => state);
   return (
     <Drawer
@@ -79,4 +79,4 @@ const HomeTabs = () => {
   );
 };
 
-export default HomeTabs;
+export default HomeDrawer;
