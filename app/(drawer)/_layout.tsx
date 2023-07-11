@@ -5,19 +5,23 @@ import { Drawer } from "expo-router/drawer";
 import { Image } from "react-native";
 
 const HomeDrawer = () => {
-  const { isDark } = useStore((state) => state);
+  const { isDark } = useStore();
   return (
     <Drawer
       drawerContent={(props) => <CustomDrawer {...props} />}
       screenOptions={{
         drawerPosition: "left",
-        headerShown: false,
+        headerTitleStyle: {
+          fontFamily: "CairoBold",
+        },
+        headerLeft: () => null,
       }}
     >
       <Drawer.Screen
         name="index"
         options={{
           title: "الرئيسة",
+          headerShown: false,
           drawerIcon: ({ color, size }) => (
             <Feather name="home" size={size} color={color} />
           ),
@@ -54,6 +58,7 @@ const HomeDrawer = () => {
       <Drawer.Screen
         name="profile"
         options={{
+          headerTitle: "الملف الشخصي",
           drawerItemStyle: { display: "none" },
         }}
       />

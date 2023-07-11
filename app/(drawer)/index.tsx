@@ -9,13 +9,14 @@ import CategoryCard from "@components/categoryCard";
 import { categories } from "@src/data/categories";
 import Card from "@components/card";
 import Snackbar from "@components/snackbar";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const Home = () => {
   const navigation: any = useNavigation();
   const { colors } = useTheme<Theme>();
 
   return (
-    <>
+    <SafeAreaView style={{ flex: 1 }}>
       <Snackbar />
       <ScrollView style={{ flex: 1 }}>
         <Box
@@ -28,10 +29,10 @@ const Home = () => {
           <Box flexDirection="row" alignItems="center">
             <Image
               source={require("@assets/images/logo.png")}
-              style={{ width: hs(69), height: vs(69), resizeMode: "contain" }}
+              style={{ width: hs(69), resizeMode: "contain" }}
             />
-            <Box marginTop="vxs">
-              <ReText variant="TitleMedium">خـيـر</ReText>
+            <Box>
+              <ReText variant="BodyLarge">خـيـر</ReText>
               <ReText variant="BodySmall">KHEIR</ReText>
             </Box>
           </Box>
@@ -147,7 +148,7 @@ const Home = () => {
           </ScrollView>
         </Box>
       </ScrollView>
-    </>
+    </SafeAreaView>
   );
 };
 

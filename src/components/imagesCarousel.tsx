@@ -24,7 +24,7 @@ const ImagesCarousel = ({ images }: Props) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const scrollRef = useRef<ScrollView>(null);
 
-  const { isDark } = useStore((state) => state);
+  const { isDark } = useStore();
   const { colors } = useTheme<Theme>();
 
   useEffect(() => {

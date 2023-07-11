@@ -12,7 +12,7 @@ import { logoutMutation } from "@apis/auth";
 
 const CustomDrawer = (props: any) => {
   const { navigation } = props;
-  const { toggleTheme, isDark, user } = useStore((state) => state);
+  const { toggleTheme, isDark, user } = useStore();
   const { colors } = useTheme<Theme>();
   const onToggleTheme = () => toggleTheme();
   const { mutate, isLoading } = logoutMutation();
