@@ -1,6 +1,6 @@
 import { Feather } from "@expo/vector-icons";
 import { Box, ReText, Theme } from "@styles/theme";
-import { useNavigation } from "expo-router";
+import { useNavigation, useRouter } from "expo-router";
 import { Image, ScrollView, TouchableOpacity } from "react-native";
 import { hs, vs } from "@utils/platform";
 import { useTheme } from "@shopify/restyle";
@@ -13,6 +13,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 const Home = () => {
   const navigation: any = useNavigation();
+  const router = useRouter();
   const { colors } = useTheme<Theme>();
 
   return (
@@ -41,7 +42,7 @@ const Home = () => {
               name={"shopping-cart"}
               size={hs(24)}
               color={colors.text}
-              onPress={() => {}}
+              onPress={() => router.push("cart")}
             />
             <Feather
               name="menu"
@@ -74,8 +75,7 @@ const Home = () => {
             {categories.map((category) => (
               <Box key={category.id} marginHorizontal="hs">
                 <CategoryCard
-                  // onPress={() => navigation.navigate("Category", { category })}
-                  onPress={() => {}}
+                  onPress={() => router.push(category.route)}
                   title={category.title}
                   image={category.image}
                 />
@@ -98,7 +98,6 @@ const Home = () => {
             {categories.map((category) => (
               <Box key={category.id} marginHorizontal="hs">
                 <Card
-                  // onPress={() => navigation.navigate("Category", { category })}
                   onPress={() => {}}
                   title={category.title}
                   progress={"70"}
@@ -118,7 +117,7 @@ const Home = () => {
           marginHorizontal="hm"
         >
           <ReText variant="HeadlineMedium">فرص التطوع</ReText>
-          <TouchableOpacity onPress={() => {}}>
+          <TouchableOpacity onPress={() => router.push("volunteer")}>
             <ReText variant="BodySmall" color="primary6">
               عرض الكل
             </ReText>

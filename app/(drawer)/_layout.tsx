@@ -18,7 +18,7 @@ const HomeDrawer = () => {
       }}
     >
       <Drawer.Screen
-        name="index"
+        name="(homeStack)"
         options={{
           title: "الرئيسة",
           headerShown: false,
