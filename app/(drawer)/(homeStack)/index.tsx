@@ -10,11 +10,17 @@ import { categories } from "@src/data/categories";
 import Card from "@components/card";
 import Snackbar from "@components/snackbar";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { fetchVolunteerQuery } from "@apis/volunteer";
+import Loading from "@components/loading";
+import { width } from "@utils/helper";
 
 const Home = () => {
   const navigation: any = useNavigation();
   const router = useRouter();
   const { colors } = useTheme<Theme>();
+  const { data: volunteerData, isLoading } = fetchVolunteerQuery();
+
+  if (isLoading) return <Loading />;
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -98,7 +104,7 @@ const Home = () => {
             {categories.map((category) => (
               <Box key={category.id} marginHorizontal="hs">
                 <Card
-                  onPress={() => {}}
+                  onPress={() => router.push("almost-done/1")}
                   title={category.title}
                   progress={"70"}
                   imageUrl={
@@ -132,15 +138,13 @@ const Home = () => {
               marginTop: vs(12),
             }}
           >
-            {categories.map((category) => (
-              <Box key={category.id} marginHorizontal="hs">
+            {volunteerData?.map((volunteer) => (
+              <Box key={volunteer.id} marginHorizontal="hs">
                 <Card
-                  // onPress={() => navigation.navigate("Category", { category })}
-                  onPress={() => {}}
-                  // title={category.title}
-                  imageUrl={
-                    "https://lh3.googleusercontent.com/u/0/drive-viewer/AFGJ81oWu_4K9kUlQnN5nLxrqr8ulX1HXWTdC3AdCyCizsVIa4YXOxcDZUv7nRm3ad2Ix9QzTf0BGgGyreZTeHijji0MSASbUA=w1920-h982"
-                  }
+                  onPress={() => router.push(`volunteer/${volunteer.id}`)}
+                  imageUrl={volunteer.image}
+                  width={width - hs(64)}
+                  height={vs(220)}
                 />
               </Box>
             ))}
