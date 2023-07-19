@@ -1,35 +1,47 @@
 import Colors from "@styles/colors";
 import { Box, ReText } from "@styles/theme";
-import { width } from "@utils/helper";
 import { hs, ms, vs } from "@utils/platform";
-import { TouchableOpacity, ImageBackground } from "react-native";
-import { ProgressBar } from "react-native-paper";
+import { useStore } from "@zustand/store";
+import { TouchableOpacity } from "react-native";
+import { ProgressBar, Card as PCard } from "react-native-paper";
 
 type Props = {
-  onPress: () => void;
+  onPress?: () => void;
   title?: string;
   imageUrl: string;
   progress?: string;
+  width?: number;
+  height?: number;
 };
 
-const Card = ({ imageUrl, onPress, progress, title }: Props) => {
+const Card = ({ imageUrl, onPress, progress, title, height, width }: Props) => {
+  const { isDark } = useStore();
+
   return (
-    <Box flex={1} width={width - hs(64)} height={vs(600)}>
-      <TouchableOpacity onPress={onPress}>
-        <ImageBackground
-          source={{
-            uri: imageUrl,
-          }}
-          resizeMode={"cover"}
+    <Box flex={1} width={width || hs(250)}>
+      <TouchableOpacity onPress={onPress} activeOpacity={onPress ? 0.8 : 1}>
+        <PCard
+          collapsable
           style={{
-            height: 200,
-            borderTopRightRadius: ms(16),
-            borderTopLeftRadius: ms(16),
-            borderBottomLeftRadius: title ? 0 : ms(16),
-            borderBottomRightRadius: title ? 0 : ms(16),
-            overflow: "hidden",
+            borderRadius: ms(18),
           }}
         >
+          <PCard.Cover
+            source={{
+              uri: imageUrl,
+            }}
+            borderTopLeftRadius={ms(18)}
+            borderTopRightRadius={ms(18)}
+            borderBottomLeftRadius={title ? 0 : ms(18)}
+            borderBottomRightRadius={title ? 0 : ms(18)}
+            style={{
+              height: height || vs(176),
+              borderTopLeftRadius: ms(18),
+              borderTopRightRadius: ms(18),
+              borderBottomLeftRadius: title ? 0 : ms(18),
+              borderBottomRightRadius: title ? 0 : ms(18),
+            }}
+          />
           {progress && (
             <Box flex={1} justifyContent="flex-end">
               <ProgressBar
@@ -41,6 +53,9 @@ const Card = ({ imageUrl, onPress, progress, title }: Props) => {
                   borderRadius: ms(12),
                   marginStart: hs(12),
                   marginBottom: vs(16),
+                  position: "absolute",
+                  bottom: 0,
+                  left: 0,
                 }}
               />
               <ReText
@@ -59,20 +74,18 @@ const Card = ({ imageUrl, onPress, progress, title }: Props) => {
               </ReText>
             </Box>
           )}
-        </ImageBackground>
-        {title && (
-          <Box
-            paddingVertical="vs"
-            alignItems="center"
-            backgroundColor="secBackground"
-            borderBottomLeftRadius={"l"}
-            borderBottomRightRadius={"l"}
-          >
-            <ReText variant="BodyLarge" color="primary6">
-              {title}
-            </ReText>
-          </Box>
-        )}
+          {title && (
+            <Box paddingVertical="vs" paddingHorizontal="hs">
+              <ReText
+                variant="BodyMedium"
+                textAlign="center"
+                color={isDark ? "primary6" : "primary5"}
+              >
+                {title}
+              </ReText>
+            </Box>
+          )}
+        </PCard>
       </TouchableOpacity>
     </Box>
   );
