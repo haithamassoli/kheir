@@ -1,8 +1,6 @@
-import { Feather } from "@expo/vector-icons";
-import Colors from "@styles/colors";
 import { Box, ReText } from "@styles/theme";
 import { width } from "@utils/helper";
-import { hs, ms } from "@utils/platform";
+import { hs } from "@utils/platform";
 
 const DescCard = ({ desc }: { desc: string }) => {
   return (

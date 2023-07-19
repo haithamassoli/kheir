@@ -34,3 +34,7 @@ export const isConnected = async () => {
   const connectionStatus = await NetInfo.fetch();
   return connectionStatus.isConnected;
 };
+
+export const calcPercentage = (goal: number, collected: number) => {
+  return Math.round((collected / goal) * 100).toString();
+};
