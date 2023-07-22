@@ -64,6 +64,7 @@ const SignIn = () => {
               fontFamily: "CairoReg",
             }}
           />
+          <Box height={vs(12)} />
           <ControlledInput
             control={control}
             name="password"

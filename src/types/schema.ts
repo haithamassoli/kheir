@@ -15,6 +15,22 @@ export const validationSchema = z.object({
 
 export type ValidationSchemaType = z.infer<typeof validationSchema>;
 
+export const validationAddToCartSchema = z.object({
+  price: z
+    .string({
+      required_error: "السعر يجب أن لا يكون فارغًا",
+    })
+    .min(1, "السعر يجب أن يكون 1 دينار على الأقل"),
+  friendPhone: z
+    .string()
+    .min(10, "رقم الهاتف يجب أن يكون 10 أرقام على الأقل")
+    .optional(),
+});
+
+export type ValidationAddToCartSchemaType = z.infer<
+  typeof validationAddToCartSchema
+>;
+
 export interface IUser {
   apiKey: string;
   appName: string;

@@ -49,7 +49,7 @@ const CollectedCard = ({ collected, goal, progress }: Props) => {
             تم جمع
           </ReText>
           <ReText variant="BodyMedium" color="primary">
-            {collected} ريال
+            {collected} دينار
           </ReText>
         </Box>
         <Box width={hs(2)} height={"100%"} backgroundColor="black8" />
@@ -58,7 +58,7 @@ const CollectedCard = ({ collected, goal, progress }: Props) => {
             المتبقي
           </ReText>
           <ReText variant="BodyMedium" color="primary">
-            {goal - collected} ريال
+            {goal - collected} دينار
           </ReText>
         </Box>
       </Box>

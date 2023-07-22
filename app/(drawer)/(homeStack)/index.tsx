@@ -2,7 +2,7 @@ import { Feather } from "@expo/vector-icons";
 import { Box, ReText, Theme } from "@styles/theme";
 import { useNavigation, useRouter } from "expo-router";
 import { Image, ScrollView, TouchableOpacity } from "react-native";
-import { hs, vs } from "@utils/platform";
+import { hs, ms, vs } from "@utils/platform";
 import { useTheme } from "@shopify/restyle";
 import ImagesCarousel from "@components/imagesCarousel";
 import CategoryCard from "@components/categoryCard";
@@ -13,9 +13,11 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { fetchVolunteerQuery } from "@apis/volunteer";
 import Loading from "@components/loading";
 import { width } from "@utils/helper";
+import { useStore } from "@zustand/store";
 
 const Home = () => {
   const navigation: any = useNavigation();
+  const { cart } = useStore();
   const router = useRouter();
   const { colors } = useTheme<Theme>();
   const { data: volunteerData, isLoading } = fetchVolunteerQuery();
@@ -44,6 +46,26 @@ const Home = () => {
             </Box>
           </Box>
           <Box flexDirection="row" alignItems="center" gap="hm">
+            <Box
+              width={hs(18)}
+              height={vs(18)}
+              borderRadius="l"
+              backgroundColor="primary6"
+              position="absolute"
+              top={-vs(6)}
+              left={-hs(6)}
+              zIndex="overlay"
+              alignSelf="center"
+            >
+              <ReText
+                variant="BodySmall"
+                textAlign="center"
+                fontSize={ms(10)}
+                color="lightText"
+              >
+                {cart.length}
+              </ReText>
+            </Box>
             <Feather
               name={"shopping-cart"}
               size={hs(24)}

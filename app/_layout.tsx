@@ -9,7 +9,7 @@ import { reloadAsync } from "expo-updates";
 import { useFonts } from "expo-font";
 import * as Notifications from "expo-notifications";
 import { FlashList } from "@shopify/flash-list";
-import { getDataFromStorage } from "@utils/helper";
+import { getDataFromStorage, storeDataToStorage } from "@utils/helper";
 import {
   PaperProvider,
   MD3LightTheme,
@@ -100,6 +100,12 @@ const getUserFromStorage = async () => {
   // console.log("user is:", user);
 };
 
+const getCartFromStorage = async () => {
+  const cart = await getDataFromStorage("cart");
+  console.log("cart is:", cart);
+  if (cart) useStore.setState({ cart });
+};
+
 export default function RootLayout() {
   TextInput.defaultProps = TextInput.defaultProps || {};
   TextInput.defaultProps.allowFontScaling = false;
@@ -129,13 +135,20 @@ export default function RootLayout() {
   const segments = useSegments();
   const router = useRouter();
 
-  const { isDark, user } = useStore();
+  const { isDark, user, cart } = useStore();
 
   useEffect(() => {
     forceRTL();
     getTheme();
     getUserFromStorage();
+    getCartFromStorage();
   }, []);
+
+  useEffect(() => {
+    if (cart.length > 0) {
+      storeDataToStorage("cart", cart);
+    }
+  }, [cart]);
 
   useEffect(() => {
     const inAuthGroup = segments.includes("profile");
