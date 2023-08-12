@@ -84,7 +84,9 @@ const SingUp = () => {
             mode="contained-tonal"
             onPress={handleSubmit(onSubmit)}
             style={{ width: "100%" }}
-            labelStyle={{ fontFamily: "CairoSemiBold" }}
+            contentStyle={{
+              height: vs(46),
+            }}
           >
             تسجيل
           </Button>

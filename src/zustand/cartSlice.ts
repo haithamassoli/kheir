@@ -1,4 +1,3 @@
-import { storeDataToStorage } from "@utils/helper";
 import { StateCreator } from "zustand";
 
 export interface ICartState {
@@ -49,23 +48,3 @@ export const createCartSlice: StateCreator<ICartState> = (set) => ({
       cart: [],
     })),
 });
-
-// cartItem.id === item.id
-// ? {
-//     ...cartItem,
-//     price: cartItem.price + item.price,
-//     friendPhone: item.friendPhone,
-//   }
-// : cartItem;
-
-// return {
-//   cart: state.cart.map((cartItem) =>
-//     cartItem.id === item.id
-//       ? {
-//           ...cartItem,
-//           price: cartItem.price + item.price,
-//           friendPhone: item.friendPhone,
-//         }
-//       : cartItem
-//   ),
-// };

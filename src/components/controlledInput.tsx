@@ -7,6 +7,7 @@ type ControlledInputProps = {
   name: string;
   width?: string | number;
   defaultValue?: string;
+  withError?: boolean;
 } & React.ComponentProps<typeof TextInput>;
 
 const ControlledInput = ({
@@ -14,6 +15,7 @@ const ControlledInput = ({
   name,
   width,
   defaultValue,
+  withError = true,
   ...textInputProps
 }: ControlledInputProps) => {
   return (
@@ -27,6 +29,10 @@ const ControlledInput = ({
       }) => (
         <>
           <TextInput
+            contentStyle={{
+              height: vs(48),
+              fontFamily: "CairoBold",
+            }}
             {...textInputProps}
             value={value}
             defaultValue={defaultValue}
@@ -34,7 +40,7 @@ const ControlledInput = ({
             onBlur={onBlur}
             error={invalid}
           />
-          {error && (
+          {error && withError && (
             <HelperText
               type="error"
               visible={invalid}
