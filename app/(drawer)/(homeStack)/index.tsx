@@ -12,8 +12,9 @@ import Snackbar from "@components/snackbar";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { fetchVolunteerQuery } from "@apis/volunteer";
 import Loading from "@components/loading";
-import { width } from "@utils/helper";
+import { calcPercentage, width } from "@utils/helper";
 import { useStore } from "@zustand/store";
+import { fetchAlmostDoneQuery } from "@apis/almostDone";
 
 const Home = () => {
   const navigation: any = useNavigation();
@@ -21,8 +22,10 @@ const Home = () => {
   const router = useRouter();
   const { colors } = useTheme<Theme>();
   const { data: volunteerData, isLoading } = fetchVolunteerQuery();
+  const { data: almostDoneData, isLoading: isLoadingAlmostDone } =
+    fetchAlmostDoneQuery();
 
-  if (isLoading) return <Loading />;
+  if (isLoading || isLoadingAlmostDone) return <Loading />;
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -88,7 +91,7 @@ const Home = () => {
             ]}
           />
         </Box>
-        <ReText variant="HeadlineMedium" marginStart="hm">
+        <ReText variant="HeadlineMedium" marginStart="hm" textAlign="left">
           فئات التبرع
         </ReText>
         <Box height={vs(120)}>
@@ -111,32 +114,35 @@ const Home = () => {
             ))}
           </ScrollView>
         </Box>
-        <ReText variant="HeadlineMedium" marginStart="hm" marginTop="vm">
+        <ReText
+          variant="HeadlineMedium"
+          marginStart="hm"
+          marginTop="vm"
+          textAlign="left"
+        >
           شارف على الإنتهاء
         </ReText>
-        <Box height={vs(258)}>
-          <ScrollView
-            horizontal
-            overScrollMode="never"
-            contentContainerStyle={{
-              paddingLeft: hs(16),
-              marginTop: vs(12),
-            }}
-          >
-            {categories.map((category) => (
-              <Box key={category.id} marginHorizontal="hs">
-                <Card
-                  onPress={() => router.push("almost-done/1")}
-                  title={category.title}
-                  progress={"70"}
-                  imageUrl={
-                    "https://lh3.googleusercontent.com/u/0/drive-viewer/AFGJ81oWu_4K9kUlQnN5nLxrqr8ulX1HXWTdC3AdCyCizsVIa4YXOxcDZUv7nRm3ad2Ix9QzTf0BGgGyreZTeHijji0MSASbUA=w1920-h982"
-                  }
-                />
-              </Box>
-            ))}
-          </ScrollView>
-        </Box>
+        <ScrollView
+          horizontal
+          overScrollMode="never"
+          contentContainerStyle={{
+            paddingLeft: hs(16),
+            marginTop: vs(12),
+          }}
+        >
+          {almostDoneData?.map((almostDone) => (
+            <Box key={almostDone.id} marginHorizontal="hs">
+              <Card
+                onPress={() => router.push(`almost-done/${almostDone.id}`)}
+                progress={calcPercentage(
+                  almostDone?.goal!,
+                  almostDone?.collected!
+                )}
+                imageUrl={almostDone.image}
+              />
+            </Box>
+          ))}
+        </ScrollView>
         <Box
           flexDirection="row"
           justifyContent="space-between"

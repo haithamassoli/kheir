@@ -1,5 +1,11 @@
 export const categories = [
   {
+    id: 6,
+    title: "إعمار",
+    route: "construction",
+    image: require("@assets/icons/6.png"),
+  },
+  {
     id: 1,
     title: "حالات طارئة",
     route: "emergencies",
@@ -28,11 +34,5 @@ export const categories = [
     title: "سداد دين",
     route: "paying-debt",
     image: require("@assets/icons/5.png"),
-  },
-  {
-    id: 6,
-    title: "إعمار",
-    route: "construction",
-    image: require("@assets/icons/6.png"),
   },
 ];

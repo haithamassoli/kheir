@@ -32,7 +32,7 @@ const ExecutorCard = ({ beneficiaries, donors, executor }: Props) => {
             عدد المستفيدين:
           </ReText>
           <ReText variant="BodyMedium" color="primary">
-            {beneficiaries} أسرة
+            {beneficiaries}
           </ReText>
         </Box>
         <Box width={hs(2)} height={"100%"} backgroundColor="black8" />

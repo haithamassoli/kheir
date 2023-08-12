@@ -119,7 +119,7 @@ const ConstructionItem = () => {
             <ReText variant="TitleLarge" textAlign="center" color="lightText">
               مبلغ التبرع
             </ReText>
-            <ReText variant="TitleSmall" color="lightText">
+            <ReText variant="TitleSmall" color="lightText" textAlign="left">
               حدد قيمة التبرع بالدينار الأردني
             </ReText>
             <Box
@@ -187,13 +187,13 @@ const ConstructionItem = () => {
                   });
                 }}
               />
-              <ReText variant="BodySmall" color="lightText">
+              <ReText variant="BodySmall" color="lightText" textAlign="left">
                 تبرّع عن أهلك أو أصدقائك و أرسلها لهم كهدية
               </ReText>
             </Box>
             {checked && (
               <>
-                <ReText variant="TitleSmall" color="lightText">
+                <ReText variant="TitleSmall" color="lightText" textAlign="left">
                   أدخل رقم هاتف قريبك/صديقك لنرسل له هديتك
                 </ReText>
                 <ControlledInput

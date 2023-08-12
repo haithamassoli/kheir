@@ -6,6 +6,7 @@ const HomeStack = () => {
       screenOptions={{
         headerTitleAlign: "center",
         headerBackTitle: "الرجوع",
+        headerBackTitleVisible: false,
         headerTitleStyle: {
           fontFamily: "CairoBold",
         },
@@ -25,7 +26,19 @@ const HomeStack = () => {
         }}
       />
       <Stack.Screen
+        name="volunteer/[id]"
+        options={{
+          title: "فرص التطوع",
+        }}
+      />
+      <Stack.Screen
         name="emergencies/index"
+        options={{
+          title: "الحالات الطارئة",
+        }}
+      />
+      <Stack.Screen
+        name="emergencies/[id]"
         options={{
           title: "الحالات الطارئة",
         }}
@@ -58,6 +71,18 @@ const HomeStack = () => {
         name="construction/index"
         options={{
           title: "إعمــار",
+        }}
+      />
+      <Stack.Screen
+        name="construction/[id]"
+        options={{
+          title: "إعمــار",
+        }}
+      />
+      <Stack.Screen
+        name="almost-done/[id]"
+        options={{
+          title: "شارف على الانتهاء",
         }}
       />
       {/* <Stack.Screen
