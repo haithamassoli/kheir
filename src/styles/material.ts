@@ -1,5 +1,7 @@
 // https://callstack.github.io/react-native-paper/docs/guides/theming#creating-dynamic-theme-colors
 
+import { hs, ms, vs } from "@utils/platform";
+
 export const MaterialLight = {
   primary: "rgb(0, 103, 126)",
   onPrimary: "rgb(255, 255, 255)",
@@ -87,64 +89,87 @@ export const MaterialDark = {
 };
 
 export const fontConfig = {
-  labelLarge: {
-    fontFamily: "CairoBold",
-    lineHeight: 26,
-  },
-  labelMedium: {
-    fontFamily: "CairoMedium",
-    lineHeight: 26,
-  },
-  labelSmall: {
-    fontFamily: "CairoReg",
-    lineHeight: 26,
-  },
-  bodyLarge: {
-    fontFamily: "CairoBold",
-    lineHeight: 26,
-  },
-  bodyMedium: {
-    fontFamily: "CairoMedium",
-    lineHeight: 26,
-  },
-  bodySmall: {
-    fontFamily: "CairoReg",
-    lineHeight: 26,
-  },
   DisplayLarge: {
-    fontFamily: "CairoBold",
-    lineHeight: 26,
+    fontFamily: "SahabahBold",
+    lineHeight: vs(64),
+    fontSize: ms(57),
   },
   DisplayMedium: {
-    fontFamily: "CairoMedium",
-    lineHeight: 26,
+    fontFamily: "SahabahReg",
+    lineHeight: vs(52),
+    fontSize: ms(45),
   },
   DisplaySmall: {
-    fontFamily: "CairoReg",
-    lineHeight: 26,
-  },
-  titleSmall: {
-    fontFamily: "CairoBold",
-    lineHeight: 26,
-  },
-  titleMedium: {
-    fontFamily: "CairoMedium",
-    lineHeight: 26,
-  },
-  titleLarge: {
-    fontFamily: "CairoReg",
-    lineHeight: 26,
-  },
-  headlineSmall: {
-    fontFamily: "CairoBold",
-    lineHeight: 26,
-  },
-  headlineMedium: {
-    fontFamily: "CairoMedium",
-    lineHeight: 26,
+    fontFamily: "SahabahReg",
+    lineHeight: vs(44),
+    fontSize: ms(36),
   },
   headlineLarge: {
-    fontFamily: "CairoReg",
-    lineHeight: 26,
+    fontFamily: "SahabahReg",
+    lineHeight: vs(40),
+    fontSize: ms(32),
+  },
+  headlineMedium: {
+    fontFamily: "SahabahReg",
+    lineHeight: vs(36),
+    fontSize: ms(28),
+  },
+  headlineSmall: {
+    fontFamily: "SahabahBold",
+    lineHeight: vs(32),
+    fontSize: ms(24),
+  },
+  titleLarge: {
+    fontFamily: "SahabahReg",
+    lineHeight: vs(28),
+    fontSize: ms(22),
+  },
+  titleMedium: {
+    fontFamily: "SahabahReg",
+    lineHeight: vs(24),
+    fontSize: ms(16),
+    letterSpacing: hs(0.15),
+  },
+  titleSmall: {
+    fontFamily: "SahabahBold",
+    lineHeight: vs(20),
+    fontSize: ms(14),
+    letterSpacing: hs(0.1),
+  },
+  labelLarge: {
+    fontFamily: "SahabahBold",
+    lineHeight: vs(20),
+    fontSize: ms(14),
+    letterSpacing: hs(0.1),
+  },
+  labelMedium: {
+    fontFamily: "SahabahReg",
+    lineHeight: vs(16),
+    fontSize: ms(12),
+    letterSpacing: hs(0.5),
+  },
+  labelSmall: {
+    fontFamily: "SahabahReg",
+    lineHeight: vs(16),
+    fontSize: ms(11),
+    letterSpacing: hs(0.5),
+  },
+  bodyLarge: {
+    fontFamily: "SahabahBold",
+    lineHeight: vs(24),
+    fontSize: ms(16),
+    letterSpacing: hs(0.15),
+  },
+  bodyMedium: {
+    fontFamily: "SahabahReg",
+    lineHeight: vs(20),
+    fontSize: ms(14),
+    letterSpacing: hs(0.25),
+  },
+  bodySmall: {
+    fontFamily: "SahabahReg",
+    lineHeight: vs(16),
+    fontSize: ms(12),
+    letterSpacing: hs(0.4),
   },
 };
