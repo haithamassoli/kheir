@@ -82,8 +82,6 @@ const ConstructionItem = () => {
         flexGrow: 1,
         paddingHorizontal: hs(16),
         paddingVertical: vs(16),
-        alignItems: "center",
-        gap: vs(16),
       }}
       refreshControl={
         <RefreshControl
@@ -95,32 +93,37 @@ const ConstructionItem = () => {
         />
       }
     >
-      <Card
-        imageUrl={data?.image!}
-        title={data?.desc}
-        width={width - hs(32)}
-        height={vs(240)}
-      />
-      <CollectedCard
-        collected={data?.collected!}
-        goal={data?.goal!}
-        progress={calcPercentage(data?.goal!, data?.collected!)}
-      />
-      <ExecutorCard
-        beneficiaries={data?.beneficiaries!}
-        donors={data?.donors!}
-        executor={data?.executor!}
-      />
-      <Button
-        mode="contained-tonal"
-        onPress={onPress}
-        style={{ width: "100%" }}
-        contentStyle={{
-          height: vs(46),
-        }}
-      >
-        تبرع الآن
-      </Button>
+      <Box flex={1} justifyContent="space-between">
+        <Box gap="vm">
+          <Card
+            imageUrl={data?.image!}
+            title={data?.desc}
+            width={width - hs(32)}
+            height={vs(240)}
+          />
+          <CollectedCard
+            collected={data?.collected!}
+            goal={data?.goal!}
+            progress={calcPercentage(data?.goal!, data?.collected!)}
+          />
+          <ExecutorCard
+            beneficiaries={data?.beneficiaries!}
+            donors={data?.donors!}
+            executor={data?.executor!}
+          />
+        </Box>
+        <Button
+          mode="contained"
+          onPress={onPress}
+          style={{ width: "100%" }}
+          contentStyle={{
+            height: vs(46),
+            zIndex: 0,
+          }}
+        >
+          تبرع الآن
+        </Button>
+      </Box>
       <BottomSheet
         ref={bottomSheetRef}
         index={-1}
