@@ -4,9 +4,7 @@ import { useRouter, useSearchParams } from "expo-router";
 import Loading from "@components/loading";
 import Card from "@components/card";
 import { calcPercentage, width } from "@utils/helper";
-import { Checkbox } from "react-native-paper";
-import { fetchConstructionByIdQuery } from "@apis/construction";
-import { Button, TextInput } from "react-native-paper";
+import { Button, TextInput, Checkbox } from "react-native-paper";
 import CollectedCard from "@components/collectedCard";
 import ExecutorCard from "@components/executorCard";
 import { useCallback, useMemo, useRef, useState } from "react";
@@ -32,8 +30,7 @@ const ConstructionItem = () => {
   const router = useRouter();
   const { data, isLoading } = fetchAlmostDoneByIdQuery(id!);
   const [checked, setChecked] = useState(false);
-  const { addToCart, cart } = useStore();
-  console.log(cart);
+  const { addToCart } = useStore();
 
   const { control, handleSubmit, setValue } =
     useForm<ValidationAddToCartSchemaType>({
@@ -52,12 +49,21 @@ const ConstructionItem = () => {
     bottomSheetRef.current?.snapToIndex(1);
   };
 
+  const onPressBuyNow = (formData: ValidationAddToCartSchemaType) => {
+    addToCart({
+      id: id!,
+      price: +formData.price!,
+      friendPhone: formData.friendPhone || "",
+      name: "إعمـار",
+    });
+    router.replace("/cart");
+  };
+
   const onPressAddToCart = (data: ValidationAddToCartSchemaType) => {
-    // console.log("data", data);
     addToCart({
       id: id!,
       price: +data.price!,
-      friendPhone: data.friendPhone!,
+      friendPhone: data.friendPhone || "",
       name: "شارف على الانتهاء",
     });
     router.push("/");
@@ -95,6 +101,9 @@ const ConstructionItem = () => {
         mode="contained-tonal"
         onPress={onPress}
         style={{ width: "100%" }}
+        contentStyle={{
+          height: vs(46),
+        }}
       >
         تبرع الآن
       </Button>
@@ -233,11 +242,14 @@ const ConstructionItem = () => {
             >
               <Button
                 mode="contained-tonal"
-                onPress={onPress}
+                onPress={handleSubmit(onPressBuyNow)}
                 buttonColor={Colors.lightBackground}
                 textColor={Colors.primary}
                 labelStyle={{ fontFamily: "CairoBold" }}
                 style={{ width: "68%" }}
+                contentStyle={{
+                  height: vs(46),
+                }}
               >
                 تــبــــــرّع الآن
               </Button>

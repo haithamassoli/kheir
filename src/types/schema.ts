@@ -31,6 +31,36 @@ export type ValidationAddToCartSchemaType = z.infer<
   typeof validationAddToCartSchema
 >;
 
+export const validationCardSchema = z.object({
+  cardNumber: z
+    .string({
+      required_error: "رقم البطاقة يجب أن لا يكون فارغًا",
+    })
+    .min(16, "رقم البطاقة يجب أن يكون 16 رقمًا على الأقل"),
+  cardHolder: z
+    .string({
+      required_error: "اسم صاحب البطاقة يجب أن لا يكون فارغًا",
+    })
+    .min(3, "اسم صاحب البطاقة يجب أن يكون 3 أحرف على الأقل"),
+  expiryDateMonth: z
+    .string({
+      required_error: "شهر انتهاء الصلاحية يجب أن لا يكون فارغًا",
+    })
+    .min(2, "شهر انتهاء الصلاحية يجب أن يكون 2 أحرف على الأقل"),
+  expiryDateYear: z
+    .string({
+      required_error: "سنة انتهاء الصلاحية يجب أن لا يكون فارغًا",
+    })
+    .min(2, "سنة انتهاء الصلاحية يجب أن يكون 2 أحرف على الأقل"),
+  cvv: z
+    .string({
+      required_error: "CVV يجب أن لا يكون فارغًا",
+    })
+    .min(3, "CVV يجب أن يكون 3 أحرف على الأقل"),
+});
+
+export type ValidationCardSchemaType = z.infer<typeof validationCardSchema>;
+
 export interface IUser {
   apiKey: string;
   appName: string;

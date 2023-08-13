@@ -16,7 +16,7 @@ const HomeStack = () => {
       <Stack.Screen
         name="cart"
         options={{
-          title: "سلة التبرعات",
+          title: "بوابة خير",
         }}
       />
       <Stack.Screen
@@ -85,12 +85,6 @@ const HomeStack = () => {
           title: "شارف على الانتهاء",
         }}
       />
-      {/* <Stack.Screen
-        name="achievements/[id]"
-        options={{
-          title: "",
-        }}
-      /> */}
     </Stack>
   );
 };

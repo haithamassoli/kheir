@@ -145,9 +145,12 @@ export default function RootLayout() {
   }, []);
 
   useEffect(() => {
-    if (cart.length > 0) {
-      storeDataToStorage("cart", cart);
-    }
+    const storeCart = async () => {
+      if (cart.length > 0) {
+        await storeDataToStorage("cart", cart);
+      }
+    };
+    storeCart();
   }, [cart]);
 
   useEffect(() => {
@@ -162,10 +165,7 @@ export default function RootLayout() {
 
   const [fontsLoaded] = useFonts({
     CairoReg: require("@assets/fonts/Cairo-Reg.ttf"),
-    CairoMedium: require("@assets/fonts/Cairo-Medium.ttf"),
     CairoBold: require("@assets/fonts/Cairo-Bold.ttf"),
-    CairoSemiBold: require("@assets/fonts/Cairo-SemiBold.ttf"),
-    SahabahLight: require("@assets/fonts/DG-Sahabah-Light.ttf"),
     SahabahBold: require("@assets/fonts/DG-Sahabah-Bold.ttf"),
     SahabahReg: require("@assets/fonts/DG-Sahabah-Reg.ttf"),
   });
