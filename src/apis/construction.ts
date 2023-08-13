@@ -14,7 +14,7 @@ type Construction = {
 };
 
 export const fetchConstructionByIdQuery = (id: string) =>
-  useQuery(["constructionItem", id], () => fetchConstructionById(id));
+  useQuery(["construction", id], () => fetchConstructionById(id));
 
 const fetchConstructionById = async (id: string) => {
   const docRef = doc(db, "construction", id);

@@ -56,18 +56,38 @@ export const addOrderMutation = () =>
 
 const addOrder = async (data: { cart: Cart[]; uid: string }) => {
   try {
-    if (!data.uid) throw new Error("يجب تسجيل الدخول أولاً");
-    const userRef = collection(db, "users");
-    const querySnapshot = await getDocs(
-      query(userRef, where("uid", "==", data.uid))
-    );
-    querySnapshot.forEach(async (docItem) => {
-      const cartRef = doc(db, "users", docItem.id);
-      await addDoc(collection(cartRef, "orders"), {
-        ...data.cart,
-        createdAt: new Date(),
+    if (data.uid) {
+      const userRef = collection(db, "users");
+      const querySnapshot = await getDocs(
+        query(userRef, where("uid", "==", data.uid))
+      );
+      querySnapshot.forEach(async (docItem) => {
+        const cartRef = doc(db, "users", docItem.id);
+        await addDoc(collection(cartRef, "orders"), {
+          ...data.cart,
+          createdAt: new Date(),
+        });
       });
+    }
+    data.cart.forEach(async (item) => {
+      const almostDoneRef = doc(db, "almostDone", item.id);
+      const almostDoneSnap = await getDoc(almostDoneRef);
+      const constructionRef = doc(db, "construction", item.id);
+      const constructionSnap = await getDoc(constructionRef);
+      if (almostDoneSnap.exists()) {
+        await updateDoc(almostDoneRef, {
+          collected: almostDoneSnap.data().collected + item.price,
+          donors: almostDoneSnap.data().donors + 1,
+        });
+      }
+      if (constructionSnap.exists()) {
+        await updateDoc(constructionRef, {
+          collected: constructionSnap.data().collected + item.price,
+          donors: constructionSnap.data().donors + 1,
+        });
+      }
     });
+
     return data.cart;
   } catch (error: any) {
     throw new Error(error.message);

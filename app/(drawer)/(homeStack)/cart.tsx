@@ -16,10 +16,12 @@ import { useRouter } from "expo-router";
 import { storeDataToStorage } from "@utils/helper";
 import { useEffect } from "react";
 import { addOrderMutation } from "@apis/cart";
+import { useQueryClient } from "@tanstack/react-query";
 
 const Cart = () => {
   const { cart, user } = useStore();
   const router = useRouter();
+  const queryClient = useQueryClient();
   const { control, handleSubmit } = useForm<ValidationCardSchemaType>({
     resolver: zodResolver(validationCardSchema),
   });
@@ -50,6 +52,8 @@ const Cart = () => {
       },
       {
         onSuccess: () => {
+          queryClient.invalidateQueries(["almostDone"]);
+          queryClient.invalidateQueries(["construction"]);
           useStore.setState({
             cart: [],
             snackbarText: "تمت عملية الدفع بنجاح",

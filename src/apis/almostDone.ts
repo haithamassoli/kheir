@@ -14,7 +14,7 @@ type AlmostDone = {
 };
 
 export const fetchAlmostDoneByIdQuery = (id: string) =>
-  useQuery(["almostDoneItem", id], () => fetchAlmostDoneById(id));
+  useQuery(["almostDone", id], () => fetchAlmostDoneById(id));
 
 const fetchAlmostDoneById = async (id: string) => {
   const docRef = doc(db, "almostDone", id);

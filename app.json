@@ -1,11 +1,6 @@
 {
   "expo": {
     "scheme": "kheir",
-    "web": {
-      "bundler": "metro",
-      "output": "static",
-      "favicon": "./assets/favicon.png"
-    },
     "name": "خير",
     "slug": "kheir",
     "version": "0.1.0",

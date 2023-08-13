@@ -1,7 +1,12 @@
 import { Feather } from "@expo/vector-icons";
 import { Box, ReText, Theme } from "@styles/theme";
 import { useNavigation, useRouter } from "expo-router";
-import { Image, ScrollView, TouchableOpacity } from "react-native";
+import {
+  Image,
+  RefreshControl,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
 import { hs, ms, vs } from "@utils/platform";
 import { useTheme } from "@shopify/restyle";
 import ImagesCarousel from "@components/imagesCarousel";
@@ -22,15 +27,29 @@ const Home = () => {
   const router = useRouter();
   const { colors } = useTheme<Theme>();
   const { data: volunteerData, isLoading } = fetchVolunteerQuery();
-  const { data: almostDoneData, isLoading: isLoadingAlmostDone } =
-    fetchAlmostDoneQuery();
+  const {
+    data: almostDoneData,
+    isFetching: isLoadingAlmostDone,
+    refetch: refetchAlmostDone,
+  } = fetchAlmostDoneQuery();
 
   if (isLoading || isLoadingAlmostDone) return <Loading />;
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Snackbar />
-      <ScrollView style={{ flex: 1 }}>
+      <ScrollView
+        style={{ flex: 1 }}
+        refreshControl={
+          <RefreshControl
+            refreshing={isLoadingAlmostDone}
+            onRefresh={refetchAlmostDone}
+            colors={[colors.primary4]}
+            progressBackgroundColor={colors.secBackground}
+            tintColor={colors.primary4}
+          />
+        }
+      >
         <Box
           flexDirection="row"
           justifyContent="space-between"

@@ -1,8 +1,8 @@
 import { fetchOrdersQuery } from "@apis/cart";
 import HeaderRight from "@components/headerRight";
 import Loading from "@components/loading";
-import colors from "@styles/colors";
-import { Box, ReText } from "@styles/theme";
+import { useTheme } from "@shopify/restyle";
+import { Box, ReText, Theme } from "@styles/theme";
 import { hs, vs } from "@utils/platform";
 import { useStore } from "@zustand/store";
 import { useNavigation, useRouter } from "expo-router";
@@ -14,6 +14,7 @@ const Donations = () => {
   const navigation: any = useNavigation();
   const router = useRouter();
   const { user } = useStore();
+  const { colors } = useTheme<Theme>();
   const { isLoading, data, isFetching, refetch } = fetchOrdersQuery(user?.uid!);
   console.log(data);
 
@@ -35,7 +36,7 @@ const Donations = () => {
             refreshing={isFetching}
             onRefresh={refetch}
             colors={[colors.primary4]}
-            progressBackgroundColor={colors.black9}
+            progressBackgroundColor={colors.secBackground}
             tintColor={colors.primary4}
           />
         }
@@ -100,23 +101,23 @@ const Donations = () => {
           {Object.values(donation)
             .filter((value) => typeof value === "object")
             .map((donationItem, index) => (
-              <Box
-                key={index}
-                flexDirection="row"
-                justifyContent="space-between"
-                alignItems="center"
-                paddingHorizontal="hs"
-                paddingVertical="vs"
-                borderBottomWidth={1}
-                borderBottomColor="black9"
-              >
+              <Box>
                 {donationItem?.name && (
-                  <>
+                  <Box
+                    key={index}
+                    flexDirection="row"
+                    justifyContent="space-between"
+                    alignItems="center"
+                    paddingHorizontal="hs"
+                    paddingVertical="vs"
+                    borderBottomWidth={1}
+                    borderBottomColor="black9"
+                  >
                     <ReText variant="BodyMedium">{donationItem?.name}</ReText>
                     <ReText variant="BodyMedium">
                       {donationItem?.price} دينار
                     </ReText>
-                  </>
+                  </Box>
                 )}
               </Box>
             ))}

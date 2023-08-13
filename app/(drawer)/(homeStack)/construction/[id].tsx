@@ -1,5 +1,5 @@
 import { hs, ms, vs } from "@utils/platform";
-import { Image, ScrollView } from "react-native";
+import { Image, RefreshControl, ScrollView } from "react-native";
 import { useRouter, useSearchParams } from "expo-router";
 import Loading from "@components/loading";
 import Card from "@components/card";
@@ -10,7 +10,7 @@ import CollectedCard from "@components/collectedCard";
 import ExecutorCard from "@components/executorCard";
 import { useCallback, useMemo, useRef, useState } from "react";
 import BottomSheet from "@gorhom/bottom-sheet";
-import { Box, ReText } from "@styles/theme";
+import { Box, ReText, Theme } from "@styles/theme";
 import { LinearGradient } from "expo-linear-gradient";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import ControlledInput from "@components/controlledInput";
@@ -22,15 +22,19 @@ import {
   validationAddToCartSchema,
 } from "@src/types/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useTheme } from "@shopify/restyle";
 
 const defaultDinar = [1, 5, 10, 20];
 
 const ConstructionItem = () => {
   const { id }: Partial<{ id: string }> = useSearchParams();
   const router = useRouter();
-  const { data, isLoading } = fetchConstructionByIdQuery(id!);
+  const { data, isLoading, isFetching, refetch } = fetchConstructionByIdQuery(
+    id!
+  );
   const [checked, setChecked] = useState(false);
   const { addToCart } = useStore();
+  const { colors } = useTheme<Theme>();
 
   const { control, handleSubmit, setValue } =
     useForm<ValidationAddToCartSchemaType>({
@@ -81,6 +85,15 @@ const ConstructionItem = () => {
         alignItems: "center",
         gap: vs(16),
       }}
+      refreshControl={
+        <RefreshControl
+          refreshing={isFetching}
+          onRefresh={refetch}
+          colors={[colors.primary4]}
+          progressBackgroundColor={colors.secBackground}
+          tintColor={colors.primary4}
+        />
+      }
     >
       <Card
         imageUrl={data?.image!}
