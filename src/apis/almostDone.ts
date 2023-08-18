@@ -17,12 +17,16 @@ export const fetchAlmostDoneByIdQuery = (id: string) =>
   useQuery(["almostDone", id], () => fetchAlmostDoneById(id));
 
 const fetchAlmostDoneById = async (id: string) => {
-  const docRef = doc(db, "almostDone", id);
-  const docSnap = await getDoc(docRef);
-  if (docSnap.exists()) {
-    return { ...docSnap.data(), id: docSnap.id } as AlmostDone;
-  } else {
-    console.log("No such document!");
+  try {
+    const docRef = doc(db, "almostDone", id);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      return { ...docSnap.data(), id: docSnap.id } as AlmostDone;
+    } else {
+      console.log("No such document!");
+    }
+  } catch (e) {
+    console.log(e);
   }
 };
 
@@ -31,20 +35,24 @@ export const fetchAlmostDoneQuery = () => {
 };
 
 const fetchAlmostDone = async () => {
-  const almostDoneRef = collection(db, "almostDone");
-  const querySnapshot = await getDocs(almostDoneRef);
-  const almostDone: AlmostDone[] = [];
-  querySnapshot.forEach((doc) => {
-    almostDone.push({
-      id: doc.id,
-      beneficiaries: doc.data().beneficiaries,
-      collected: doc.data().collected,
-      desc: doc.data().desc,
-      image: doc.data().image,
-      donors: doc.data().donors,
-      executor: doc.data().executor,
-      goal: doc.data().goal,
+  try {
+    const almostDoneRef = collection(db, "almostDone");
+    const querySnapshot = await getDocs(almostDoneRef);
+    const almostDone: AlmostDone[] = [];
+    querySnapshot.forEach((doc) => {
+      almostDone.push({
+        id: doc.id,
+        beneficiaries: doc.data().beneficiaries,
+        collected: doc.data().collected,
+        desc: doc.data().desc,
+        image: doc.data().image,
+        donors: doc.data().donors,
+        executor: doc.data().executor,
+        goal: doc.data().goal,
+      });
     });
-  });
-  return almostDone;
+    return almostDone;
+  } catch (e) {
+    console.log(e);
+  }
 };

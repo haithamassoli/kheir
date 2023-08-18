@@ -1,5 +1,3 @@
-import { auth } from "@src/firebase.config";
-import { storeDataToStorage } from "@utils/helper";
 import {
   collection,
   addDoc,
@@ -7,10 +5,8 @@ import {
   query,
   where,
   doc,
-  setDoc,
   getDoc,
   orderBy,
-  deleteDoc,
   updateDoc,
 } from "firebase/firestore";
 import { useMutation, useQuery } from "@tanstack/react-query";
@@ -26,7 +22,6 @@ const fetchOrders = async (uid: string) => {
     const querySnapshot = await getDocs(
       query(userRef, where("uid", "==", uid))
     );
-
     let orders: any[] = [];
     let userId = "";
     querySnapshot.forEach((docItem) => {

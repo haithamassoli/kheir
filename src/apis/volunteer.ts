@@ -13,12 +13,16 @@ export const fetchVolunteerByIdQuery = (id: string) =>
   useQuery(["volunteerItem", id], () => fetchVolunteerById(id));
 
 const fetchVolunteerById = async (id: string) => {
-  const docRef = doc(db, "volunteer", id);
-  const docSnap = await getDoc(docRef);
-  if (docSnap.exists()) {
-    return { ...docSnap.data(), id: docSnap.id } as Volunteer;
-  } else {
-    console.log("No such document!");
+  try {
+    const docRef = doc(db, "volunteer", id);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      return { ...docSnap.data(), id: docSnap.id } as Volunteer;
+    } else {
+      console.log("No such document!");
+    }
+  } catch (e) {
+    console.log(e);
   }
 };
 
@@ -27,16 +31,20 @@ export const fetchVolunteerQuery = () => {
 };
 
 const fetchVolunteer = async () => {
-  const volunteerRef = collection(db, "volunteer");
-  const querySnapshot = await getDocs(volunteerRef);
-  const volunteer: Volunteer[] = [];
-  querySnapshot.forEach((doc) => {
-    volunteer.push({
-      id: doc.id,
-      loc: doc.data().loc,
-      desc: doc.data().desc,
-      image: doc.data().image,
+  try {
+    const volunteerRef = collection(db, "volunteer");
+    const querySnapshot = await getDocs(volunteerRef);
+    const volunteer: Volunteer[] = [];
+    querySnapshot.forEach((doc) => {
+      volunteer.push({
+        id: doc.id,
+        loc: doc.data().loc,
+        desc: doc.data().desc,
+        image: doc.data().image,
+      });
     });
-  });
-  return volunteer;
+    return volunteer;
+  } catch (e) {
+    console.log(e);
+  }
 };
