@@ -59,7 +59,7 @@ const ImagesCarousel = ({ images }: Props) => {
       >
         {images.length === 0 && (
           <Image
-            source={require("@assets/images/carousel/1.jpg")}
+            source={require("@assets/images/carousel/1.png")}
             contentFit="cover"
             placeholder={blurhash}
             transition={400}

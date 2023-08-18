@@ -118,8 +118,8 @@ const Home = () => {
         <Box marginTop="vm">
           <ImagesCarousel
             images={[
-              require("@assets/images/carousel/1.jpg"),
-              require("@assets/images/carousel/2.jpg"),
+              require("@assets/images/carousel/1.png"),
+              require("@assets/images/carousel/2.png"),
             ]}
           />
         </Box>
