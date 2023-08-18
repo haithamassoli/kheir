@@ -7,7 +7,6 @@ import { StatusBar } from "expo-status-bar";
 import { useStore } from "@zustand/store";
 import * as Updates from "expo-updates";
 import { useFonts } from "expo-font";
-import * as Notifications from "expo-notifications";
 import { FlashList } from "@shopify/flash-list";
 import { getDataFromStorage, storeDataToStorage } from "@utils/helper";
 import {
@@ -44,14 +43,6 @@ if (Platform.OS === "android") {
     UIManager.setLayoutAnimationEnabledExperimental(true);
   }
 }
-
-Notifications.setNotificationHandler({
-  handleNotification: async () => ({
-    shouldShowAlert: true,
-    shouldPlaySound: true,
-    shouldSetBadge: true,
-  }),
-});
 
 const queryClient = new QueryClient();
 
@@ -95,32 +86,32 @@ const getCartFromStorage = async () => {
   if (cart) useStore.setState({ cart });
 };
 
+TextInput.defaultProps = TextInput.defaultProps || {};
+TextInput.defaultProps.allowFontScaling = false;
+PaperTextInput.defaultProps = PaperTextInput.defaultProps || {};
+PaperTextInput.defaultProps.allowFontScaling = false;
+
+Text.defaultProps = Text.defaultProps || {};
+Text.defaultProps.allowFontScaling = false;
+ReText.defaultProps = ReText.defaultProps || {};
+ReText.defaultProps.allowFontScaling = false;
+PaperText.defaultProps = PaperText.defaultProps || {};
+PaperText.defaultProps.allowFontScaling = false;
+
+ScrollView.defaultProps = ScrollView.defaultProps || {};
+ScrollView.defaultProps.showsVerticalScrollIndicator = false;
+ScrollView.defaultProps.showsHorizontalScrollIndicator = false;
+
+KeyboardAwareScrollView.defaultProps =
+  KeyboardAwareScrollView.defaultProps || {};
+KeyboardAwareScrollView.defaultProps.showsVerticalScrollIndicator = false;
+KeyboardAwareScrollView.defaultProps.showsHorizontalScrollIndicator = false;
+
+FlashList.defaultProps = FlashList.defaultProps || {};
+FlashList.defaultProps.showsVerticalScrollIndicator = false;
+FlashList.defaultProps.showsHorizontalScrollIndicator = false;
+
 export default function RootLayout() {
-  TextInput.defaultProps = TextInput.defaultProps || {};
-  TextInput.defaultProps.allowFontScaling = false;
-  PaperTextInput.defaultProps = PaperTextInput.defaultProps || {};
-  PaperTextInput.defaultProps.allowFontScaling = false;
-
-  Text.defaultProps = Text.defaultProps || {};
-  Text.defaultProps.allowFontScaling = false;
-  ReText.defaultProps = ReText.defaultProps || {};
-  ReText.defaultProps.allowFontScaling = false;
-  PaperText.defaultProps = PaperText.defaultProps || {};
-  PaperText.defaultProps.allowFontScaling = false;
-
-  ScrollView.defaultProps = ScrollView.defaultProps || {};
-  ScrollView.defaultProps.showsVerticalScrollIndicator = false;
-  ScrollView.defaultProps.showsHorizontalScrollIndicator = false;
-
-  KeyboardAwareScrollView.defaultProps =
-    KeyboardAwareScrollView.defaultProps || {};
-  KeyboardAwareScrollView.defaultProps.showsVerticalScrollIndicator = false;
-  KeyboardAwareScrollView.defaultProps.showsHorizontalScrollIndicator = false;
-
-  FlashList.defaultProps = FlashList.defaultProps || {};
-  FlashList.defaultProps.showsVerticalScrollIndicator = false;
-  FlashList.defaultProps.showsHorizontalScrollIndicator = false;
-
   const segments = useSegments();
   const router = useRouter();
 

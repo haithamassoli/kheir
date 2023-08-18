@@ -1,11 +1,12 @@
 import {
-  Image,
   TouchableOpacity,
   StyleSheet,
   ImageSourcePropType,
 } from "react-native";
 import { Box, ReText } from "@styles/theme";
 import { hs, vs } from "@utils/platform";
+import { Image } from "expo-image";
+import { blurhash } from "@utils/helper";
 
 type Props = {
   onPress: () => void;
@@ -26,7 +27,11 @@ const CategoryCard = ({ onPress, title, image }: Props) => {
       >
         <Image
           source={image}
-          style={{ width: hs(44), height: vs(39), resizeMode: "contain" }}
+          style={{ width: hs(44), height: vs(39) }}
+          contentFit="contain"
+          placeholder={blurhash}
+          transition={400}
+          placeholderContentFit="cover"
         />
       </Box>
       <ReText variant="LabelMedium" textAlign="center" marginTop="vs">

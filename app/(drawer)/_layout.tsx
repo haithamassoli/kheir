@@ -1,9 +1,10 @@
 import { Feather } from "@expo/vector-icons";
 import CustomDrawer from "@src/layouts/custom-drawer";
+import { blurhash } from "@utils/helper";
 import { ms } from "@utils/platform";
 import { useStore } from "@zustand/store";
+import { Image } from "expo-image";
 import { Drawer } from "expo-router/drawer";
-import { Image } from "react-native";
 
 const HomeDrawer = () => {
   const { isDark } = useStore();
@@ -46,7 +47,10 @@ const HomeDrawer = () => {
                   ? require("@assets/icons/drawerIcons/darkDonations.png")
                   : require("@assets/icons/drawerIcons/donations.png")
               }
-              resizeMode="contain"
+              contentFit="contain"
+              placeholder={blurhash}
+              transition={400}
+              placeholderContentFit="contain"
               style={{ width: size, height: size }}
             />
           ),

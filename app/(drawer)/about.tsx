@@ -14,7 +14,7 @@ const About = () => {
           ),
         }}
       />
-      <ReText variant="DisplayMedium">About</ReText>
+      <ReText variant="DisplaySmall">About</ReText>
       <ReText variant="BodySmall">KHEIR</ReText>
     </Box>
   );

@@ -14,7 +14,7 @@ const Notifications = () => {
           ),
         }}
       />
-      <ReText variant="DisplayMedium" textAlign="center">
+      <ReText variant="DisplaySmall" textAlign="center">
         لا يوجد إشعارات حالياً
       </ReText>
       <ReText variant="BodySmall">خـيـر</ReText>

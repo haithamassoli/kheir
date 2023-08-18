@@ -17,9 +17,7 @@
       "fallbackToCacheTimeout": 0,
       "url": "https://u.expo.dev/66a92220-8f3a-4f58-b597-0d5392128767"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "buildNumber": "0.5.0",
       "supportsTablet": true,
@@ -33,15 +31,6 @@
       },
       "package": "com.haithamassoli.kheir"
     },
-    "plugins": [
-      [
-        "expo-notifications",
-        {
-          "icon": "./assets/icon.png",
-          "color": "#ffffff"
-        }
-      ]
-    ],
     "extra": {
       "eas": {
         "projectId": "66a92220-8f3a-4f58-b597-0d5392128767"

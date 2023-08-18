@@ -14,7 +14,7 @@ const Profile = () => {
           ),
         }}
       />
-      <ReText variant="DisplayMedium">Profile</ReText>
+      <ReText variant="DisplaySmall">Profile</ReText>
       <ReText variant="BodySmall">KHEIR</ReText>
     </Box>
   );

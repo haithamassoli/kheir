@@ -1,9 +1,9 @@
 import { hs, ms, vs } from "@utils/platform";
-import { Image, RefreshControl, ScrollView } from "react-native";
+import { RefreshControl, ScrollView } from "react-native";
 import { useRouter, useSearchParams } from "expo-router";
 import Loading from "@components/loading";
 import Card from "@components/card";
-import { calcPercentage, width } from "@utils/helper";
+import { blurhash, calcPercentage, width } from "@utils/helper";
 import { fetchConstructionByIdQuery } from "@apis/construction";
 import { Button, TextInput, Checkbox } from "react-native-paper";
 import CollectedCard from "@components/collectedCard";
@@ -23,6 +23,7 @@ import {
 } from "@src/types/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTheme } from "@shopify/restyle";
+import { Image } from "expo-image";
 
 const defaultDinar = [1, 5, 10, 20];
 
@@ -281,7 +282,13 @@ const ConstructionItem = () => {
                     justifyContent: "center",
                   }}
                 >
-                  <Image source={require("@assets/icons/cart.jpg")} />
+                  <Image
+                    source={require("@assets/icons/cart.jpg")}
+                    style={{ width: ms(24), height: ms(24) }}
+                    contentFit="contain"
+                    placeholder={blurhash}
+                    transition={400}
+                  />
                 </Box>
               </TouchableOpacity>
             </Box>

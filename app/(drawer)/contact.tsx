@@ -14,7 +14,7 @@ const Contact = () => {
           ),
         }}
       />
-      <ReText variant="DisplayMedium">Contact</ReText>
+      <ReText variant="DisplaySmall">Contact</ReText>
       <ReText variant="BodySmall">KHEIR</ReText>
     </Box>
   );

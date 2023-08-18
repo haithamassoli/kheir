@@ -1,12 +1,7 @@
 import { Feather } from "@expo/vector-icons";
 import { Box, ReText, Theme } from "@styles/theme";
 import { useNavigation, useRouter } from "expo-router";
-import {
-  Image,
-  RefreshControl,
-  ScrollView,
-  TouchableOpacity,
-} from "react-native";
+import { RefreshControl, ScrollView, TouchableOpacity } from "react-native";
 import { hs, ms, vs } from "@utils/platform";
 import { useTheme } from "@shopify/restyle";
 import ImagesCarousel from "@components/imagesCarousel";
@@ -17,9 +12,10 @@ import Snackbar from "@components/snackbar";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { fetchVolunteerQuery } from "@apis/volunteer";
 import Loading from "@components/loading";
-import { calcPercentage, width } from "@utils/helper";
+import { blurhash, calcPercentage, width } from "@utils/helper";
 import { useStore } from "@zustand/store";
 import { fetchAlmostDoneQuery } from "@apis/almostDone";
+import { Image } from "expo-image";
 
 const Home = () => {
   const navigation: any = useNavigation();
@@ -60,11 +56,28 @@ const Home = () => {
           <Box flexDirection="row" alignItems="center">
             <Image
               source={require("@assets/images/logo.png")}
-              style={{ width: hs(69), resizeMode: "contain" }}
+              style={{ width: ms(72), height: ms(72) }}
+              contentFit="contain"
+              placeholder={blurhash}
+              transition={400}
+              placeholderContentFit="contain"
             />
             <Box>
-              <ReText variant="BodyLarge">خـيـر</ReText>
-              <ReText variant="BodySmall">KHEIR</ReText>
+              <ReText
+                variant="BodyLarge"
+                fontFamily="CairoBold"
+                textAlign="left"
+              >
+                خـيـر
+              </ReText>
+              <ReText
+                variant="BodySmall"
+                fontFamily="CairoBold"
+                textAlign="left"
+                style={{ marginTop: vs(-5) }}
+              >
+                KHEIR
+              </ReText>
             </Box>
           </Box>
           <Box flexDirection="row" alignItems="center" gap="hm">
