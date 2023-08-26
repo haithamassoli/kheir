@@ -175,6 +175,8 @@ const Home = () => {
                     almostDone?.collected!
                   )}
                   imageUrl={almostDone.image}
+                  aspectRatio={125 / 88}
+                  height={vs(176)}
                 />
               </Animated.View>
             </Box>
@@ -211,7 +213,7 @@ const Home = () => {
                   <Card
                     onPress={() => router.push(`/volunteer/${volunteer.id}`)}
                     imageUrl={volunteer.image}
-                    width={width - hs(64)}
+                    aspectRatio={311 / 220}
                     height={vs(220)}
                   />
                 </Animated.View>

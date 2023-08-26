@@ -96,19 +96,12 @@ const ConstructionItem = () => {
     >
       <Box flex={1} justifyContent="space-between">
         <Box gap="vm">
-          <Animated.View
-            style={{
-              width: width - hs(32),
-              height: vs(240),
-              marginBottom: vs(48),
-            }}
-            entering={FadeInUp.duration(600)}
-          >
+          <Animated.View entering={FadeInUp.duration(600)}>
             <Card
               imageUrl={data?.image!}
               title={data?.desc}
               width={width - hs(32)}
-              height={vs(240)}
+              aspectRatio={343 / 176}
             />
           </Animated.View>
           <Animated.View entering={FadeInUp.duration(600).delay(200)}>

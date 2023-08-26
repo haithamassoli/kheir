@@ -102,7 +102,7 @@ const ConstructionItem = () => {
               imageUrl={data?.image!}
               title={data?.desc}
               width={width - hs(32)}
-              height={vs(240)}
+              aspectRatio={343 / 176}
             />
           </Animated.View>
           <Animated.View entering={FadeInUp.duration(600).delay(200)}>

@@ -35,7 +35,7 @@ const Emergencies = () => {
                 imageUrl={item.image}
                 width={width - hs(32)}
                 title={item.title}
-                height={vs(240)}
+                aspectRatio={343 / 176}
               />
             </Animated.View>
           </Box>

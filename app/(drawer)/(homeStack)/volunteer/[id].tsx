@@ -24,14 +24,12 @@ const volunteerItem = () => {
         gap: vs(16),
       }}
     >
-      <Animated.View
-        style={{
-          width: width - hs(32),
-          height: vs(240),
-        }}
-        entering={FadeInUp.duration(600)}
-      >
-        <Card imageUrl={data?.image!} width={width - hs(32)} height={vs(240)} />
+      <Animated.View entering={FadeInUp.duration(600)}>
+        <Card
+          imageUrl={data?.image!}
+          width={width - hs(32)}
+          aspectRatio={343 / 176}
+        />
       </Animated.View>
       <Animated.View entering={FadeInUp.duration(600).delay(200)}>
         <DescCard desc={data?.desc!} />

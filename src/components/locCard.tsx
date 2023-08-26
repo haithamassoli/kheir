@@ -1,4 +1,4 @@
-import { Feather } from "@expo/vector-icons";
+import { Feather, MaterialIcons } from "@expo/vector-icons";
 import Colors from "@styles/colors";
 import { Box, ReText } from "@styles/theme";
 import { width } from "@utils/helper";
@@ -18,7 +18,11 @@ const LocCard = ({ loc }: { loc: string }) => {
         <ReText variant="LabelLarge" marginBottom="vs" color="primary">
           الذهاب إلى الموقع
         </ReText>
-        <Feather name="map-pin" size={ms(76)} color={Colors.primary} />
+        <MaterialIcons
+          name="location-on"
+          size={ms(46)}
+          color={Colors.primary}
+        />
       </Box>
     </TouchableOpacity>
   );

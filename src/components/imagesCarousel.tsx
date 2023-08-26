@@ -6,7 +6,7 @@ import Colors from "@styles/colors";
 import { hs, ms, vs } from "@utils/platform";
 import { Box, Theme } from "@styles/theme";
 import { useStore } from "@zustand/store";
-import { blurhash, height, width } from "@utils/helper";
+import { blurhash, width } from "@utils/helper";
 import { Image } from "expo-image";
 
 type Props = {
@@ -43,7 +43,7 @@ const ImagesCarousel = ({ images }: Props) => {
 
   return (
     <View style={styles.container}>
-      <Box width={width - hs(32)} height={height * 0.24} borderRadius="l">
+      <Box width={width - hs(32)} borderRadius="l" aspectRatio={68 / 39}>
         <ScrollView
           ref={scrollRef}
           contentContainerStyle={{
@@ -114,12 +114,13 @@ export default memo(ImagesCarousel);
 const styles = StyleSheet.create({
   container: {
     alignSelf: "center",
-    height: vs(232),
+    width: width - hs(32),
+    aspectRatio: 68 / 39,
   },
   image: {
     borderRadius: ms(12),
     width: width - hs(32),
-    height: height * 0.24,
+    aspectRatio: 68 / 39,
   },
   dotsContainer: {
     flexDirection: "row",

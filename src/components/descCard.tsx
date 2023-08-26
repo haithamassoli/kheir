@@ -9,7 +9,6 @@ const DescCard = ({ desc }: { desc: string }) => {
       backgroundColor="secBackground"
       width={width - hs(32)}
       borderRadius="l"
-      paddingBottom="vs"
     >
       <Box
         width={"100%"}
@@ -33,6 +32,7 @@ const DescCard = ({ desc }: { desc: string }) => {
         color="primary"
         marginHorizontal="hm"
         textAlign="center"
+        paddingBottom="vs"
       >
         {desc}
       </ReText>
