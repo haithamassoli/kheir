@@ -70,6 +70,9 @@ const CustomDrawer = (props: any) => {
                 active={isFocused}
                 onPress={onPress}
                 icon={options.drawerIcon}
+                style={{
+                  height: vs(56),
+                }}
               />
             );
           })}
