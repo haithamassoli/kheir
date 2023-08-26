@@ -1,6 +1,6 @@
 import { hs, ms, vs } from "@utils/platform";
 import { RefreshControl, ScrollView } from "react-native";
-import { useRouter, useSearchParams } from "expo-router";
+import { useRouter, useLocalSearchParams } from "expo-router";
 import Loading from "@components/loading";
 import Card from "@components/card";
 import { blurhash, calcPercentage, width } from "@utils/helper";
@@ -24,11 +24,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { fetchAlmostDoneByIdQuery } from "@apis/almostDone";
 import { useTheme } from "@shopify/restyle";
 import { Image } from "expo-image";
+import Animated, { FadeInUp } from "react-native-reanimated";
 
 const defaultDinar = [1, 5, 10, 20];
 
 const ConstructionItem = () => {
-  const { id }: Partial<{ id: string }> = useSearchParams();
+  const { id }: Partial<{ id: string }> = useLocalSearchParams();
   const { colors } = useTheme<Theme>();
   const router = useRouter();
   const { data, isLoading, refetch, isFetching } = fetchAlmostDoneByIdQuery(
@@ -95,33 +96,48 @@ const ConstructionItem = () => {
     >
       <Box flex={1} justifyContent="space-between">
         <Box gap="vm">
-          <Card
-            imageUrl={data?.image!}
-            title={data?.desc}
-            width={width - hs(32)}
-            height={vs(240)}
-          />
-          <CollectedCard
-            collected={data?.collected!}
-            goal={data?.goal!}
-            progress={calcPercentage(data?.goal!, data?.collected!)}
-          />
-          <ExecutorCard
-            beneficiaries={data?.beneficiaries!}
-            donors={data?.donors!}
-            executor={data?.executor!}
-          />
+          <Animated.View
+            style={{
+              width: width - hs(32),
+              height: vs(240),
+              marginBottom: vs(48),
+            }}
+            entering={FadeInUp.duration(600)}
+          >
+            <Card
+              imageUrl={data?.image!}
+              title={data?.desc}
+              width={width - hs(32)}
+              height={vs(240)}
+            />
+          </Animated.View>
+          <Animated.View entering={FadeInUp.duration(600).delay(200)}>
+            <CollectedCard
+              collected={data?.collected!}
+              goal={data?.goal!}
+              progress={calcPercentage(data?.goal!, data?.collected!)}
+            />
+          </Animated.View>
+          <Animated.View entering={FadeInUp.duration(600).delay(400)}>
+            <ExecutorCard
+              beneficiaries={data?.beneficiaries!}
+              donors={data?.donors!}
+              executor={data?.executor!}
+            />
+          </Animated.View>
         </Box>
-        <Button
-          mode="contained"
-          onPress={onPress}
-          style={{ width: "100%" }}
-          contentStyle={{
-            height: vs(46),
-          }}
-        >
-          تبرع الآن
-        </Button>
+        <Animated.View entering={FadeInUp.duration(600).delay(600)}>
+          <Button
+            mode="contained"
+            onPress={onPress}
+            style={{ width: "100%" }}
+            contentStyle={{
+              height: vs(46),
+            }}
+          >
+            تبرع الآن
+          </Button>
+        </Animated.View>
       </Box>
       <BottomSheet
         ref={bottomSheetRef}

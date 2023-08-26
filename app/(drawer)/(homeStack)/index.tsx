@@ -12,10 +12,11 @@ import Snackbar from "@components/snackbar";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { fetchVolunteerQuery } from "@apis/volunteer";
 import Loading from "@components/loading";
-import { blurhash, calcPercentage, width } from "@utils/helper";
+import { calcPercentage, width } from "@utils/helper";
 import { useStore } from "@zustand/store";
 import { fetchAlmostDoneQuery } from "@apis/almostDone";
 import { Image } from "expo-image";
+import Animated, { FadeInUp } from "react-native-reanimated";
 
 const Home = () => {
   const navigation: any = useNavigation();
@@ -58,21 +59,14 @@ const Home = () => {
               source={require("@assets/images/logo.png")}
               style={{ width: ms(72), height: ms(72) }}
               contentFit="contain"
-              placeholder={blurhash}
               transition={400}
-              placeholderContentFit="contain"
             />
             <Box>
-              <ReText
-                variant="BodyLarge"
-                fontFamily="CairoBold"
-                textAlign="left"
-              >
+              <ReText variant="BodyLarge" textAlign="left">
                 خـيـر
               </ReText>
               <ReText
                 variant="BodySmall"
-                fontFamily="CairoBold"
                 textAlign="left"
                 style={{ marginTop: vs(-5) }}
               >
@@ -81,32 +75,33 @@ const Home = () => {
             </Box>
           </Box>
           <Box flexDirection="row" alignItems="center" gap="hm">
-            <Box
-              width={hs(18)}
-              height={vs(18)}
-              borderRadius="l"
-              backgroundColor="primary6"
-              position="absolute"
-              top={-vs(6)}
-              left={-hs(6)}
-              zIndex="overlay"
-              alignSelf="center"
-            >
-              <ReText
-                variant="BodySmall"
-                textAlign="center"
-                fontSize={ms(10)}
-                color="lightText"
+            <TouchableOpacity onPress={() => router.push("/cart")}>
+              <Box
+                width={hs(18)}
+                height={vs(18)}
+                borderRadius="l"
+                backgroundColor="primary6"
+                position="absolute"
+                top={-vs(6)}
+                left={-hs(6)}
+                zIndex="overlay"
+                alignSelf="center"
               >
-                {cart.length}
-              </ReText>
-            </Box>
-            <Feather
-              name={"shopping-cart"}
-              size={hs(24)}
-              color={colors.text}
-              onPress={() => router.push("cart")}
-            />
+                <ReText
+                  variant="BodySmall"
+                  textAlign="center"
+                  fontSize={ms(10)}
+                  color="lightText"
+                >
+                  {cart.length}
+                </ReText>
+              </Box>
+              <Feather
+                name={"shopping-cart"}
+                size={hs(24)}
+                color={colors.text}
+              />
+            </TouchableOpacity>
             <Feather
               name="menu"
               size={hs(24)}
@@ -116,16 +111,20 @@ const Home = () => {
           </Box>
         </Box>
         <Box marginTop="vm">
-          <ImagesCarousel
-            images={[
-              require("@assets/images/carousel/1.png"),
-              require("@assets/images/carousel/2.png"),
-            ]}
-          />
+          <Animated.View entering={FadeInUp.duration(600)}>
+            <ImagesCarousel
+              images={[
+                require("@assets/images/carousel/1.png"),
+                require("@assets/images/carousel/2.png"),
+              ]}
+            />
+          </Animated.View>
         </Box>
-        <ReText variant="HeadlineMedium" marginStart="hm" textAlign="left">
-          فئات التبرع
-        </ReText>
+        <Animated.View entering={FadeInUp.duration(600).delay(200)}>
+          <ReText variant="HeadlineMedium" marginStart="hm" textAlign="left">
+            فئات التبرع
+          </ReText>
+        </Animated.View>
         <Box height={vs(120)}>
           <ScrollView
             horizontal
@@ -137,23 +136,27 @@ const Home = () => {
           >
             {categories.map((category) => (
               <Box key={category.id} marginHorizontal="hs">
-                <CategoryCard
-                  onPress={() => router.push(category.route)}
-                  title={category.title}
-                  image={category.image}
-                />
+                <Animated.View entering={FadeInUp.duration(600).delay(500)}>
+                  <CategoryCard
+                    onPress={() => router.push(category.route)}
+                    title={category.title}
+                    image={category.image}
+                  />
+                </Animated.View>
               </Box>
             ))}
           </ScrollView>
         </Box>
-        <ReText
-          variant="HeadlineMedium"
-          marginStart="hm"
-          marginTop="vm"
-          textAlign="left"
-        >
-          شارف على الإنتهاء
-        </ReText>
+        <Animated.View entering={FadeInUp.duration(600).delay(700)}>
+          <ReText
+            variant="HeadlineMedium"
+            marginStart="hm"
+            marginTop="vm"
+            textAlign="left"
+          >
+            شارف على الإنتهاء
+          </ReText>
+        </Animated.View>
         <ScrollView
           horizontal
           overScrollMode="never"
@@ -164,31 +167,35 @@ const Home = () => {
         >
           {almostDoneData?.map((almostDone) => (
             <Box key={almostDone.id} marginHorizontal="hs">
-              <Card
-                onPress={() => router.push(`almost-done/${almostDone.id}`)}
-                progress={calcPercentage(
-                  almostDone?.goal!,
-                  almostDone?.collected!
-                )}
-                imageUrl={almostDone.image}
-              />
+              <Animated.View entering={FadeInUp.duration(600).delay(1000)}>
+                <Card
+                  onPress={() => router.push(`/almost-done/${almostDone.id}`)}
+                  progress={calcPercentage(
+                    almostDone?.goal!,
+                    almostDone?.collected!
+                  )}
+                  imageUrl={almostDone.image}
+                />
+              </Animated.View>
             </Box>
           ))}
         </ScrollView>
-        <Box
-          flexDirection="row"
-          justifyContent="space-between"
-          alignItems="center"
-          marginTop="vm"
-          marginHorizontal="hm"
-        >
-          <ReText variant="HeadlineMedium">فرص التطوع</ReText>
-          <TouchableOpacity onPress={() => router.push("volunteer")}>
-            <ReText variant="BodySmall" color="primary6">
-              عرض الكل
-            </ReText>
-          </TouchableOpacity>
-        </Box>
+        <Animated.View entering={FadeInUp.duration(600).delay(1200)}>
+          <Box
+            flexDirection="row"
+            justifyContent="space-between"
+            alignItems="center"
+            marginTop="vm"
+            marginHorizontal="hm"
+          >
+            <ReText variant="HeadlineMedium">فرص التطوع</ReText>
+            <TouchableOpacity onPress={() => router.push("/volunteer/")}>
+              <ReText variant="BodySmall" color="primary6">
+                عرض الكل
+              </ReText>
+            </TouchableOpacity>
+          </Box>
+        </Animated.View>
         <Box height={vs(258)}>
           <ScrollView
             horizontal
@@ -200,12 +207,14 @@ const Home = () => {
           >
             {volunteerData?.map((volunteer) => (
               <Box key={volunteer.id} marginHorizontal="hs">
-                <Card
-                  onPress={() => router.push(`volunteer/${volunteer.id}`)}
-                  imageUrl={volunteer.image}
-                  width={width - hs(64)}
-                  height={vs(220)}
-                />
+                <Animated.View entering={FadeInUp.duration(600).delay(1500)}>
+                  <Card
+                    onPress={() => router.push(`/volunteer/${volunteer.id}`)}
+                    imageUrl={volunteer.image}
+                    width={width - hs(64)}
+                    height={vs(220)}
+                  />
+                </Animated.View>
               </Box>
             ))}
           </ScrollView>

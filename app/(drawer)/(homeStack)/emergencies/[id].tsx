@@ -1,15 +1,16 @@
 import { hs, vs } from "@utils/platform";
 import { ScrollView } from "react-native";
-import { useSearchParams } from "expo-router";
+import { useLocalSearchParams } from "expo-router";
 import Loading from "@components/loading";
 import Card from "@components/card";
 import { width } from "@utils/helper";
 import LocCard from "@components/locCard";
 import DescCard from "@components/descCard";
 import { fetchEmergencyQuery } from "@apis/emergencies";
+import Animated, { FadeInUp } from "react-native-reanimated";
 
 const volunteerItem = () => {
-  const { id }: Partial<{ id: string }> = useSearchParams();
+  const { id }: Partial<{ id: string }> = useLocalSearchParams();
   const { data, isLoading } = fetchEmergencyQuery(id!);
 
   if (isLoading) return <Loading />;
@@ -23,9 +24,23 @@ const volunteerItem = () => {
         gap: vs(16),
       }}
     >
-      <Card imageUrl={data?.image!} width={width - hs(32)} height={vs(240)} />
-      <DescCard desc={data?.desc!} />
-      {data?.loc && <LocCard loc={data?.loc!} />}
+      <Animated.View
+        style={{
+          width: width - hs(32),
+          height: vs(240),
+        }}
+        entering={FadeInUp.duration(600)}
+      >
+        <Card imageUrl={data?.image!} width={width - hs(32)} height={vs(240)} />
+      </Animated.View>
+      <Animated.View entering={FadeInUp.duration(600).delay(200)}>
+        <DescCard desc={data?.desc!} />
+      </Animated.View>
+      {data?.loc && (
+        <Animated.View entering={FadeInUp.duration(600).delay(400)}>
+          <LocCard loc={data?.loc!} />
+        </Animated.View>
+      )}
     </ScrollView>
   );
 };

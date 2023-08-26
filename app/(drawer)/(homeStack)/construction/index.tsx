@@ -8,6 +8,7 @@ import { calcPercentage, width } from "@utils/helper";
 import { hs, vs } from "@utils/platform";
 import { useRouter } from "expo-router";
 import { RefreshControl } from "react-native";
+import Animated, { FadeInUp } from "react-native-reanimated";
 
 const Construction = () => {
   const router = useRouter();
@@ -33,20 +34,22 @@ const Construction = () => {
         }
         data={data}
         estimatedItemSize={10}
-        renderItem={({ item }) => (
+        renderItem={({ item, index }) => (
           <Box
             justifyContent="center"
             alignItems="center"
             flex={1}
             marginBottom="vs"
           >
-            <Card
-              onPress={() => router.push(`construction/${item.id}`)}
-              imageUrl={item.image}
-              width={width - hs(32)}
-              height={vs(240)}
-              progress={calcPercentage(item.goal, item.collected)}
-            />
+            <Animated.View entering={FadeInUp.duration(600).delay(index * 200)}>
+              <Card
+                onPress={() => router.push(`/construction/${item.id}`)}
+                imageUrl={item.image}
+                width={width - hs(32)}
+                height={vs(240)}
+                progress={calcPercentage(item.goal, item.collected)}
+              />
+            </Animated.View>
           </Box>
         )}
       />

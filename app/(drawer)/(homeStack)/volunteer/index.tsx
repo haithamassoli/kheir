@@ -6,6 +6,7 @@ import { Box } from "@styles/theme";
 import { width } from "@utils/helper";
 import { hs, vs } from "@utils/platform";
 import { useRouter } from "expo-router";
+import Animated, { FadeInUp } from "react-native-reanimated";
 
 const Volunteer = () => {
   const { data, isLoading } = fetchVolunteerQuery();
@@ -20,19 +21,21 @@ const Volunteer = () => {
         }}
         data={data}
         estimatedItemSize={10}
-        renderItem={({ item }) => (
+        renderItem={({ item, index }) => (
           <Box
             justifyContent="center"
             alignItems="center"
             flex={1}
             marginBottom="vs"
           >
-            <Card
-              onPress={() => router.push(`volunteer/${item.id}`)}
-              imageUrl={item.image}
-              width={width - hs(32)}
-              height={vs(240)}
-            />
+            <Animated.View entering={FadeInUp.duration(600).delay(index * 200)}>
+              <Card
+                onPress={() => router.push(`/volunteer/${item.id}`)}
+                imageUrl={item.image}
+                width={width - hs(32)}
+                height={vs(240)}
+              />
+            </Animated.View>
           </Box>
         )}
       />
