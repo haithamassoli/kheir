@@ -6,8 +6,7 @@ const HomeStack = () => {
     <Stack
       screenOptions={{
         headerTitleAlign: "center",
-        headerBackTitle: "الرجوع",
-        headerBackTitleVisible: false,
+        headerBackTitle: "رجوع",
         headerTitleStyle: {
           fontFamily: "CairoBold",
           fontSize: ms(16),

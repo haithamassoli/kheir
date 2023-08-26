@@ -41,12 +41,19 @@
         "projectId": "kheir-ebd9b",
         "storageBucket": "kheir-ebd9b.appspot.com",
         "messagingSenderId": "362796967322",
-        "appId": "1:362796967322:web:c745715ebb43d8f8a38623",
-        "measurementId": "G-31LSZQEG0E"
+        "appId": "1:362796967322:web:c745715ebb43d8f8a38623"
+      },
+      "router": {
+        "origin": false
       }
     },
     "runtimeVersion": {
       "policy": "sdkVersion"
+    },
+    "plugins": ["expo-router"],
+    "experiments": {
+      "typedRoutes": true,
+      "tsconfigPaths": true
     }
   }
 }
