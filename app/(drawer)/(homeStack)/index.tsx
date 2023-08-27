@@ -17,10 +17,13 @@ import { useStore } from "@zustand/store";
 import { fetchAlmostDoneQuery } from "@apis/almostDone";
 import { Image } from "expo-image";
 import Animated, { FadeInUp } from "react-native-reanimated";
+import { useNetInfo } from "@react-native-community/netinfo";
+import NoConnection from "@components/noConnection";
 
 const Home = () => {
   const navigation: any = useNavigation();
   const { cart } = useStore();
+  const { isConnected } = useNetInfo();
   const router = useRouter();
   const { colors } = useTheme<Theme>();
   const { data: volunteerData, isLoading } = fetchVolunteerQuery();
@@ -31,6 +34,10 @@ const Home = () => {
   } = fetchAlmostDoneQuery();
 
   if (isLoading || isLoadingAlmostDone) return <Loading />;
+
+  if (isConnected === false) {
+    return <NoConnection refetch={refetchAlmostDone} />;
+  }
 
   return (
     <SafeAreaView style={{ flex: 1 }}>

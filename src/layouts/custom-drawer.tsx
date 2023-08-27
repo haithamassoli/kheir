@@ -1,4 +1,4 @@
-import { TouchableOpacity } from "react-native";
+import { Share, TouchableOpacity } from "react-native";
 import { DrawerContentScrollView } from "@react-navigation/drawer";
 import { Feather, Ionicons } from "@expo/vector-icons";
 import { Divider, Drawer } from "react-native-paper";
@@ -96,7 +96,12 @@ const CustomDrawer = (props: any) => {
           </Box>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => {}}
+          onPress={() => {
+            Share.share({
+              message: `تطبيق خير على الاندرويد
+https://play.google.com/store/apps/details?id=com.haithamassoli.kheir`,
+            });
+          }}
           style={{ paddingVertical: vs(16) }}
         >
           <Box flexDirection={"row"} alignItems={"center"}>
