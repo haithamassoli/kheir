@@ -1,6 +1,6 @@
 import { hs, ms, vs } from "@utils/platform";
-import { RefreshControl, ScrollView } from "react-native";
-import { useRouter, useLocalSearchParams } from "expo-router";
+import { RefreshControl, ScrollView, Share } from "react-native";
+import { useRouter, useLocalSearchParams, Stack } from "expo-router";
 import Loading from "@components/loading";
 import Card from "@components/card";
 import { calcPercentage, width } from "@utils/helper";
@@ -25,6 +25,7 @@ import { fetchAlmostDoneByIdQuery } from "@apis/almostDone";
 import { useTheme } from "@shopify/restyle";
 import { Image } from "expo-image";
 import Animated, { FadeInUp } from "react-native-reanimated";
+import { Feather } from "@expo/vector-icons";
 
 const defaultDinar = [1, 5, 10, 20];
 
@@ -75,6 +76,13 @@ const ConstructionItem = () => {
     router.push("/");
   };
 
+  const onSharePress = () => {
+    Share.share({
+      message: `تبرع معنا للمشروع ${data?.desc} على تطبيق خير
+https://play.google.com/store/apps/details?id=com.haithamassoli.kheir`,
+    });
+  };
+
   if (isLoading) return <Loading />;
 
   return (
@@ -94,6 +102,15 @@ const ConstructionItem = () => {
         />
       }
     >
+      <Stack.Screen
+        options={{
+          headerRight: () => (
+            <TouchableOpacity onPress={onSharePress}>
+              <Feather name="share-2" size={ms(24)} color={colors.primary} />
+            </TouchableOpacity>
+          ),
+        }}
+      />
       <Box flex={1} justifyContent="space-between">
         <Box gap="vm">
           <Animated.View entering={FadeInUp.duration(600)}>
