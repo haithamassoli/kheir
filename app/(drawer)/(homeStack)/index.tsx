@@ -12,7 +12,7 @@ import Snackbar from "@components/snackbar";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { fetchVolunteerQuery } from "@apis/volunteer";
 import Loading from "@components/loading";
-import { calcPercentage, width } from "@utils/helper";
+import { calcPercentage } from "@utils/helper";
 import { useStore } from "@zustand/store";
 import { fetchAlmostDoneQuery } from "@apis/almostDone";
 import { Image } from "expo-image";
@@ -75,7 +75,13 @@ const Home = () => {
             </Box>
           </Box>
           <Box flexDirection="row" alignItems="center" gap="hm">
-            <TouchableOpacity onPress={() => router.push("/cart")}>
+            <TouchableOpacity
+              onPress={() => {
+                if (cart.length === 0)
+                  return useStore.setState({ snackbarText: "السلة فارغة" });
+                router.push("/cart");
+              }}
+            >
               <Box
                 width={hs(18)}
                 height={vs(18)}
@@ -176,7 +182,7 @@ const Home = () => {
                   )}
                   imageUrl={almostDone.image}
                   aspectRatio={125 / 88}
-                  height={vs(176)}
+                  height={vs(192)}
                 />
               </Animated.View>
             </Box>

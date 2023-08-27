@@ -28,7 +28,7 @@ const volunteerItem = () => {
         <Card
           imageUrl={data?.image!}
           width={width - hs(32)}
-          aspectRatio={343 / 176}
+          aspectRatio={343 / 206}
         />
       </Animated.View>
       <Animated.View entering={FadeInUp.duration(600).delay(200)}>

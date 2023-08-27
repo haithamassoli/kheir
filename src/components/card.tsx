@@ -1,10 +1,8 @@
 import Colors from "@styles/colors";
 import { Box, ReText } from "@styles/theme";
-import { blurhash } from "@utils/helper";
 import { hs, ms, vs } from "@utils/platform";
 import { useStore } from "@zustand/store";
-import { Image } from "expo-image";
-import { TouchableOpacity } from "react-native";
+import { TouchableOpacity, Image } from "react-native";
 import { ProgressBar } from "react-native-paper";
 
 type Props = {
@@ -32,14 +30,14 @@ const Card = ({
     <Box>
       <TouchableOpacity onPress={onPress} activeOpacity={onPress ? 0.8 : 1}>
         <Image
-          source={imageUrl}
-          placeholder={blurhash}
-          contentFit="cover"
-          placeholderContentFit="cover"
+          source={{
+            uri: imageUrl,
+          }}
+          resizeMode="cover"
           style={{
-            aspectRatio: aspectRatio,
             height: height || undefined,
             width: width || undefined,
+            aspectRatio,
             borderTopLeftRadius: ms(18),
             borderTopRightRadius: ms(18),
             borderBottomLeftRadius: title ? 0 : ms(18),
@@ -48,20 +46,21 @@ const Card = ({
         />
         {progress && (
           <Box flex={1} justifyContent="flex-end">
-            <ProgressBar
-              progress={parseInt(progress) / 100}
-              color={Colors.primary6}
-              style={{
-                width: "82%",
-                height: vs(12),
-                borderRadius: ms(12),
-                marginStart: hs(12),
-                marginBottom: vs(16),
-                position: "absolute",
-                bottom: 0,
-                left: 0,
-              }}
-            />
+            <Box width="82%">
+              <ProgressBar
+                progress={parseInt(progress) / 100}
+                color={Colors.primary6}
+                style={{
+                  height: vs(12),
+                  borderRadius: ms(12),
+                  marginStart: hs(12),
+                  marginBottom: vs(16),
+                  position: "absolute",
+                  bottom: 0,
+                  left: 0,
+                }}
+              />
+            </Box>
             <ReText
               marginEnd="hs"
               marginBottom="vs"

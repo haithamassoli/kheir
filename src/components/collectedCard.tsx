@@ -24,7 +24,6 @@ const CollectedCard = ({ collected, goal, progress }: Props) => {
           progress={parseInt(progress) / 100}
           color={Colors.primary5}
           style={{
-            width: "100%",
             height: vs(16),
             borderRadius: ms(12),
             marginTop: vs(12),
@@ -32,12 +31,12 @@ const CollectedCard = ({ collected, goal, progress }: Props) => {
           }}
         />
         <ReText
-          color="lightText"
+          color="text"
           variant="BodyMedium"
           style={{
             position: "absolute",
-            top: vs(8),
-            start: hs(8 + +progress * 2),
+            top: vs(6),
+            start: hs(8 + +progress * 2.5),
           }}
         >
           {parseInt(progress)}%

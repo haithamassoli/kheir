@@ -46,7 +46,7 @@ const Construction = () => {
                 onPress={() => router.push(`/construction/${item.id}`)}
                 imageUrl={item.image}
                 width={width - hs(32)}
-                aspectRatio={343 / 176}
+                aspectRatio={343 / 206}
                 progress={calcPercentage(item.goal, item.collected)}
               />
             </Animated.View>

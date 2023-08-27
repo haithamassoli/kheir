@@ -1,7 +1,6 @@
 import { Feather } from "@expo/vector-icons";
 import CustomDrawer from "@src/layouts/custom-drawer";
 import { IconSize } from "@styles/size";
-import { blurhash } from "@utils/helper";
 import { ms } from "@utils/platform";
 import { useStore } from "@zustand/store";
 import { Image } from "expo-image";
@@ -49,9 +48,7 @@ const HomeDrawer = () => {
                   : require("@assets/icons/drawerIcons/donations.png")
               }
               contentFit="contain"
-              placeholder={blurhash}
               transition={400}
-              placeholderContentFit="contain"
               style={{ width: IconSize.m, height: IconSize.m }}
             />
           ),

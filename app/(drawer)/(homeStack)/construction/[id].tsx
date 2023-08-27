@@ -3,7 +3,7 @@ import { RefreshControl, ScrollView } from "react-native";
 import { useRouter, useLocalSearchParams } from "expo-router";
 import Loading from "@components/loading";
 import Card from "@components/card";
-import { blurhash, calcPercentage, width } from "@utils/helper";
+import { calcPercentage, width } from "@utils/helper";
 import { fetchConstructionByIdQuery } from "@apis/construction";
 import { Button, TextInput, Checkbox } from "react-native-paper";
 import CollectedCard from "@components/collectedCard";
@@ -102,7 +102,7 @@ const ConstructionItem = () => {
               imageUrl={data?.image!}
               title={data?.desc}
               width={width - hs(32)}
-              aspectRatio={343 / 176}
+              aspectRatio={343 / 206}
             />
           </Animated.View>
           <Animated.View entering={FadeInUp.duration(600).delay(200)}>
@@ -295,7 +295,6 @@ const ConstructionItem = () => {
                     source={require("@assets/icons/cart.jpg")}
                     style={{ width: ms(24), height: ms(24) }}
                     contentFit="contain"
-                    placeholder={blurhash}
                     transition={400}
                   />
                 </Box>
