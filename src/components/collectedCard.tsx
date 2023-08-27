@@ -2,6 +2,7 @@ import Colors from "@styles/colors";
 import { Box, ReText } from "@styles/theme";
 import { width } from "@utils/helper";
 import { hs, ms, vs } from "@utils/platform";
+import { useStore } from "@zustand/store";
 import { ProgressBar } from "react-native-paper";
 
 type Props = {
@@ -11,6 +12,7 @@ type Props = {
 };
 
 const CollectedCard = ({ collected, goal, progress }: Props) => {
+  const { isDark } = useStore();
   return (
     <Box
       alignItems="center"
@@ -44,19 +46,19 @@ const CollectedCard = ({ collected, goal, progress }: Props) => {
       </Box>
       <Box flexDirection="row" justifyContent="space-between" width="82%">
         <Box alignItems="center">
-          <ReText variant="BodyMedium" color="primary">
+          <ReText variant="BodyMedium" color={isDark ? "lightText" : "primary"}>
             تم جمع
           </ReText>
-          <ReText variant="BodyMedium" color="primary">
+          <ReText variant="BodyMedium" color={isDark ? "lightText" : "primary"}>
             {collected} دينار
           </ReText>
         </Box>
         <Box width={hs(2)} height={"100%"} backgroundColor="black8" />
         <Box alignItems="center">
-          <ReText variant="BodyMedium" color="primary">
+          <ReText variant="BodyMedium" color={isDark ? "lightText" : "primary"}>
             المتبقي
           </ReText>
-          <ReText variant="BodyMedium" color="primary">
+          <ReText variant="BodyMedium" color={isDark ? "lightText" : "primary"}>
             {goal - collected} دينار
           </ReText>
         </Box>

@@ -1,6 +1,7 @@
 import { Box, ReText } from "@styles/theme";
 import { width } from "@utils/helper";
 import { hs, vs } from "@utils/platform";
+import { useStore } from "@zustand/store";
 
 type Props = {
   beneficiaries: number;
@@ -9,6 +10,7 @@ type Props = {
 };
 
 const ExecutorCard = ({ beneficiaries, donors, executor }: Props) => {
+  const { isDark } = useStore();
   return (
     <Box
       alignItems="center"
@@ -17,7 +19,7 @@ const ExecutorCard = ({ beneficiaries, donors, executor }: Props) => {
       borderRadius="l"
       paddingVertical="vs"
     >
-      <ReText variant="BodyLarge" color="primary">
+      <ReText variant="BodyLarge" color={isDark ? "lightText" : "primary"}>
         {executor}
       </ReText>
       <Box
@@ -28,19 +30,19 @@ const ExecutorCard = ({ beneficiaries, donors, executor }: Props) => {
       />
       <Box flexDirection="row" justifyContent="space-between" width="82%">
         <Box alignItems="center">
-          <ReText variant="BodyMedium" color="primary">
+          <ReText variant="BodyMedium" color={isDark ? "lightText" : "primary"}>
             عدد المستفيدين:
           </ReText>
-          <ReText variant="BodyMedium" color="primary">
+          <ReText variant="BodyMedium" color={isDark ? "lightText" : "primary"}>
             {beneficiaries}
           </ReText>
         </Box>
         <Box width={hs(2)} height={"100%"} backgroundColor="black8" />
         <Box alignItems="center">
-          <ReText variant="BodyMedium" color="primary">
+          <ReText variant="BodyMedium" color={isDark ? "lightText" : "primary"}>
             عدد المتبرعين:
           </ReText>
-          <ReText variant="BodyMedium" color="primary">
+          <ReText variant="BodyMedium" color={isDark ? "lightText" : "primary"}>
             {donors}
           </ReText>
         </Box>

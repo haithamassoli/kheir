@@ -67,12 +67,9 @@ const SingUp = () => {
     <SafeAreaView style={{ flex: 1 }}>
       <Snackbar />
       <Box flex={1} paddingHorizontal="hl" paddingTop="vl">
-        <Feather
-          name="x"
-          size={IconSize.l}
-          color={colors.text}
-          onPress={() => router.replace("/")}
-        />
+        <TouchableOpacity onPress={() => router.push("/")}>
+          <Feather name="x" size={IconSize.l} color={colors.text} />
+        </TouchableOpacity>
         <Box flex={1}>
           <Box height={"25%"} justifyContent="center" alignItems="center">
             <Feather name="user" color={Colors.primary} size={IconSize.xl} />

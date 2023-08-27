@@ -9,6 +9,7 @@ import { useNavigation, useRouter } from "expo-router";
 import { Drawer } from "expo-router/drawer";
 import { useEffect } from "react";
 import { RefreshControl, ScrollView } from "react-native";
+import Animated, { FadeInUp } from "react-native-reanimated";
 
 const Donations = () => {
   const navigation: any = useNavigation();
@@ -16,7 +17,6 @@ const Donations = () => {
   const { user } = useStore();
   const { colors } = useTheme<Theme>();
   const { isLoading, data, isFetching, refetch } = fetchOrdersQuery(user?.uid!);
-  console.log(data);
 
   useEffect(() => {
     if (!user) {
@@ -60,7 +60,7 @@ const Donations = () => {
     <ScrollView
       contentContainerStyle={{
         flex: 1,
-        paddingBottom: vs(16),
+        paddingVertical: vs(16),
         paddingHorizontal: hs(8),
       }}
       refreshControl={
@@ -80,8 +80,11 @@ const Donations = () => {
           ),
         }}
       />
-      {data?.map((donation) => (
-        <Box key={donation.id}>
+      {data?.map((donation, index) => (
+        <Animated.View
+          key={index}
+          entering={FadeInUp.duration(600).delay(200 * index)}
+        >
           <Box
             backgroundColor="primary"
             width="100%"
@@ -121,7 +124,7 @@ const Donations = () => {
                 )}
               </Box>
             ))}
-        </Box>
+        </Animated.View>
       ))}
     </ScrollView>
   );

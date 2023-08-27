@@ -1,8 +1,10 @@
 import { Box, ReText } from "@styles/theme";
 import { width } from "@utils/helper";
 import { hs } from "@utils/platform";
+import { useStore } from "@zustand/store";
 
 const DescCard = ({ desc }: { desc: string }) => {
+  const { isDark } = useStore();
   return (
     <Box
       alignItems="center"
@@ -29,7 +31,7 @@ const DescCard = ({ desc }: { desc: string }) => {
       </Box>
       <ReText
         variant="BodyMedium"
-        color="primary"
+        color={isDark ? "lightText" : "primary"}
         marginHorizontal="hm"
         textAlign="center"
         paddingBottom="vs"

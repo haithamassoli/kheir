@@ -1,8 +1,10 @@
 import Colors from "@styles/colors";
 import { Box, ReText } from "@styles/theme";
+import { blurhash } from "@utils/helper";
 import { hs, ms, vs } from "@utils/platform";
 import { useStore } from "@zustand/store";
-import { TouchableOpacity, Image } from "react-native";
+import { Image } from "expo-image";
+import { TouchableOpacity } from "react-native";
 import { ProgressBar } from "react-native-paper";
 
 type Props = {
@@ -30,10 +32,10 @@ const Card = ({
     <Box>
       <TouchableOpacity onPress={onPress} activeOpacity={onPress ? 0.8 : 1}>
         <Image
-          source={{
-            uri: imageUrl,
-          }}
-          resizeMode="cover"
+          source={imageUrl}
+          placeholder={blurhash}
+          placeholderContentFit="cover"
+          contentFit="cover"
           style={{
             height: height || undefined,
             width: width || undefined,
@@ -88,7 +90,7 @@ const Card = ({
             <ReText
               variant="BodyMedium"
               textAlign="center"
-              color={isDark ? "primary6" : "primary5"}
+              color={isDark ? "lightText" : "primary5"}
             >
               {title}
             </ReText>

@@ -60,6 +60,13 @@ const CustomDrawer = (props: any) => {
             const isFocused = props.state.index === index;
 
             const onPress = () => {
+              if (route.name === "donations" && !user) {
+                useStore.setState({
+                  snackbarText: "يجب تسجيل الدخول أولاً",
+                });
+                navigation.closeDrawer();
+                return;
+              }
               props.navigation.navigate(route.name);
             };
 
