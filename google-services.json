@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "362796967322",
+    "project_id": "kheir-ebd9b",
+    "storage_bucket": "kheir-ebd9b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:362796967322:android:f8b9dd94c3e828e3a38623",
+        "android_client_info": {
+          "package_name": "com.haithamassoli.kheir"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "362796967322-8lpbjhidg6nd8tb71godh8uh7thedctj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.haithamassoli.kheir",
+            "certificate_hash": "ecf257f92dfdab1185d82c78e977000014e6a43f"
+          }
+        },
+        {
+          "client_id": "362796967322-qj2h613asfmqaddqmgcvabsq0tggik5b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDsls2vLMybfHQvH-0ujvJooYD1EYocwww"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "362796967322-qj2h613asfmqaddqmgcvabsq0tggik5b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
