@@ -36,6 +36,9 @@
       "eas": {
         "projectId": "66a92220-8f3a-4f58-b597-0d5392128767"
       },
+      "router": {
+        "origin": false
+      },
       "firebase": {
         "apiKey": "AIzaSyDvhjLHxTzGmOBnl-XPkeLqv-XBj6mEvy0",
         "authDomain": "kheir-ebd9b.firebaseapp.com",
@@ -47,6 +50,11 @@
     },
     "runtimeVersion": {
       "policy": "sdkVersion"
+    },
+    "plugins": ["expo-router"],
+    "experiments": {
+      "typedRoutes": true,
+      "tsconfigPaths": true
     }
   }
 }

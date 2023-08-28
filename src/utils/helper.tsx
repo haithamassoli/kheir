@@ -1,5 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import NetInfo from "@react-native-community/netinfo";
+import { useStore } from "@zustand/store";
 import { Dimensions } from "react-native";
 
 export const { width, height } = Dimensions.get("window");
@@ -41,3 +42,35 @@ export const calcPercentage = (goal: number, collected: number) => {
 
 export const blurhash =
   "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[";
+
+export const getTheme = async () => {
+  try {
+    const darkMode = await getDataFromStorage("isDark");
+    if (darkMode === null) {
+      useStore.setState({ isDark: false });
+    } else {
+      useStore.setState({ isDark: darkMode });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getUserFromStorage = async () => {
+  try {
+    const user = await getDataFromStorage("user");
+    if (user) useStore.setState({ user });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getCartFromStorage = async () => {
+  try {
+    const cart = await getDataFromStorage("cart");
+    console.log("cart is:", cart);
+    if (cart) useStore.setState({ cart });
+  } catch (error) {
+    console.log(error);
+  }
+};
