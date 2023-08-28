@@ -2,7 +2,7 @@ import { Feather, Ionicons } from "@expo/vector-icons";
 import Colors from "@styles/colors";
 import { IconSize } from "@styles/size";
 import { Box, ReText, Theme } from "@styles/theme";
-import { useRouter } from "expo-router";
+import { router } from "expo-router";
 import { Button, TextInput } from "react-native-paper";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -21,7 +21,6 @@ import { useStore } from "@zustand/store";
 import { useNetInfo } from "@react-native-community/netinfo";
 
 const SignIn = () => {
-  const router = useRouter();
   const { isConnected } = useNetInfo();
   const { colors } = useTheme<Theme>();
   const { control, handleSubmit } = useForm<ValidationSchemaType>({

@@ -1,6 +1,6 @@
 import { hs, ms, vs } from "@utils/platform";
 import { RefreshControl, ScrollView, Share } from "react-native";
-import { useRouter, useLocalSearchParams, Stack } from "expo-router";
+import { router, useLocalSearchParams, Stack } from "expo-router";
 import Loading from "@components/loading";
 import Card from "@components/card";
 import { calcPercentage, width } from "@utils/helper";
@@ -32,7 +32,6 @@ const defaultDinar = [1, 5, 10, 20];
 const ConstructionItem = () => {
   const { id }: Partial<{ id: string }> = useLocalSearchParams();
   const { colors } = useTheme<Theme>();
-  const router = useRouter();
   const { data, isLoading, refetch, isFetching } = fetchAlmostDoneByIdQuery(
     id!
   );

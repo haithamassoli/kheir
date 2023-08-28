@@ -12,7 +12,7 @@ import { useStore } from "@zustand/store";
 import { useForm } from "react-hook-form";
 import { ScrollView } from "react-native";
 import { Button } from "react-native-paper";
-import { useRouter } from "expo-router";
+import { router } from "expo-router";
 import { storeDataToStorage } from "@utils/helper";
 import { useEffect } from "react";
 import { addOrderMutation } from "@apis/cart";
@@ -21,7 +21,6 @@ import Animated, { FadeInUp } from "react-native-reanimated";
 
 const Cart = () => {
   const { cart, user } = useStore();
-  const router = useRouter();
   const queryClient = useQueryClient();
   const { control, handleSubmit } = useForm<ValidationCardSchemaType>({
     resolver: zodResolver(validationCardSchema),

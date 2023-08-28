@@ -5,12 +5,11 @@ import { FlashList } from "@shopify/flash-list";
 import { Box } from "@styles/theme";
 import { width } from "@utils/helper";
 import { hs, vs } from "@utils/platform";
-import { useRouter } from "expo-router";
+import { router } from "expo-router";
 import Animated, { FadeInUp } from "react-native-reanimated";
 
 const Volunteer = () => {
   const { data, isLoading } = fetchVolunteerQuery();
-  const router = useRouter();
   if (isLoading) return <Loading />;
   return (
     <Box flex={1} gap="vl">

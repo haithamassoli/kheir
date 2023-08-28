@@ -1,6 +1,6 @@
 import { Feather } from "@expo/vector-icons";
 import { Box, ReText, Theme } from "@styles/theme";
-import { useNavigation, useRouter } from "expo-router";
+import { useNavigation, router } from "expo-router";
 import { RefreshControl, ScrollView, TouchableOpacity } from "react-native";
 import { hs, ms, vs } from "@utils/platform";
 import { useTheme } from "@shopify/restyle";
@@ -24,7 +24,6 @@ const Home = () => {
   const navigation: any = useNavigation();
   const { cart } = useStore();
   const { isConnected } = useNetInfo();
-  const router = useRouter();
   const { colors } = useTheme<Theme>();
   const { data: volunteerData, isLoading } = fetchVolunteerQuery();
   const {

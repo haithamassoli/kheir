@@ -5,11 +5,10 @@ import { FlashList } from "@shopify/flash-list";
 import { Box } from "@styles/theme";
 import { width } from "@utils/helper";
 import { hs, vs } from "@utils/platform";
-import { useRouter } from "expo-router";
+import { router } from "expo-router";
 import Animated, { FadeInUp } from "react-native-reanimated";
 
 const Emergencies = () => {
-  const router = useRouter();
   const { data, isLoading } = fetchEmergenciesQuery();
 
   if (isLoading) return <Loading />;

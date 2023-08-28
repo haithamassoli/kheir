@@ -3,7 +3,7 @@
     "scheme": "kheir",
     "name": "خير",
     "slug": "kheir",
-    "version": "1.5.0",
+    "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -15,16 +15,17 @@
     },
     "updates": {
       "fallbackToCacheTimeout": 0,
+      "checkAutomatically": "NEVER",
       "url": "https://u.expo.dev/66a92220-8f3a-4f58-b597-0d5392128767"
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "buildNumber": "1.5.0",
+      "buildNumber": "1.0.0",
       "supportsTablet": true,
       "bundleIdentifier": "com.haithamassoli.kheir"
     },
     "android": {
-      "versionCode": 6,
+      "versionCode": 8,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"

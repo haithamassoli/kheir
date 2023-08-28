@@ -5,7 +5,7 @@ import { useTheme } from "@shopify/restyle";
 import { Box, ReText, Theme } from "@styles/theme";
 import { hs, vs } from "@utils/platform";
 import { useStore } from "@zustand/store";
-import { useNavigation, useRouter } from "expo-router";
+import { useNavigation, router } from "expo-router";
 import { Drawer } from "expo-router/drawer";
 import { useEffect } from "react";
 import { RefreshControl, ScrollView } from "react-native";
@@ -13,7 +13,6 @@ import Animated, { FadeInUp } from "react-native-reanimated";
 
 const Donations = () => {
   const navigation: any = useNavigation();
-  const router = useRouter();
   const { user } = useStore();
   const { colors } = useTheme<Theme>();
   const { isLoading, data, isFetching, refetch } = fetchOrdersQuery(user?.uid!);

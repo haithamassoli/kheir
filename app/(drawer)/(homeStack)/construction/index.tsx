@@ -6,12 +6,11 @@ import { useTheme } from "@shopify/restyle";
 import { Box, Theme } from "@styles/theme";
 import { calcPercentage, width } from "@utils/helper";
 import { hs, vs } from "@utils/platform";
-import { useRouter } from "expo-router";
+import { router } from "expo-router";
 import { RefreshControl } from "react-native";
 import Animated, { FadeInUp } from "react-native-reanimated";
 
 const Construction = () => {
-  const router = useRouter();
   const { data, isLoading, refetch, isFetching } = fetchConstructionQuery();
   const { colors } = useTheme<Theme>();
 
