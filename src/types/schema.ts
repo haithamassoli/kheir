@@ -20,7 +20,8 @@ export const validationAddToCartSchema = z.object({
     .string({
       required_error: "السعر يجب أن لا يكون فارغًا",
     })
-    .min(1, "السعر يجب أن يكون 1 دينار على الأقل"),
+    .min(1, "السعر يجب أن يكون 1 دينار على الأقل")
+    .max(5, "السعر يجب أن يكون 5 أرقام على الأكثر"),
   friendPhone: z
     .string()
     .min(10, "رقم الهاتف يجب أن يكون 10 أرقام على الأقل")

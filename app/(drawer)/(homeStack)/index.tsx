@@ -89,8 +89,8 @@ const Home = () => {
               }}
             >
               <Box
-                width={hs(18)}
-                height={vs(18)}
+                width={ms(18)}
+                height={ms(18)}
                 borderRadius="l"
                 backgroundColor="primary6"
                 position="absolute"
@@ -110,13 +110,13 @@ const Home = () => {
               </Box>
               <Feather
                 name={"shopping-cart"}
-                size={hs(24)}
+                size={ms(24)}
                 color={colors.text}
               />
             </TouchableOpacity>
             <Feather
               name="menu"
-              size={hs(24)}
+              size={ms(24)}
               color={colors.text}
               onPress={() => navigation.openDrawer()}
             />

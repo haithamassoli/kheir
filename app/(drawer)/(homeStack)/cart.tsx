@@ -208,7 +208,7 @@ const Cart = () => {
             <ReText variant="TitleSmall" textAlign="left" marginTop="vs">
               تاريخ الانتهاء (شهر/سنة)
             </ReText>
-            <Box flexDirection="row">
+            <Box flexDirection="row" height={vs(36)}>
               <ControlledInput
                 mode="flat"
                 name="expiryDateMonth"
@@ -218,11 +218,13 @@ const Cart = () => {
                 style={{
                   borderTopLeftRadius: ms(8),
                   borderBottomLeftRadius: ms(8),
-                  height: vs(36),
-                  width: "33%",
                 }}
                 underlineStyle={{
                   display: "none",
+                }}
+                contentStyle={{
+                  height: vs(36),
+                  width: ms(62),
                 }}
               />
               <Box backgroundColor="black5" width={ms(2)} height={"100%"} />
@@ -235,14 +237,19 @@ const Cart = () => {
                 style={{
                   borderTopRightRadius: ms(8),
                   borderBottomRightRadius: ms(8),
-                  height: vs(36),
-                  width: "33%",
                 }}
                 underlineStyle={{
                   display: "none",
                 }}
+                contentStyle={{
+                  height: vs(36),
+                  width: ms(62),
+                }}
               />
             </Box>
+            <ReText variant="LabelSmall" textAlign="left">
+              (23/12)
+            </ReText>
           </Box>
           <Box width="48%">
             <ReText variant="TitleSmall" textAlign="left" marginTop="vs">

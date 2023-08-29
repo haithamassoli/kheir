@@ -50,7 +50,7 @@ const CollectedCard = ({ collected, goal, progress }: Props) => {
             تم جمع
           </ReText>
           <ReText variant="BodyMedium" color={isDark ? "lightText" : "primary"}>
-            {collected} دينار
+            {Math.round(collected)} دينار
           </ReText>
         </Box>
         <Box width={hs(2)} height={"100%"} backgroundColor="black8" />
@@ -59,7 +59,9 @@ const CollectedCard = ({ collected, goal, progress }: Props) => {
             المتبقي
           </ReText>
           <ReText variant="BodyMedium" color={isDark ? "lightText" : "primary"}>
-            {goal - collected} دينار
+            {goal - collected > 0
+              ? `${Math.round(goal - collected)} دينار`
+              : "تم الانتهاء"}
           </ReText>
         </Box>
       </Box>

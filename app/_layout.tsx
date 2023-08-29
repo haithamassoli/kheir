@@ -5,12 +5,7 @@ import { StatusBar } from "expo-status-bar";
 import { useStore } from "@zustand/store";
 import { useFonts } from "expo-font";
 import { FlashList } from "@shopify/flash-list";
-import {
-  getCartFromStorage,
-  getTheme,
-  getUserFromStorage,
-  storeDataToStorage,
-} from "@utils/helper";
+import { getDataFromStorage, storeDataToStorage } from "@utils/helper";
 import {
   PaperProvider,
   MD3LightTheme,
@@ -45,6 +40,38 @@ export const unstable_settings = {
 };
 
 SplashScreen.preventAutoHideAsync();
+
+const getTheme = async () => {
+  try {
+    const darkMode = await getDataFromStorage("isDark");
+    if (darkMode === null) {
+      useStore.setState({ isDark: false });
+    } else {
+      useStore.setState({ isDark: darkMode });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const getUserFromStorage = async () => {
+  try {
+    const user = await getDataFromStorage("user");
+    if (user) useStore.setState({ user });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const getCartFromStorage = async () => {
+  try {
+    const cart = await getDataFromStorage("cart");
+    console.log("cart is:", cart);
+    if (cart) useStore.setState({ cart });
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export default function RootLayout() {
   TextInput.defaultProps = TextInput.defaultProps || {};
