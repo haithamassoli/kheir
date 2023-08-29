@@ -16,7 +16,7 @@
     "updates": {
       "fallbackToCacheTimeout": 0,
       "checkAutomatically": "NEVER",
-      "url": "https://u.expo.dev/66a92220-8f3a-4f58-b597-0d5392128767"
+      "enabled": false
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
@@ -25,7 +25,7 @@
       "bundleIdentifier": "com.haithamassoli.kheir"
     },
     "android": {
-      "versionCode": 8,
+      "versionCode": 9,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
@@ -48,9 +48,6 @@
         "messagingSenderId": "362796967322",
         "appId": "1:362796967322:web:c745715ebb43d8f8a38623"
       }
-    },
-    "runtimeVersion": {
-      "policy": "sdkVersion"
     },
     "plugins": ["expo-router"],
     "experiments": {

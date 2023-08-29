@@ -29,7 +29,7 @@ import {
   LightNavigationColors,
 } from "@styles/navigation";
 import { router, useSegments, SplashScreen, Stack } from "expo-router";
-import { reloadAsync } from "expo-updates";
+import RNRestart from "react-native-restart";
 
 if (Platform.OS === "android") {
   if (UIManager.setLayoutAnimationEnabledExperimental) {
@@ -67,12 +67,12 @@ export default function RootLayout() {
 
   const { isDark, user, cart } = useStore();
 
-  const forceRTL = async () => {
+  const forceRTL = () => {
     if (!I18nManager.isRTL) {
       try {
         I18nManager.allowRTL(true);
         I18nManager.forceRTL(true);
-        await reloadAsync();
+        RNRestart.restart();
       } catch (error) {
         console.log(error);
       }
