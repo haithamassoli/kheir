@@ -82,6 +82,8 @@ https://play.google.com/store/apps/details?id=com.haithamassoli.kheir`,
     });
   };
 
+  const progress = calcPercentage(data?.goal!, data?.collected!);
+
   if (isLoading) return <Loading />;
 
   return (
@@ -124,7 +126,7 @@ https://play.google.com/store/apps/details?id=com.haithamassoli.kheir`,
             <CollectedCard
               collected={data?.collected!}
               goal={data?.goal!}
-              progress={calcPercentage(data?.goal!, data?.collected!)}
+              progress={progress}
             />
           </Animated.View>
           <Animated.View entering={FadeInUp.duration(600).delay(400)}>
@@ -140,11 +142,12 @@ https://play.google.com/store/apps/details?id=com.haithamassoli.kheir`,
             mode="contained"
             onPress={onPress}
             style={{ width: "100%" }}
+            disabled={+progress >= 100}
             contentStyle={{
               height: vs(46),
             }}
           >
-            تبرع الآن
+            {+progress >= 100 ? "تم الانتهاء" : "تبرع الآن"}
           </Button>
         </Animated.View>
       </Box>

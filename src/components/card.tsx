@@ -75,7 +75,7 @@ const Card = ({
                 right: 0,
               }}
             >
-              {progress}%
+              {+progress > 100 ? "100" : progress}%
             </ReText>
           </Box>
         )}

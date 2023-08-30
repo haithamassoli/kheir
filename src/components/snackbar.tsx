@@ -23,7 +23,7 @@ const Snackbar = () => {
       flex={1}
       position="absolute"
       zIndex="modal"
-      bottom={vs(24)}
+      bottom={vs(12)}
       width={"100%"}
     >
       <PSnackbar

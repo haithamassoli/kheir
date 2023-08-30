@@ -41,7 +41,7 @@ const CollectedCard = ({ collected, goal, progress }: Props) => {
             start: hs(8 + +progress * 2.5),
           }}
         >
-          {parseInt(progress)}%
+          {+progress >= 100 ? "100" : progress}%
         </ReText>
       </Box>
       <Box flexDirection="row" justifyContent="space-between" width="82%">
@@ -59,7 +59,7 @@ const CollectedCard = ({ collected, goal, progress }: Props) => {
             المتبقي
           </ReText>
           <ReText variant="BodyMedium" color={isDark ? "lightText" : "primary"}>
-            {goal - collected > 0
+            {+progress < 100
               ? `${Math.round(goal - collected)} دينار`
               : "تم الانتهاء"}
           </ReText>
