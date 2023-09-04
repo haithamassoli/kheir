@@ -138,7 +138,7 @@ export const fontConfig = {
   },
   labelLarge: {
     fontFamily: "SahabahBold",
-    lineHeight: vs(20),
+    lineHeight: vs(16),
     fontSize: ms(14),
     letterSpacing: hs(0.1),
   },
