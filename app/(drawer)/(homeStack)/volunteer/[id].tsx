@@ -10,7 +10,6 @@ import DescCard from "@components/descCard";
 import Animated, { FadeInUp } from "react-native-reanimated";
 import { Button } from "react-native-paper";
 import { Box } from "@styles/theme";
-import { useStore } from "@zustand/store";
 import Snackbar from "@components/snackbar";
 import { Feather } from "@expo/vector-icons";
 import Colors from "@styles/colors";
@@ -18,11 +17,8 @@ import Colors from "@styles/colors";
 const volunteerItem = () => {
   const { id }: Partial<{ id: string }> = useLocalSearchParams();
   const { data, isLoading } = fetchVolunteerByIdQuery(id!);
-  const { user } = useStore();
 
   const onPress = () => {
-    if (!user)
-      return useStore.setState({ snackbarText: "يجب تسجيل الدخول أولاً" });
     Linking.openURL(
       "https://docs.google.com/forms/d/e/1FAIpQLScNxCHPBQSG-u1p5FH-a-LUFCupyJyCWa0NaYYKUX564oJXXQ/viewform?usp=sf_link"
     );

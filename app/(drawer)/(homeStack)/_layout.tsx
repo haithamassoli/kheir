@@ -5,8 +5,13 @@ const HomeStack = () => {
   return (
     <Stack
       screenOptions={{
+        animation: "slide_from_left",
         headerTitleAlign: "center",
         headerBackTitle: "رجوع",
+        headerBackTitleStyle: {
+          fontFamily: "CairoReg",
+          fontSize: ms(16),
+        },
         headerTitleStyle: {
           fontFamily: "CairoBold",
           fontSize: ms(16),

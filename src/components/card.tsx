@@ -64,14 +64,13 @@ const Card = ({
               />
             </Box>
             <ReText
-              marginEnd="hs"
-              marginBottom="vs"
+              marginEnd="hxs"
               variant="LabelLarge"
               color="primary6"
               fontFamily="SahabahBold"
               style={{
                 position: "absolute",
-                bottom: 0,
+                bottom: vs(14),
                 right: 0,
               }}
             >
