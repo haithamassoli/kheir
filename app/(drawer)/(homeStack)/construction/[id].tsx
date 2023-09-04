@@ -62,7 +62,7 @@ const ConstructionItem = () => {
       friendPhone: formData.friendPhone || "",
       name: "إعمـار",
     });
-    router.replace("/cart");
+    router.push("/cart");
   };
 
   const onPressAddToCart = (formData: ValidationAddToCartSchemaType) => {

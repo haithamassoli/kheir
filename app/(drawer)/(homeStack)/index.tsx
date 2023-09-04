@@ -101,9 +101,11 @@ const Home = () => {
               >
                 <ReText
                   variant="BodySmall"
+                  fontFamily="CairoBold"
                   textAlign="center"
-                  fontSize={ms(10)}
+                  fontSize={ms(12)}
                   color="lightText"
+                  style={{ lineHeight: ms(12), paddingTop: vs(8) }}
                 >
                   {cart.length}
                 </ReText>
