@@ -148,10 +148,13 @@ const Home = () => {
               marginTop: vs(12),
             }}
           >
-            {categories.map((category) => (
+            {categories.map((category, index) => (
               <Box key={category.id} marginHorizontal="hs">
-                <Animated.View entering={FadeInUp.duration(600).delay(500)}>
+                <Animated.View
+                  entering={FadeInUp.duration(600).delay(index * 200 + 500)}
+                >
                   <CategoryCard
+                    // @ts-ignore
                     onPress={() => router.push(category.route)}
                     title={category.title}
                     image={category.image}
@@ -179,9 +182,11 @@ const Home = () => {
             marginTop: vs(12),
           }}
         >
-          {almostDoneData?.map((almostDone) => (
+          {almostDoneData?.map((almostDone, index) => (
             <Box key={almostDone.id} marginHorizontal="hs">
-              <Animated.View entering={FadeInUp.duration(600).delay(1000)}>
+              <Animated.View
+                entering={FadeInUp.duration(600).delay(index * 200 + 1000)}
+              >
                 <Card
                   onPress={() => router.push(`/almost-done/${almostDone.id}`)}
                   progress={calcPercentage(
@@ -221,9 +226,11 @@ const Home = () => {
               marginTop: vs(12),
             }}
           >
-            {volunteerData?.map((volunteer) => (
+            {volunteerData?.map((volunteer, index) => (
               <Box key={volunteer.id} marginHorizontal="hs">
-                <Animated.View entering={FadeInUp.duration(600).delay(1500)}>
+                <Animated.View
+                  entering={FadeInUp.duration(600).delay(index * 200 + 1500)}
+                >
                   <Card
                     onPress={() => router.push(`/volunteer/${volunteer.id}`)}
                     imageUrl={volunteer.image}
