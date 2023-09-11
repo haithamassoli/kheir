@@ -1,139 +1,74 @@
-import { useState, useRef, memo } from "react";
-import { View, ScrollView, StyleSheet } from "react-native";
-import { useEffect } from "react";
+import { useState, memo } from "react";
 import { useTheme } from "@shopify/restyle";
-import Colors from "@styles/colors";
-import { hs, ms, vs } from "@utils/platform";
+import { hs, ms } from "@utils/platform";
 import { Box, Theme } from "@styles/theme";
-import { useStore } from "@zustand/store";
 import { blurhash, width } from "@utils/helper";
 import { Image } from "expo-image";
+import Carousel from "react-native-reanimated-carousel";
+import Animated, { SlideInLeft } from "react-native-reanimated";
 
 type Props = {
-  images: any[];
+  images: string[];
 };
 
 const ImagesCarousel = ({ images }: Props) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const scrollRef = useRef<ScrollView>(null);
-
-  const { isDark } = useStore();
   const { colors } = useTheme<Theme>();
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setSelectedIndex((prevIndex) =>
-        prevIndex === images.length - 1 ? 0 : prevIndex + 1
-      ),
-        scrollRef.current?.scrollTo({
-          animated: true,
-          x: (width - hs(32)) * selectedIndex,
-          y: 0,
-        });
-    }, 3000);
-    return () => clearInterval(interval);
-  }, [selectedIndex]);
-
-  const setImageIndex = (event: any) => {
-    const contentOffset = event.nativeEvent.contentOffset;
-    const viewSize = event.nativeEvent.layoutMeasurement;
-    const selectedIndex = Math.floor(contentOffset.x / viewSize.width);
-    setSelectedIndex(selectedIndex);
-  };
-
   return (
-    <View style={styles.container}>
-      <Box width={width - hs(32)} borderRadius="l" aspectRatio={68 / 39}>
-        <ScrollView
-          ref={scrollRef}
-          contentContainerStyle={{
-            flexDirection: "row-reverse",
-          }}
-          horizontal
-          overScrollMode="never"
-          showsHorizontalScrollIndicator={false}
-          onMomentumScrollEnd={setImageIndex}
-          pagingEnabled
-        >
-          {images.length === 0 && (
-            <Image
-              source={require("@assets/images/carousel/1.png")}
-              contentFit="cover"
-              placeholder={blurhash}
-              transition={400}
-              style={styles.image}
-            />
-          )}
-          {Array.isArray(images) &&
-            images.map((image, index) => (
-              <Image
-                key={index}
-                source={image}
-                transition={400}
-                placeholder={blurhash}
-                placeholderContentFit="cover"
-                style={styles.image}
-              />
-            ))}
-        </ScrollView>
-      </Box>
-      <View style={styles.dotsContainer}>
-        {images.length === 0 && (
-          <View
-            style={[
-              styles.dot,
-              {
-                borderColor: isDark ? Colors.primary4 : Colors.primary7,
-              },
-            ]}
+    <>
+      <Carousel
+        width={width}
+        height={width / 2}
+        autoPlay={true}
+        data={images!}
+        autoPlayInterval={3000}
+        autoPlayReverse
+        onSnapToItem={setSelectedIndex}
+        renderItem={({ item }) => (
+          <Image
+            source={item}
+            transition={400}
+            style={{
+              width: width - hs(32),
+              height: width / 2,
+              borderRadius: ms(10),
+            }}
+            contentFit="cover"
+            placeholder={blurhash}
+            placeholderContentFit="cover"
           />
         )}
+      />
+      <Box flexDirection="row" justifyContent="flex-end" marginTop="vs">
         {images.map((_, index) => (
-          <View
+          <Animated.View
             key={index}
-            style={[
-              styles.dot,
-              {
-                borderColor:
-                  index === images.length - selectedIndex - 1
-                    ? colors.primary7
-                    : colors.black6,
+            layout={SlideInLeft.withInitialValues({
+              originX: 0,
+            })}
+          >
+            <Box
+              key={index}
+              height={ms(8)}
+              width={ms(8)}
+              borderRadius="l"
+              marginHorizontal="hxs"
+              marginVertical="vxs"
+              style={{
                 backgroundColor:
-                  index === selectedIndex ? colors.primary7 : colors.black6,
-              },
-            ]}
-          />
+                  index === images.length - selectedIndex - 1
+                    ? colors.primary
+                    : colors.black6,
+                width:
+                  index === images.length - selectedIndex - 1 ? ms(24) : ms(8),
+              }}
+            />
+          </Animated.View>
         ))}
-      </View>
-    </View>
+      </Box>
+    </>
   );
 };
 
 export default memo(ImagesCarousel);
-
-const styles = StyleSheet.create({
-  container: {
-    alignSelf: "center",
-    width: width - hs(32),
-    aspectRatio: 68 / 39,
-  },
-  image: {
-    borderRadius: ms(12),
-    width: width - hs(32),
-    aspectRatio: 68 / 39,
-  },
-  dotsContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
-    marginTop: vs(8),
-    zIndex: 100,
-  },
-  dot: {
-    height: vs(8),
-    width: vs(8),
-    borderRadius: ms(6),
-    borderWidth: ms(4),
-    margin: ms(4),
-    backgroundColor: Colors.primary6,
-  },
-});
