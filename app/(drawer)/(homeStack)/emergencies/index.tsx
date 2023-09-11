@@ -1,6 +1,8 @@
 import { fetchEmergenciesQuery } from "@apis/emergencies";
 import Card from "@components/card";
 import Loading from "@components/loading";
+import NoConnection from "@components/noConnection";
+import { useNetInfo } from "@react-native-community/netinfo";
 import { FlashList } from "@shopify/flash-list";
 import { Box } from "@styles/theme";
 import { width } from "@utils/helper";
@@ -9,9 +11,12 @@ import { router } from "expo-router";
 import Animated, { FadeInUp } from "react-native-reanimated";
 
 const Emergencies = () => {
-  const { data, isLoading } = fetchEmergenciesQuery();
+  const { data, isLoading, refetch } = fetchEmergenciesQuery();
+  const { isConnected } = useNetInfo();
 
   if (isLoading) return <Loading />;
+  if (isConnected === false) return <NoConnection refetch={refetch} />;
+
   return (
     <Box flex={1} gap="vl">
       <FlashList

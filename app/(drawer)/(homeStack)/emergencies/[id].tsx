@@ -12,10 +12,13 @@ import { TouchableOpacity } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import Colors from "@styles/colors";
 import { Share } from "react-native";
+import NoConnection from "@components/noConnection";
+import { useNetInfo } from "@react-native-community/netinfo";
 
 const volunteerItem = () => {
   const { id }: Partial<{ id: string }> = useLocalSearchParams();
-  const { data, isLoading } = fetchEmergencyQuery(id!);
+  const { data, isLoading, refetch } = fetchEmergencyQuery(id!);
+  const { isConnected } = useNetInfo();
 
   const onSharePress = () => {
     Share.share({
@@ -26,6 +29,7 @@ https://play.google.com/store/apps/details?id=com.haithamassoli.kheir`,
   };
 
   if (isLoading) return <Loading />;
+  if (isConnected === false) return <NoConnection refetch={refetch} />;
 
   return (
     <ScrollView

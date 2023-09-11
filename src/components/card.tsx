@@ -32,6 +32,7 @@ const Card = ({
     <Box>
       <TouchableOpacity onPress={onPress} activeOpacity={onPress ? 0.8 : 1}>
         <Image
+          transition={400}
           source={imageUrl}
           placeholder={blurhash}
           placeholderContentFit="cover"

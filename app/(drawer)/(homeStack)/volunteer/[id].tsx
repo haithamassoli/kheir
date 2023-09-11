@@ -13,10 +13,13 @@ import { Box } from "@styles/theme";
 import Snackbar from "@components/snackbar";
 import { Feather } from "@expo/vector-icons";
 import Colors from "@styles/colors";
+import NoConnection from "@components/noConnection";
+import { useNetInfo } from "@react-native-community/netinfo";
 
 const volunteerItem = () => {
   const { id }: Partial<{ id: string }> = useLocalSearchParams();
-  const { data, isLoading } = fetchVolunteerByIdQuery(id!);
+  const { data, isLoading, refetch } = fetchVolunteerByIdQuery(id!);
+  const { isConnected } = useNetInfo();
 
   const onPress = () => {
     Linking.openURL(
@@ -33,6 +36,7 @@ https://play.google.com/store/apps/details?id=com.haithamassoli.kheir`,
   };
 
   if (isLoading) return <Loading />;
+  if (isConnected === false) return <NoConnection refetch={refetch} />;
 
   return (
     <>

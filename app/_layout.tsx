@@ -26,10 +26,11 @@ import {
 import { router, useSegments, SplashScreen, Stack } from "expo-router";
 import RNRestart from "react-native-restart";
 
-if (Platform.OS === "android") {
-  if (UIManager.setLayoutAnimationEnabledExperimental) {
-    UIManager.setLayoutAnimationEnabledExperimental(true);
-  }
+if (
+  Platform.OS === "android" &&
+  UIManager.setLayoutAnimationEnabledExperimental
+) {
+  UIManager.setLayoutAnimationEnabledExperimental(true);
 }
 
 const queryClient = new QueryClient();

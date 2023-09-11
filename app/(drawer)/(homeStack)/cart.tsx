@@ -18,8 +18,10 @@ import { useEffect } from "react";
 import { addOrderMutation } from "@apis/cart";
 import { useQueryClient } from "@tanstack/react-query";
 import Animated, { FadeInUp } from "react-native-reanimated";
+import { useNetInfo } from "@react-native-community/netinfo";
 
 const Cart = () => {
+  const { isConnected } = useNetInfo();
   const { cart, user } = useStore();
   const queryClient = useQueryClient();
   const { control, handleSubmit } = useForm<ValidationCardSchemaType>({
@@ -47,6 +49,8 @@ const Cart = () => {
   }, []);
 
   const onSubmit = async (data: ValidationCardSchemaType) => {
+    if (isConnected === false)
+      return useStore.setState({ snackbarText: "لا يوجد اتصال بالانترنت" });
     await storeDataToStorage("cart", null);
     mutate(
       {

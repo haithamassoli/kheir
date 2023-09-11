@@ -1,6 +1,8 @@
 import { fetchOrdersQuery } from "@apis/cart";
 import HeaderRight from "@components/headerRight";
 import Loading from "@components/loading";
+import NoConnection from "@components/noConnection";
+import { useNetInfo } from "@react-native-community/netinfo";
 import { useTheme } from "@shopify/restyle";
 import { Box, ReText, Theme } from "@styles/theme";
 import { hs, vs } from "@utils/platform";
@@ -13,6 +15,7 @@ import Animated, { FadeInUp } from "react-native-reanimated";
 
 const Donations = () => {
   const navigation: any = useNavigation();
+  const { isConnected } = useNetInfo();
   const { user } = useStore();
   const { colors } = useTheme<Theme>();
   const { isLoading, data, isFetching, refetch } = fetchOrdersQuery(user?.uid!);
@@ -25,6 +28,7 @@ const Donations = () => {
   }, []);
 
   if (isLoading) return <Loading />;
+  if (isConnected === false) return <NoConnection refetch={refetch} />;
 
   if (Array.isArray(data) && data.length === 0) {
     return (

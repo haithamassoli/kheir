@@ -34,9 +34,8 @@ const Home = () => {
 
   if (isLoading || isLoadingAlmostDone) return <Loading />;
 
-  if (isConnected === false) {
+  if (isConnected === false)
     return <NoConnection refetch={refetchAlmostDone} />;
-  }
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -125,7 +124,12 @@ const Home = () => {
           </Box>
         </Box>
         <Box marginTop="vm">
-          <Animated.View entering={FadeInUp.duration(600)}>
+          <Animated.View
+            entering={FadeInUp.duration(600)}
+            style={{
+              marginHorizontal: hs(16),
+            }}
+          >
             <ImagesCarousel
               images={[
                 require("@assets/images/carousel/1.png"),

@@ -26,12 +26,15 @@ import { useTheme } from "@shopify/restyle";
 import { Image } from "expo-image";
 import Animated, { FadeInUp } from "react-native-reanimated";
 import { Feather } from "@expo/vector-icons";
+import NoConnection from "@components/noConnection";
+import { useNetInfo } from "@react-native-community/netinfo";
 
 const defaultDinar = [1, 5, 10, 20];
 
 const ConstructionItem = () => {
   const { id }: Partial<{ id: string }> = useLocalSearchParams();
   const { colors } = useTheme<Theme>();
+  const { isConnected } = useNetInfo();
   const { data, isLoading, refetch, isFetching } = fetchAlmostDoneByIdQuery(
     id!
   );
@@ -85,6 +88,7 @@ https://play.google.com/store/apps/details?id=com.haithamassoli.kheir`,
   const progress = calcPercentage(data?.goal!, data?.collected!);
 
   if (isLoading) return <Loading />;
+  if (isConnected === false) return <NoConnection refetch={refetch} />;
 
   return (
     <ScrollView
