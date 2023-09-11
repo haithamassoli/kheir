@@ -49,7 +49,7 @@ const Card = ({
         />
         {progress && (
           <Box flex={1} justifyContent="flex-end">
-            <Box width="82%">
+            <Box width="78%">
               <ProgressBar
                 progress={parseInt(progress) / 100}
                 color={Colors.primary6}
@@ -65,7 +65,6 @@ const Card = ({
               />
             </Box>
             <ReText
-              marginEnd="hxs"
               variant="LabelLarge"
               color="primary6"
               fontFamily="SahabahBold"
@@ -73,6 +72,8 @@ const Card = ({
                 position: "absolute",
                 bottom: vs(14),
                 right: 0,
+                width: "18%",
+                textAlign: "center",
               }}
             >
               {+progress > 100 ? "100" : progress}%
