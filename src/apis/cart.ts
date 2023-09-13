@@ -13,6 +13,14 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { db } from "@src/firebase.config";
 import { Cart } from "@zustand/cartSlice";
 
+interface Order {
+  id: string;
+  title: string;
+  price: number;
+  friendPhone?: string;
+  createdAt: Date;
+}
+
 export const fetchOrdersQuery = (uid: string) =>
   useQuery(["orders", uid], () => fetchOrders(uid));
 
@@ -38,7 +46,7 @@ const fetchOrders = async (uid: string) => {
         createdAt: docItem.data().createdAt.toDate(),
       });
     });
-    return orders;
+    return orders as Order[];
   } catch (error) {
     console.log(error);
   }

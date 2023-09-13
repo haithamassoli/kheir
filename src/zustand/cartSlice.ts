@@ -9,7 +9,7 @@ export interface ICartState {
 
 export interface Cart {
   id: string;
-  name: string;
+  title: string;
   price: number;
   friendPhone?: string;
 }

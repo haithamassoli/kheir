@@ -87,6 +87,9 @@ const Donations = () => {
         <Animated.View
           key={index}
           entering={FadeInUp.duration(600).delay(200 * index)}
+          style={{
+            marginBottom: vs(8),
+          }}
         >
           <Box
             backgroundColor="primary"
@@ -108,7 +111,7 @@ const Donations = () => {
             .filter((value) => typeof value === "object")
             .map((donationItem, index) => (
               <Box>
-                {donationItem?.name && (
+                {donationItem?.title && (
                   <Box
                     key={index}
                     flexDirection="row"
@@ -116,10 +119,8 @@ const Donations = () => {
                     alignItems="center"
                     paddingHorizontal="hs"
                     paddingVertical="vs"
-                    borderBottomWidth={1}
-                    borderBottomColor="black9"
                   >
-                    <ReText variant="BodyMedium">{donationItem?.name}</ReText>
+                    <ReText variant="BodyMedium">{donationItem?.title}</ReText>
                     <ReText variant="BodyMedium">
                       {donationItem?.price} دينار
                     </ReText>

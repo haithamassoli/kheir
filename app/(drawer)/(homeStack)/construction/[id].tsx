@@ -63,7 +63,7 @@ const ConstructionItem = () => {
       id: id!,
       price: +formData.price!,
       friendPhone: formData.friendPhone || "",
-      name: "إعمـار",
+      title: data?.title!,
     });
     router.push("/cart");
   };
@@ -73,7 +73,7 @@ const ConstructionItem = () => {
       id: id!,
       price: +formData.price!,
       friendPhone: formData.friendPhone || "",
-      name: "إعمـار",
+      title: data?.title!,
     });
     useStore.setState({ snackbarText: "تم إضافة التبرع إلى السلة" });
     router.replace("/");

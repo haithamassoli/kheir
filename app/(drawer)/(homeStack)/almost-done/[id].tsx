@@ -63,17 +63,17 @@ const ConstructionItem = () => {
       id: id!,
       price: +formData.price!,
       friendPhone: formData.friendPhone || "",
-      name: "إعمـار",
+      title: data?.title!,
     });
     router.replace("/cart");
   };
 
-  const onPressAddToCart = (data: ValidationAddToCartSchemaType) => {
+  const onPressAddToCart = (formData: ValidationAddToCartSchemaType) => {
     addToCart({
       id: id!,
-      price: +data.price!,
-      friendPhone: data.friendPhone || "",
-      name: "شارف على الانتهاء",
+      price: +formData.price!,
+      friendPhone: formData.friendPhone || "",
+      title: data?.title!,
     });
     router.push("/");
   };

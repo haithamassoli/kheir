@@ -57,7 +57,7 @@ const Home = () => {
           justifyContent="space-between"
           alignItems="center"
           marginEnd="hm"
-          height={60}
+          height={vs(60)}
         >
           <Box flexDirection="row" alignItems="center">
             <Image
@@ -73,7 +73,7 @@ const Home = () => {
               <ReText
                 variant="BodySmall"
                 textAlign="left"
-                style={{ marginTop: vs(-5) }}
+                style={{ marginTop: vs(-6) }}
               >
                 KHEIR
               </ReText>
@@ -115,12 +115,9 @@ const Home = () => {
                 color={colors.text}
               />
             </TouchableOpacity>
-            <Feather
-              name="menu"
-              size={ms(24)}
-              color={colors.text}
-              onPress={() => navigation.openDrawer()}
-            />
+            <TouchableOpacity onPress={() => navigation.openDrawer()}>
+              <Feather name="menu" size={ms(24)} color={colors.text} />
+            </TouchableOpacity>
           </Box>
         </Box>
         <Box marginTop="vm">

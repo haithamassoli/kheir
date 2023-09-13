@@ -10,7 +10,7 @@ import {
 import { hs, ms, vs } from "@utils/platform";
 import { useStore } from "@zustand/store";
 import { useForm } from "react-hook-form";
-import { ScrollView } from "react-native";
+import { ScrollView, TouchableOpacity } from "react-native";
 import { Button } from "react-native-paper";
 import { router } from "expo-router";
 import { storeDataToStorage } from "@utils/helper";
@@ -73,6 +73,7 @@ const Cart = () => {
 
   return (
     <ScrollView
+      keyboardShouldPersistTaps="handled"
       contentContainerStyle={{
         flexGrow: 1,
         paddingHorizontal: hs(16),
@@ -123,14 +124,11 @@ const Cart = () => {
                 paddingVertical="vxs"
               >
                 <ReText variant="TitleSmall" textAlign="left">
-                  {item.name}
+                  {item.title}
                 </ReText>
                 <Box flexDirection="row" alignItems="center">
                   <ReText variant="TitleSmall">{item.price} دينار</ReText>
-                  <Feather
-                    name="x"
-                    size={ms(20)}
-                    color={colors.primary}
+                  <TouchableOpacity
                     onPress={async () => {
                       useStore.setState({
                         cart: cart.filter(
@@ -145,7 +143,9 @@ const Cart = () => {
                         router.push("/");
                       }
                     }}
-                  />
+                  >
+                    <Feather name="x" size={ms(20)} color={colors.primary} />
+                  </TouchableOpacity>
                 </Box>
               </Box>
             ))}

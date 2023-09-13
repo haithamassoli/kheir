@@ -4,6 +4,7 @@ import { db } from "@src/firebase.config";
 
 type Construction = {
   id: string;
+  title: string;
   desc: string;
   beneficiaries: number;
   collected: number;
@@ -49,6 +50,7 @@ const fetchConstruction = async () => {
         donors: doc.data().donors,
         executor: doc.data().executor,
         goal: doc.data().goal,
+        title: doc.data().title,
       });
     });
     return construction;
