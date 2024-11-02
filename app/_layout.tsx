@@ -18,13 +18,12 @@ import { MaterialDark, MaterialLight, fontConfig } from "@styles/material";
 import { ThemeProvider } from "@react-navigation/native";
 import theme, { Box, ReText, darkTheme } from "@styles/theme";
 import Colors from "@styles/colors";
-import { I18nManager, Platform, ScrollView, UIManager } from "react-native";
+import {  Platform, ScrollView, UIManager } from "react-native";
 import {
   DarkNavigationColors,
   LightNavigationColors,
 } from "@styles/navigation";
 import { router, useSegments, SplashScreen, Stack } from "expo-router";
-import RNRestart from "react-native-restart";
 
 if (
   Platform.OS === "android" &&
@@ -95,23 +94,10 @@ export default function RootLayout() {
 
   const { isDark, user, cart } = useStore();
 
-  const forceRTL = () => {
-    if (!I18nManager.isRTL) {
-      try {
-        I18nManager.allowRTL(true);
-        I18nManager.forceRTL(true);
-        RNRestart.restart();
-      } catch (error) {
-        console.log(error);
-      }
-    }
-  };
-
   useEffect(() => {
     getTheme();
     getUserFromStorage();
     getCartFromStorage();
-    forceRTL();
   }, []);
 
   useEffect(() => {

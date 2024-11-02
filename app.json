@@ -39,6 +39,8 @@
       "eas": {
         "projectId": "66a92220-8f3a-4f58-b597-0d5392128767"
       },
+      "supportsRTL": true,
+       "forcesRTL": true,
       "router": {
         "origin": false
       },
@@ -52,6 +54,7 @@
       }
     },
     "plugins": [
+      "expo-localization",
       "expo-router",
       "expo-font"
     ],
