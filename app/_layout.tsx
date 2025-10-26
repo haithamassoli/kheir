@@ -18,12 +18,18 @@ import { MaterialDark, MaterialLight, fontConfig } from "@styles/material";
 import { ThemeProvider } from "@react-navigation/native";
 import theme, { Box, ReText, darkTheme } from "@styles/theme";
 import Colors from "@styles/colors";
-import {  Platform, ScrollView, UIManager } from "react-native";
+import { Platform, ScrollView, UIManager } from "react-native";
 import {
   DarkNavigationColors,
   LightNavigationColors,
 } from "@styles/navigation";
-import { router, useSegments, SplashScreen, Stack } from "expo-router";
+import {
+  router,
+  useSegments,
+  SplashScreen,
+  Stack,
+  useRootNavigationState,
+} from "expo-router";
 
 if (
   Platform.OS === "android" &&
@@ -73,24 +79,25 @@ const getCartFromStorage = async () => {
   }
 };
 
+TextInput.defaultProps = TextInput.defaultProps || {};
+TextInput.defaultProps.allowFontScaling = false;
+
+Text.defaultProps = Text.defaultProps || {};
+Text.defaultProps.allowFontScaling = false;
+ReText.defaultProps = ReText.defaultProps || {};
+ReText.defaultProps.allowFontScaling = false;
+
+ScrollView.defaultProps = ScrollView.defaultProps || {};
+ScrollView.defaultProps.showsVerticalScrollIndicator = false;
+ScrollView.defaultProps.showsHorizontalScrollIndicator = false;
+
+FlashList.defaultProps = FlashList.defaultProps || {};
+FlashList.defaultProps.showsVerticalScrollIndicator = false;
+FlashList.defaultProps.showsHorizontalScrollIndicator = false;
+
 export default function RootLayout() {
-  TextInput.defaultProps = TextInput.defaultProps || {};
-  TextInput.defaultProps.allowFontScaling = false;
-
-  Text.defaultProps = Text.defaultProps || {};
-  Text.defaultProps.allowFontScaling = false;
-  ReText.defaultProps = ReText.defaultProps || {};
-  ReText.defaultProps.allowFontScaling = false;
-
-  ScrollView.defaultProps = ScrollView.defaultProps || {};
-  ScrollView.defaultProps.showsVerticalScrollIndicator = false;
-  ScrollView.defaultProps.showsHorizontalScrollIndicator = false;
-
-  FlashList.defaultProps = FlashList.defaultProps || {};
-  FlashList.defaultProps.showsVerticalScrollIndicator = false;
-  FlashList.defaultProps.showsHorizontalScrollIndicator = false;
-
   const segments = useSegments();
+  const rootNavigationState = useRootNavigationState();
 
   const { isDark, user, cart } = useStore();
 
@@ -110,6 +117,7 @@ export default function RootLayout() {
   }, [cart]);
 
   useEffect(() => {
+    if (!rootNavigationState?.key) return;
     const inAuthGroup = segments.includes("profile");
     if (!user && inAuthGroup) {
       router.replace("/sign-in");
@@ -117,7 +125,7 @@ export default function RootLayout() {
       router.replace("/");
     }
     console.log(segments);
-  }, [user, segments]);
+  }, [user, segments, rootNavigationState]);
 
   const [fontsLoaded] = useFonts({
     CairoReg: require("@assets/fonts/Cairo-Reg.ttf"),

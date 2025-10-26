@@ -1,4 +1,5 @@
 import Colors from "./colors";
+import { fontConfig } from "./material";
 
 export const LightNavigationColors = {
   colors: {
@@ -10,6 +11,7 @@ export const LightNavigationColors = {
     text: Colors.darkText,
   },
   dark: false,
+  fonts: fontConfig,
 };
 
 export const DarkNavigationColors = {
@@ -21,5 +23,6 @@ export const DarkNavigationColors = {
     primary: Colors.primary,
     text: Colors.lightText,
   },
+  fonts: fontConfig,
   dark: true,
 };

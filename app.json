@@ -3,7 +3,7 @@
     "scheme": "kheir",
     "name": "خير",
     "slug": "kheir",
-    "version": "1.0.0",
+    "version": "1.0.2",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -18,16 +18,14 @@
       "checkAutomatically": "NEVER",
       "enabled": false
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "buildNumber": "1.0.0",
       "supportsTablet": true,
       "bundleIdentifier": "com.haithamassoli.kheir"
     },
     "android": {
-      "versionCode": 20,
+      "versionCode": 22,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
@@ -40,7 +38,7 @@
         "projectId": "66a92220-8f3a-4f58-b597-0d5392128767"
       },
       "supportsRTL": true,
-       "forcesRTL": true,
+      "forcesRTL": true,
       "router": {
         "origin": false
       },
@@ -53,11 +51,7 @@
         "appId": "1:362796967322:web:c745715ebb43d8f8a38623"
       }
     },
-    "plugins": [
-      "expo-localization",
-      "expo-router",
-      "expo-font"
-    ],
+    "plugins": ["expo-localization", "expo-router", "expo-font"],
     "experiments": {
       "typedRoutes": true,
       "tsconfigPaths": true
